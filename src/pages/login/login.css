@@ -1,96 +1,193 @@
-/* Contenedor general centrado */
+/* Contenedor general centrado con gradiente */
 .login-container {
+  width: 375px;
+  height: 812px;
+  background: linear-gradient(180deg, #F2C9C4 0%, #FFFFFF 100%);
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  flex-direction: column;
+  padding-top: 3rem;
+  box-sizing: border-box;
+  margin: 0 auto;
+  position: relative;
+  font-family: Arial, sans-serif;
   min-height: 100vh;
-  background: #f5f5f5;
-  padding: 1rem;
 }
 
-/* Caja del formulario */
-.login-box {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
+/* Logo */
+.login-logo {
+  width: 368px;
+  height: 368px;
+  margin-top: -93px;
+  object-fit: contain;
 }
 
-/* Inputs y botones */
-.login-box input {
-  width: 100%;
+/* Contenedor con borde del formulario */
+.form-border {
+  width: 320px;
+  height: auto;
+  top: 286px;
+  left: 8px;
+  border-radius: 24px;
+  border: 2px solid #A8A7A7;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  padding: 2rem 1rem;
+  background: transparent; /* eliminado gradiente interno */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels generales */
+.input-label {
+  display: block;
+  width: 290px;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  text-align: left;
+  padding-bottom: 5px;
+}
+
+/* Label Email específico */
+.input-label.email-label {
+  position: relative;
+  top: -8px; /* sube el label Email */
+}
+
+/* Inputs generales */
+.form-border input {
+  width: 290px;
+  height: 51px;
+  border-radius: 24px;
+  border: 2px solid #A8A7A7;
   padding: 0.75rem;
-  margin: 0.5rem 0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
   font-size: 1rem;
+  background: transparent;
+  box-sizing: border-box;
+  align-self: center;
+  color: #000;
+  margin-bottom: 24px; /* separación entre Email y Password */
 }
 
-.login-box button {
-  width: 100%;
-  padding: 0.75rem;
-  margin: 0.5rem 0;
+.form-border input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* Password específico */
+.password-input {
+  width: 290px;
+  height: 51px;
+  border-radius: 24px;
+  border: 2px solid #A8A7A7;
+  background: transparent;
+  font-size: 1rem;
+  box-sizing: border-box;
+  align-self: center;
+  color: #000;
+  margin-bottom: 32px; /* separación Password y Login */
+}
+
+/* Botón de login */
+.form-border button {
+  width: 290px;
+  height: 43px;
+  border-radius: 24px;
   border: none;
-  border-radius: 8px;
-  background: #2563eb;
+  background: #EA0029;
   color: white;
-  font-size: 1rem;
+  font-weight: bold;
+  font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s;
+  align-self: center;
 }
 
-.login-box button:hover {
-  background: #1e40af;
+.form-border button:hover {
+  background: #c70023;
 }
 
-.login-box h1 {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  color: #111827;
-}
-
-/* Mensaje */
-.login-box p {
+/* Links debajo del formulario */
+.login-links {
+  width: 359px;
+  display: flex;
+  justify-content: space-between;
   margin-top: 1rem;
-  color: #dc2626;
-  font-size: 0.9rem;
+  font-weight: bold;
 }
 
-/* 📱 Responsive: móviles en landscape */
+.login-links a {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-links a:hover {
+  text-decoration: underline;
+}
+
+/* 📱 Responsive: móviles */
 @media (max-width: 767px) {
-  .login-box {
-    padding: 1.5rem;
-    max-width: 90%;
+  .login-container {
+    width: 100%;
+    height: 100%;
+    padding-top: 10px;
   }
 
-  .login-box h1 {
-    font-size: 1.25rem;
+  .login-logo {
+    width: 90%;
+    height: auto;
+    margin-top: -50px;
   }
 
-  .login-box input,
-  .login-box button {
-    font-size: 0.9rem;
-    padding: 0.6rem;
+  .form-border, .login-links {
+    width: 90%;
+  }
+
+  .form-border input,
+  .form-border button {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .password-input {
+    width: 100%;
+  }
+
+  .input-label {
+    width: 100%;
+    margin-bottom: 4px;
   }
 }
 
-/* 📟 Responsive: tablet 1024x600 */
+/* Tablet */
 @media (min-width: 768px) and (max-width: 1024px) {
-  .login-box {
-    max-width: 500px;
-    padding: 2rem 2.5rem;
+  .login-container {
+    width: 500px;
+    height: 812px;
   }
 
-  .login-box h1 {
-    font-size: 1.75rem;
+  .form-border {
+    width: 480px;
+    height: auto;
   }
 
-  .login-box input,
-  .login-box button {
-    font-size: 1rem;
-    padding: 0.8rem;
+  .login-links {
+    width: 480px;
+  }
+
+  .form-border input,
+  .form-border button {
+    width: 100%;
+  }
+
+  .password-input {
+    width: 100%;
+  }
+
+  .input-label {
+    width: 100%;
+    margin-bottom: 4px;
   }
 }
