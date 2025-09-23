@@ -6,7 +6,7 @@ const initialState = {
 	token: null,
 };
 
-export const register = createAsyncThunk('auth/register', async user => {
+export const registerDriver = createAsyncThunk('auth/registerDriver', async user => {
 	console.log('desde store', user);
 });
 

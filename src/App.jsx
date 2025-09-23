@@ -5,6 +5,10 @@ import Layout from './layout/layout';
 import CompanySection from './pages/sections/company/CompanySection';
 import DriverSection from './pages/sections/driver/DriverSection';
 import RegisterDriver from './pages/Register/RegisterDriver';
+import Provincias from './pages/Gastations/Provincias';
+import Municipios from './pages/Gastations/Municipios';
+import Gastations from './pages/Gastations/Gastations';
+import Gastation from './pages/Gastations/Gastation';
 
 function App() {
 	return (
@@ -14,6 +18,10 @@ function App() {
 			<Route path="/company" element={<CompanySection />} />
 			<Route path="/driver" element={<DriverSection />} />
 			<Route path="/registerDriver" element={<RegisterDriver />} />
+			<Route path="/provincias" element={<Provincias />} />
+			<Route path="/municipios/:id" element={<Municipios />} />
+			<Route path="/gastations/:id" element={<Gastations />} />
+			<Route path="/gastation/:id" element={<Gastation />} />
 		</Routes>
 	);
 }

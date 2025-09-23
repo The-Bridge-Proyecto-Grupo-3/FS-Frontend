@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
-import { register } from '../../redux/auth/authSlice';
-import './signForm.scss';
+import { registerDriver } from '../../redux/auth/authSlice';
+import './SignForm.scss';
 
 const RegisterDriver = () => {
 	const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const RegisterDriver = () => {
 		// reppassword: value => [[value == formData.password, 'Passwords do not match']],
 	};
 
-	const onSubmit = form => dispatch(register(new FormData(form))).unwrap();
+	const onSubmit = form => dispatch(registerDriver(new FormData(form))).unwrap();
 
 	const { formData, message, success, handleInputChange, handleSubmit } = useForm({
 		validation,
@@ -48,8 +48,8 @@ const RegisterDriver = () => {
 		<div className="signForm">
 			{success ? (
 				<>
-					<h1>Sign in successful!</h1>
-					<p>Please check your email to verify your account.</p>
+					<h1>¡Se ha registrado correctamente!</h1>
+					<p>Por favor, revise su email para verificar la cuenta</p>
 				</>
 			) : (
 				<form onSubmit={handleSubmit}>
