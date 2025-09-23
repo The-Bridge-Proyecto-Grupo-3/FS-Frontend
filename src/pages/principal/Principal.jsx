@@ -1,5 +1,5 @@
 import LogoPrincipal2 from '../../assets/LogoPrincipal2.png';
-import Deivi from '../../assets/deivi.png';
+import Deivi from '../../assets/Deivi.png';
 import './principal.css';
 export default function Principal() {
 	return (
