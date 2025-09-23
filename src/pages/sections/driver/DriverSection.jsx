@@ -8,7 +8,7 @@ export default function DriverSection() {
 	return (
 		<div className="driverSectionContainer">
 			<div>
-				<img src={LogoutIcon} alt="cerrar sesion" width={40} />
+				<img src={LogoutIcon} alt="cerrar sesión" width={40} />
 			</div>
 			<div>
 				<h2>Hola Conductor</h2>
@@ -33,8 +33,8 @@ export default function DriverSection() {
 				/>
 			</div>
 			<div className="sectionImgContainer">
-				<img src={FindGass} alt="add vehiculos" width={140} />
-				<img src={FindElecDot} alt="add Drivers" width={140} />
+				<img src={FindGass} alt="añadir vehículos" width={140} />
+				<img src={FindElecDot} alt="añadir conductores" width={140} />
 			</div>
 		</div>
 	);
