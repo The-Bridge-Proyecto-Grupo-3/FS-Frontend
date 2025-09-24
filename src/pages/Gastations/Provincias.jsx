@@ -32,7 +32,7 @@ const Provincias = ({ onSelect }) => {
 
 	return (
 		<div className="search-box">
-			<h1>Provincia</h1>
+			<h2>Provincia</h2>
 			<input
 				type="text"
 				placeholder="Buscar provincia..."

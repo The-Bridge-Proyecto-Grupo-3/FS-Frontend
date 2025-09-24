@@ -28,7 +28,7 @@ const Municipios = ({ idProvincia, onSelect }) => {
 
 	return (
 		<div className="search-box">
-			<h1>Municipios</h1>
+			<h2>Municipios</h2>
 			<input
 				type="text"
 				placeholder="Buscar municipio..."

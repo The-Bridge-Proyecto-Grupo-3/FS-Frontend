@@ -22,7 +22,7 @@ const Gastation = ({ idEstacion }) => {
 
 	return (
 		<div className="gastation-details">
-			<h2>{nombreEstacion}</h2>
+			<h3>{nombreEstacion}</h3>
 			<table>
 				<tbody>
 					<tr>

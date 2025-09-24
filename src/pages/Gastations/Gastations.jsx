@@ -32,7 +32,7 @@ const Gastations = ({ idMunicipio }) => {
 
 	return (
 		<div className="search-box">
-			<h1>Gasolineras</h1>
+			<h2>Estación</h2>
 			<input
 				type="text"
 				placeholder="Buscar gasolinera..."
