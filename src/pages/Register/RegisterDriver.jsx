@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
 import { registerDriver } from '../../redux/auth/authSlice';
-import './SignForm.scss';
+import './Register.scss';
 
 const RegisterDriver = () => {
 	const dispatch = useDispatch();
@@ -11,14 +11,12 @@ const RegisterDriver = () => {
 			value = value ? value.trim() : '';
 			return [
 				[
-					value.length >= 4 && value.length <= 24,
-					'El nombre debe contener entre 4 y 24 caracteres',
+					value.length >= 3 && value.length <= 24,
+					'El nombre debe contener entre 3 y 24 caracteres',
 				],
 			];
 		},
-		screenname: value => [
-			[value && value.trim().length > 0, 'El apellido no puede estar vacío'],
-		],
+		surname: value => [[value && value.trim().length > 0, 'El apellido no puede estar vacío']],
 		email: value => [
 			[
 				/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -45,7 +43,7 @@ const RegisterDriver = () => {
 	});
 
 	return (
-		<div className="signForm">
+		<div className="register-container">
 			{success ? (
 				<>
 					<h1>¡Se ha registrado correctamente!</h1>
@@ -53,7 +51,7 @@ const RegisterDriver = () => {
 				</>
 			) : (
 				<form onSubmit={handleSubmit}>
-					<h1>Registro nuevo de Conductor</h1>
+					<h2>Registro nuevo de Conductor</h2>
 					<div>
 						<label htmlFor="username">Nombre</label>
 						<input
@@ -61,18 +59,16 @@ const RegisterDriver = () => {
 							name="username"
 							className={formData.username && 'validate'}
 							type="text"
-							placeholder="Username"
 							onChange={handleInputChange}
 						/>
 					</div>
 					<div>
-						<label htmlFor="name">Apellidos:</label>
+						<label htmlFor="surname">Apellidos</label>
 						<input
-							id="name"
-							name="screenname"
-							className={formData.screenname && 'validate'}
+							id="surname"
+							name="surname"
+							className={formData.surname && 'validate'}
 							type="text"
-							placeholder="Screen name"
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -83,7 +79,6 @@ const RegisterDriver = () => {
 							name="email"
 							className={formData.email && 'validate'}
 							type="text"
-							placeholder="Email"
 							onChange={handleInputChange}
 						/>
 					</div>

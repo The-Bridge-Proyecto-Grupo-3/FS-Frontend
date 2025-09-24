@@ -23,16 +23,15 @@
 	input {
 		width: 22.5rem;
 		height: 3.125rem;
-
-		padding: 8px;
+		padding: 0.5rem;
 		border: 2px solid #a8a7a7;
 		border-radius: 1.5rem;
-		font-size: 14px;
+		font-size: 0.875rem;
 
 		&:focus {
 			border-color: #007bff;
 			outline: none;
-			box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+			box-shadow: 0 0 4px #007bff66;
 		}
 	}
 
@@ -42,7 +41,7 @@
 		left: 0;
 		width: 100%;
 		background: white;
-		border: 1px solid #ccc;
+		border: 1px solid #a8a7a7;
 		border-radius: 4px;
 		max-height: 250px;
 		overflow-y: auto;
