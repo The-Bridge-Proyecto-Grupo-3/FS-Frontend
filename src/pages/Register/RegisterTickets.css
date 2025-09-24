@@ -1,0 +1,128 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #fff; /* fondo neutro fuera del contenedor */
+}
+/* Contenedor general */
+.register-container {
+  width: 375px;
+  height: 812px;
+  background: linear-gradient(180deg, #F2C9C4 0%, #FFFFFF 100%);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 3rem;
+  box-sizing: border-box;
+  margin: 0 auto;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  color: #FFFFFF;
+}
+
+/* Título principal */
+.register-title {
+    width: 100%;
+    max-width: 304px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: #000000;
+    margin-bottom: 32px;
+}
+
+/* Formulario */
+.register-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Grupo de label + input */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+}
+
+/* Labels */
+.form-group label {
+    margin-bottom: 8px;
+}
+
+/* Inputs */
+.form-group input {
+    width: 359px;
+    height: 50px;
+    border-radius: 24px;
+    border: 2px solid #A8A7A7 !important; /* borde fijo */
+    padding: 0 16px;
+    font-size: 16px;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Botón de enviar */
+.submit-button {
+   position: absolute; /* posición exacta */
+    top: 730px;
+    left: 42px;
+    width: 291px; /* exacto */
+    height: 43px; /* exacto */
+    border-radius: 24px;
+    border: none;
+    background-color: #EA0029;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #b00021;
+}
+
+/* Mobile L (~425px) */
+@media (max-width: 425px) {
+    .register-container {
+        width: 100%;
+    }
+    .register-title {
+        width: 90%;
+        font-size: 28px;
+    }
+    .form-group input {
+        width: 100%;
+    }
+    .submit-button {
+        left: 5%;
+        width: 90%;
+    }
+}
+
+/* Tablet (~1024px x 600px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .register-container {
+        width: 90%;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    .register-title {
+        width: 80%;
+        font-size: 32px;
+    }
+    .form-group input {
+        width: 100%;
+    }
+    .submit-button {
+        left: 10%;
+        width: 80%;
+    }
+}
