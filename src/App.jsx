@@ -7,7 +7,7 @@ import DriverSection from './pages/sections/driver/DriverSection';
 import RegisterDriver from './pages/Register/RegisterDriver';
 import SearchGS from './pages/Gastations/SearchGS';
 import RegisterCompany from './pages/Register/RegisterCompany';
-import RegisterCar from './pages/Register/RegisterCar';
+import RegisterVehicle from './pages/Register/RegisterVehicle';
 import Login from './pages/login/login.jsx';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
 			<Route path="/registerDriver" element={<RegisterDriver />} />
 			<Route path="/searchGS" element={<SearchGS />} />
 			<Route path="/registerCompany" element={<RegisterCompany />} />
-			<Route path="/registerCar" element={<RegisterCar />} />
+			<Route path="/registerVehicle" element={<RegisterVehicle />} />
 			<Route path="/login" element={<Login />} />
 		</Routes>
 	);

@@ -52,22 +52,23 @@ input,
 select {
 	width: 22.5rem;
 	height: 3.125rem;
-	padding: 0.5rem;
+	padding: 1rem;
 	border: 2px solid #a8a7a7;
 	border-radius: 1.5rem;
 	font-size: 0.875rem;
+}
 
-	&:focus {
-		border-color: #007bff;
-		outline: none;
-		box-shadow: 0 0 4px #007bff66;
-	}
+input:focus, select:focus {
+	outline: none;
+	box-shadow: 0 0 4px #007bff66;
 }
 
 input[type='submit'] {
 	align-self: center;
 	width: 18.125rem;
 	height: 2.7rem;
+	padding: 0;
+	border-radius: 1.5rem;
 	font-size: 1.25rem;
 	color: #ffffff;
 	font-weight: bold;

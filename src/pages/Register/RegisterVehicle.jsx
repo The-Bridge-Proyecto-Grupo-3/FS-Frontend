@@ -1,7 +1,7 @@
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import './register.css';
 
-const RegisterCar = () => {
+const RegisterVehicle = () => {
 	return (
 		<div className="register-container">
 			<div className="iconContainer">
@@ -22,21 +22,21 @@ const RegisterCar = () => {
 						</div>
 						<div className="form-parts">
 							<label htmlFor="fuel">Tipo</label>
-							<select name="fuel" id="fuel" className="select-custom" value={'fuel0'}>
-								<option value="fuel0">Seleccione el tipo de combustible</option>
-								<option value="fuel1">Gasolina - Híbrido</option>
-								<option value="fuel2">Diesel</option>
-								<option value="fuel3">GLP</option>
-								<option value="fuel4">Eléctrico</option>
+							<select name="type" id="fuel" className="select-custom" value={''}>
+								<option value="" disabled>Seleccione el tipo de combustible</option>
+								<option value="gas">Gasolina - Híbrido</option>
+								<option value="diesel">Diesel</option>
+								<option value="glp">GLP</option>
+								<option value="electric">Eléctrico</option>
 							</select>
 						</div>
 						<div className="form-parts">
 							<label htmlFor="plate">Matricula</label>
-							<input id="plate" name="plate" type="text" />
+							<input id="plate" name="license_plate" maxLength="8" type="text" />
 						</div>
 						<div className="form-parts">
 							<label htmlFor="date">Fecha de matriculación</label>
-							<input id="date" name="date" type="date" />
+							<input id="date" name="registration_date" type="date" />
 						</div>
 					</div>
 
@@ -47,4 +47,4 @@ const RegisterCar = () => {
 	);
 };
 
-export default RegisterCar;
+export default RegisterVehicle;

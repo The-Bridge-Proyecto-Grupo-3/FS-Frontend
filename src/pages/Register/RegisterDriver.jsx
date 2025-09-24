@@ -58,21 +58,21 @@ const RegisterDriver = () => {
 					<form onSubmit={handleSubmit} className="form-info">
 						<div className="input-container">
 							<div className="form-parts">
-								<label htmlFor="username">Nombre</label>
+								<label htmlFor="firstname">Nombre</label>
 								<input
-									id="username"
-									name="username"
-									className={formData.username && 'validate'}
+									id="firstname"
+									name="first_name"
+									className={formData.first_name && 'validate'}
 									type="text"
 									onChange={handleInputChange}
 								/>
 							</div>
 							<div className="form-parts">
-								<label htmlFor="surname">Apellidos</label>
+								<label htmlFor="lastname">Apellidos</label>
 								<input
-									id="surname"
-									name="surname"
-									className={formData.surname && 'validate'}
+									id="lastname"
+									name="last_name"
+									className={formData.last_name && 'validate'}
 									type="text"
 									onChange={handleInputChange}
 								/>

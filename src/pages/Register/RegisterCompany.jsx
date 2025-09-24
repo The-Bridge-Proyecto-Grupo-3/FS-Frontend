@@ -14,19 +14,19 @@ const RegisterCompany = () => {
 					<div className="input-container">
 						<div className="form-parts">
 							<label htmlFor="companyname">Empresa</label>
-							<input id="companyname" name="companyname" type="text" />
+							<input id="companyname" name="name" type="text" />
 						</div>
 						<div className="form-parts">
 							<label htmlFor="cif">CIF</label>
-							<input id="cif" name="cif" type="text" />
+							<input id="cif" name="CIF" maxLength="9" type="text" />
 						</div>
 						<div className="form-parts">
-							<label htmlFor="adress">Dirección</label>
-							<input id="adress" name="adress" type="text" />
+							<label htmlFor="address">Dirección</label>
+							<input id="address" name="address" type="text" />
 						</div>
 						<div className="form-parts">
-							<label htmlFor="prov">Provincia</label>
-							<input id="prov" name="prov" type="text" />
+							<label htmlFor="region">Provincia</label>
+							<input id="region" name="region" type="text" />
 						</div>
 						<div className="form-parts">
 							<label htmlFor="email">Email</label>
