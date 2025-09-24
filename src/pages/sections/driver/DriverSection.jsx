@@ -3,17 +3,17 @@ import Autocomplete from '@mui/material/Autocomplete';
 import LogoutIcon from '../../../assets/LogoutIcon.png';
 import { TextField } from '@mui/material';
 import FindGass from '../../../assets/FindGass.png';
+import TicketIcon from '../../../assets/TicketIcon.png';
 import FindElecDot from '../../../assets/FindElecDot.png';
 export default function DriverSection() {
 	return (
-		<div className="driverSectionContainer">
-			<div>
+		<div>
+			<div className="logoContainer">
 				<img src={LogoutIcon} alt="cerrar sesión" width={40} />
 			</div>
-			<div>
+			<div className="infoContainer">
 				<h2>Hola Conductor</h2>
-			</div>
-			<div>
+
 				<Autocomplete
 					disablePortal
 					options={[]}
@@ -32,9 +32,21 @@ export default function DriverSection() {
 					)}
 				/>
 			</div>
-			<div className="sectionImgContainer">
-				<img src={FindGass} alt="añadir vehículos" width={140} />
-				<img src={FindElecDot} alt="añadir conductores" width={140} />
+			<div className="imagesContainer">
+				<div className="imgApis">
+					<div className="nameToIcons">
+						<label htmlFor="gasolineras">Gasolineras</label>
+						<img src={FindGass} alt="añadir vehículos" width={140} />
+					</div>
+					<div className="nameToIcons">
+						<label htmlFor="puntosRecarga">Puntos de Recarga</label>
+						<img src={FindElecDot} alt="añadir conductores" width={140} />
+					</div>
+				</div>
+				<div className="imgTicket">
+					<label htmlFor="tickets">Registra Tickets</label>
+					<img src={TicketIcon} alt="añadir ticket" width={140} />
+				</div>
 			</div>
 		</div>
 	);
