@@ -12,6 +12,7 @@ import Gastation from './pages/Gastations/Gastation';
 import SearchGS from './pages/Gastations/SearchGS';
 import RegisterCompany from './pages/Register/RegisterCompany';
 import RegisterCar from './pages/Register/RegisterCar';
+import Login from './pages/login/login.jsx';
 
 function App() {
 	return (
@@ -28,6 +29,8 @@ function App() {
 			<Route path="/searchGS" element={<SearchGS />} />
 			<Route path="/registerCompany" element={<RegisterCompany />} />
 			<Route path="/registerCar" element={<RegisterCar />} />
+			<Route path="/login" element={<Login />} />
+
 		</Routes>
 	);
 }
