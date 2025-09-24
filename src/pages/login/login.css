@@ -25,14 +25,14 @@
 
 /* Contenedor con borde del formulario */
 .form-border {
-  width: 320px;
+  width: 359px;
   height: auto;
   top: 286px;
   left: 8px;
   border-radius: 24px;
   border: 2px solid #A8A7A7;
   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-  padding: 2rem 1rem;
+  padding: 0.5rem 2rem;
   background: transparent; /* eliminado gradiente interno */
   box-sizing: border-box;
   display: flex;
@@ -52,7 +52,7 @@
 /* Label Email específico */
 .input-label.email-label {
   position: relative;
-  top: -8px; /* sube el label Email */
+  top: 8px; /* sube el label Email */
 }
 
 /* Inputs generales */
@@ -100,6 +100,7 @@
   font-size: 16px;
   cursor: pointer;
   align-self: center;
+  margin-bottom: 1rem;
 }
 
 .form-border button:hover {
