@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
 import { registerDriver } from '../../redux/auth/authSlice';
-import './Register.scss';
+import BackArrowIcon from '../../assets/BackArrowIcon.png';
+import './register.css';
 
 const RegisterDriver = () => {
 	const dispatch = useDispatch();
@@ -44,56 +45,61 @@ const RegisterDriver = () => {
 
 	return (
 		<div className="register-container">
+			<div className="iconContainer">
+				<img src={BackArrowIcon} alt="atras" width={30} />
+			</div>
 			{success ? (
 				<>
 					<h1>¡Se ha registrado correctamente!</h1>
 					<p>Por favor, revise su email para verificar la cuenta</p>
 				</>
 			) : (
-				<form onSubmit={handleSubmit}>
+				<div className="form-container">
 					<h2>Registro nuevo de Conductor</h2>
-					<div>
-						<label htmlFor="username">Nombre</label>
-						<input
-							id="username"
-							name="username"
-							className={formData.username && 'validate'}
-							type="text"
-							onChange={handleInputChange}
-						/>
-					</div>
-					<div>
-						<label htmlFor="surname">Apellidos</label>
-						<input
-							id="surname"
-							name="surname"
-							className={formData.surname && 'validate'}
-							type="text"
-							onChange={handleInputChange}
-						/>
-					</div>
-					<div>
-						<label htmlFor="email">Email</label>
-						<input
-							id="email"
-							name="email"
-							className={formData.email && 'validate'}
-							type="text"
-							onChange={handleInputChange}
-						/>
-					</div>
-					<div>
-						<label htmlFor="password">Contraseña</label>
-						<input
-							id="password"
-							name="password"
-							className={formData.password && 'validate'}
-							type="password"
-							placeholder="Password"
-							onChange={handleInputChange}
-						/>
-					</div>
-					{/* <div>
+					<form onSubmit={handleSubmit} className="form-info">
+						<div className="input-container">
+							<div className="form-parts">
+								<label htmlFor="username">Nombre</label>
+								<input
+									id="username"
+									name="username"
+									className={formData.username && 'validate'}
+									type="text"
+									onChange={handleInputChange}
+								/>
+							</div>
+							<div className="form-parts">
+								<label htmlFor="surname">Apellidos</label>
+								<input
+									id="surname"
+									name="surname"
+									className={formData.surname && 'validate'}
+									type="text"
+									onChange={handleInputChange}
+								/>
+							</div>
+							<div className="form-parts">
+								<label htmlFor="email">Email</label>
+								<input
+									id="email"
+									name="email"
+									className={formData.email && 'validate'}
+									type="text"
+									onChange={handleInputChange}
+								/>
+							</div>
+							<div className="form-parts">
+								<label htmlFor="password">Contraseña</label>
+								<input
+									id="password"
+									name="password"
+									className={formData.password && 'validate'}
+									type="password"
+									placeholder="Password"
+									onChange={handleInputChange}
+								/>
+							</div>
+							{/* <div>
 						<label htmlFor="reppassword">Repeat password:</label>
 						<input
 							id="reppassword"
@@ -104,9 +110,11 @@ const RegisterDriver = () => {
 							onChange={handleInputChange}
 						/>
 					</div> */}
-					<span className="error">{message}</span>
-					<input type="submit" value="Registrar" />
-				</form>
+							<span className="error">{message}</span>
+						</div>
+						<input type="submit" value="Registrar" />
+					</form>
+				</div>
 			)}
 		</div>
 	);
