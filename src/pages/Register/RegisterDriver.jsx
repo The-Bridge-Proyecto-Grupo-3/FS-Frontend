@@ -33,7 +33,6 @@ const RegisterDriver = () => {
 			[/[^A-Za-z0-9]+/.test(value), 'La contraseña debe contener símbolos especiales'],
 			[value && value.length >= 8, 'La contraseña debe tener 8 caracteres o más'],
 		],
-		// reppassword: value => [[value == formData.password, 'Passwords do not match']],
 	};
 
 	const onSubmit = form => dispatch(registerDriver(new FormData(form))).unwrap();
@@ -59,21 +58,21 @@ const RegisterDriver = () => {
 					<form onSubmit={handleSubmit} className="form-info">
 						<div className="input-container">
 							<div className="form-parts">
-								<label htmlFor="username">Nombre</label>
+								<label htmlFor="firstname">Nombre</label>
 								<input
-									id="username"
-									name="username"
-									className={formData.username && 'validate'}
+									id="firstname"
+									name="first_name"
+									className={formData.first_name && 'validate'}
 									type="text"
 									onChange={handleInputChange}
 								/>
 							</div>
 							<div className="form-parts">
-								<label htmlFor="surname">Apellidos</label>
+								<label htmlFor="lastname">Apellidos</label>
 								<input
-									id="surname"
-									name="surname"
-									className={formData.surname && 'validate'}
+									id="lastname"
+									name="last_name"
+									className={formData.last_name && 'validate'}
 									type="text"
 									onChange={handleInputChange}
 								/>
@@ -95,21 +94,9 @@ const RegisterDriver = () => {
 									name="password"
 									className={formData.password && 'validate'}
 									type="password"
-									placeholder="Password"
 									onChange={handleInputChange}
 								/>
 							</div>
-							{/* <div>
-						<label htmlFor="reppassword">Repeat password:</label>
-						<input
-							id="reppassword"
-							name="reppassword"
-							className={formData.reppassword && 'validate'}
-							type="password"
-							placeholder="Repeat password"
-							onChange={handleInputChange}
-						/>
-					</div> */}
 							<span className="error">{message}</span>
 						</div>
 						<input type="submit" value="Registrar" />
