@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGastations } from '../../redux/oilApi/oilSlice';
+import Gastation from './Gastation';
 import './SearchGS.scss';
 
 const Gastations = ({ idMunicipio }) => {
@@ -50,19 +51,17 @@ const Gastations = ({ idMunicipio }) => {
 						<li
 							key={estacion.idEstacion}
 							onClick={() => handleClick(estacion)}
-							style={{
-								cursor: 'pointer',
-								marginBottom: '8px',
-								backgroundColor:
-									selectedId === estacion.idEstacion ? '#d1e7dd' : 'transparent',
-								padding: '6px',
-								borderRadius: '6px',
-							}}
+							className={selectedId === estacion.idEstacion ? 'selected' : ''}
 						>
 							{estacion.nombreEstacion} - {estacion.direccion}
 						</li>
 					))}
 				</ul>
+			)}
+			{selectedId && (
+				<div style={{ marginTop: '20px' }}>
+					<Gastation idEstacion={selectedId} />
+				</div>
 			)}
 		</div>
 	);
