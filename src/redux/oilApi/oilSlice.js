@@ -6,13 +6,17 @@ const initialState = {
 	municipios: [],
 	gastations: [],
 	gastationDetails: null,
+	isLoading: false,
+	isError: false,
+	message: '',
 };
 
-export const getProvincias = createAsyncThunk('oil/getProvincias', async () => {
+export const getProvincias = createAsyncThunk('oil/getProvincias', async thunkAPI => {
 	try {
 		return await oilService.getProvincias();
 	} catch (error) {
-		console.error(error);
+		const message = error.response?.data?.message || error.message || error.toString();
+		return thunkAPI.rejectWithValue(message);
 	}
 });
 
@@ -23,7 +27,8 @@ export const getMunicipios = createAsyncThunk(
 			return await oilService.getMunicipios(idProvincia);
 		} catch (error) {
 			console.error(error);
-			return thunkAPI.rejectWithValue(error.response?.data || error.message);
+			const message = error.response?.data?.message || error.message || error.toString();
+			return thunkAPI.rejectWithValue(message);
 		}
 	}
 );
@@ -34,7 +39,8 @@ export const getGastations = createAsyncThunk(
 		try {
 			return await oilService.getGastations(idMunicipio);
 		} catch (error) {
-			return thunkAPI.rejectWithValue(error.response?.data || error.message);
+			const message = error.response?.data?.message || error.message || error.toString();
+			return thunkAPI.rejectWithValue(message);
 		}
 	}
 );
@@ -45,7 +51,8 @@ export const getGastationDetails = createAsyncThunk(
 		try {
 			return await oilService.getGastationDetails(idEstacion);
 		} catch (error) {
-			return thunkAPI.rejectWithValue(error.response?.data || error.message);
+			const message = error.response?.data?.message || error.message || error.toString();
+			return thunkAPI.rejectWithValue(message);
 		}
 	}
 );
@@ -53,28 +60,71 @@ export const getGastationDetails = createAsyncThunk(
 export const oilSlice = createSlice({
 	name: 'oil',
 	initialState,
-	reducers: {},
+	reducers: {
+		reset: state => {
+			state.isLoading = false;
+			state.isError = false;
+			state.message = '';
+		},
+	},
 	extraReducers: builder => {
 		builder
+			.addCase(getProvincias.pending, state => {
+				state.isLoading = true;
+				state.isError = false;
+			})
 			.addCase(getProvincias.fulfilled, (state, action) => {
+				state.isLoading = false;
 				state.provincias = action.payload;
 			})
+			.addCase(getProvincias.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
 			.addCase(getMunicipios.pending, state => {
+				state.isLoading = true;
+				state.isError = false;
 				state.municipios = [];
 			})
 			.addCase(getMunicipios.fulfilled, (state, action) => {
+				state.isLoading = false;
 				state.municipios = action.payload;
 			})
 			.addCase(getMunicipios.rejected, (state, action) => {
-				console.error('Error cargando municipios:', action.payload);
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+				state.municipios = [];
+			})
+			.addCase(getGastations.pending, state => {
+				state.isLoading = true;
+				state.isError = false;
 			})
 			.addCase(getGastations.fulfilled, (state, action) => {
+				state.isLoading = false;
 				state.gastations = action.payload;
 			})
+			.addCase(getGastations.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
+			.addCase(getGastationDetails.pending, state => {
+				state.isLoading = true;
+				state.isError = false;
+			})
 			.addCase(getGastationDetails.fulfilled, (state, action) => {
+				state.isLoading = false;
 				state.gastationDetails = action.payload;
+			})
+			.addCase(getGastationDetails.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
 			});
 	},
 });
 
+export const { reset } = oilSlice.actions;
 export default oilSlice.reducer;

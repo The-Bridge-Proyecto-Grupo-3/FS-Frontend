@@ -9,6 +9,7 @@ import Provincias from './pages/Gastations/Provincias';
 import Municipios from './pages/Gastations/Municipios';
 import Gastations from './pages/Gastations/Gastations';
 import Gastation from './pages/Gastations/Gastation';
+import SearchGS from './pages/Gastations/SearchGS';
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 			<Route path="/municipios/:id" element={<Municipios />} />
 			<Route path="/gastations/:id" element={<Gastations />} />
 			<Route path="/gastation/:id" element={<Gastation />} />
+			<Route path="/searchGS" element={<SearchGS />} />
 		</Routes>
 	);
 }
