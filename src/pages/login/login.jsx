@@ -44,13 +44,13 @@ function Login() {
 						</label>
 						<input
 							id="code"
-							type="number"
-							max="6"
+							className="password-input"
 							name="code"
+							type="number"
+							maxLength="6"
 							value={form.code}
 							onChange={handleChange}
 							required
-							className="password-input"
 						/>
 					</>:<>
 						<label htmlFor="email" className="input-label email-label">
@@ -58,31 +58,29 @@ function Login() {
 						</label>
 						<input
 							id="email"
-							type="email"
+							className="input-email"
 							name="email"
+							type="email"
 							value={form.email}
 							onChange={handleChange}
 							required
-							className="input-email"
 						/>
 						<label htmlFor="password" className="input-label">
-							Password
+							Contraseña
 						</label>
 						<input
 							id="password"
-							type="password"
+							className="password-input"
 							name="password"
-							placeholder=""
+							type="password"
 							value={form.password}
-							autoComplete="new-password"
 							onChange={handleChange}
 							required
-							className="password-input"
 						/>
 					</>
 					}
 					{error && <p className="error-text">{error}</p>}
-					<button type="submit">{requires2FA ? 'Verificar':'Login'}</button>
+					<button type="submit">{requires2FA ? 'Verificar':'Iniciar sesión'}</button>
 				</form>
 			</div>
 			
