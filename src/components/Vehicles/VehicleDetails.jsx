@@ -57,6 +57,7 @@ const VehicleDetails = () => {
 			setSuccess('¡Vehículo actualizado con éxito!');
 			console.log(success);
 			setEditting(false);
+			setVehicle({...formData});
 		} catch (error) {
 			const errorMessage =
 				error.response?.data?.error ||
@@ -98,7 +99,7 @@ const VehicleDetails = () => {
 	return (
 		<div className='vehicleDetails'>
 			<div className="form-container">
-				<h2>Detalles del vehículo con matrícula {vehicle.license_plate}</h2>
+				<h2>Detalles del vehículo {vehicle.license_plate}</h2>
 				{ !editting && <>
 					<button onClick={() => setEditting(true)}>Editar vehículo</button>
 					<button onClick={handleDelete}>Eliminar vehículo</button>
