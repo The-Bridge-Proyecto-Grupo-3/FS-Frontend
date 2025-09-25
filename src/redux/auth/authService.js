@@ -11,7 +11,7 @@ const userLogin = async userData => {
 	return res.data;
 };
 const verify2FA = async ({ code, token }) => {
-	const res = await axios.post(`${API_URL}/auth/2fa`, { code }, { headers: { Authorization: token}});
+	const res = await axios.post(`${API_URL}/auth/2fa`, { code }, { headers: { Authorization: token }});
 	return res.data;
 };
 const authService = {

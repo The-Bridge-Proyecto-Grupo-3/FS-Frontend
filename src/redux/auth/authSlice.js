@@ -30,9 +30,10 @@ export const registerDriver = createAsyncThunk('auth/registerDriver', async user
 
 export const verify2FA = createAsyncThunk(
 	'/auth/2fa',
-	async (code, { rejectWithValue }) => {
+	async (code, { rejectWithValue, getState }) => {
+		const { token } = getState().auth;
 		try {
-			const response = await authService.verify2FA(code);
+			const response = await authService.verify2FA({ code, token });
 			return response;
 		} catch (err) {
 			return rejectWithValue('Código 2FA incorrecto o expirado', err);
