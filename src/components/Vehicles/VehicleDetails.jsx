@@ -1,40 +1,45 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import api from '../../api/axios'; //Cambiar
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchVehicleById, deleteVehicle, updateVehicle } from '../../redux/vehicles/vehicleSlice';
 import './VehicleDetails.css';
 
 const VehicleDetails = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const { selectedVehicle, status, error: reduxError } = useSelector(state => state.vehicles);
 
-	const [vehicle, setVehicle] = useState({});
 	const [formData, setFormData] = useState({
 		brand: '',
 		model: '',
 		license_plate: '',
 		registration_date: '',
-		type: ''
+		type: '',
 	});
-	const [loading, setLoading] = useState(true);
 	const [editting, setEditting] = useState(false);
 	const [error, setError] = useState(null);
 	const [success, setSuccess] = useState(null);
 
 	useEffect(() => {
-		const fetchVehicle = async () => {
-			try {
-				const response = await api.get(`/vehicles/${id}`, { headers: { Authorization: localStorage.getItem('accessToken')}});
-				setVehicle(response.data);
-				setFormData(response.data);
-			} catch (error) {
-				setError('Vehículo no encontrado o error al cargar los datos.');
-				console.error(error);
-			} finally {
-				setLoading(false);
-			}
-		};
-		fetchVehicle();
-	}, []);
+		dispatch(fetchVehicleById(id));
+	}, [id, dispatch]);
+
+	useEffect(() => {
+		if (selectedVehicle) {
+			setFormData({
+				brand: selectedVehicle.brand,
+				model: selectedVehicle.model,
+				license_plate: selectedVehicle.license_plate,
+				registration_date: selectedVehicle.registration_date.split('T')[0],
+				type: selectedVehicle.type,
+			});
+		}
+	}, [selectedVehicle]);
+
+	const handleChange = e => {
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
 
 	const handleUpdate = async e => {
 		e.preventDefault();
@@ -42,22 +47,22 @@ const VehicleDetails = () => {
 		setSuccess(null);
 
 		if (
-			!vehicle.brand ||
-			!vehicle.model ||
-			!vehicle.license_plate ||
-			!vehicle.registration_date ||
-			!vehicle.type
+			!selectedVehicle.brand ||
+			!selectedVehicle.model ||
+			!selectedVehicle.license_plate ||
+			!selectedVehicle.registration_date ||
+			!selectedVehicle.type
 		) {
 			setError('Todos los campos son obligatorios.');
 			return;
 		}
 
 		try {
-			const response = await api.put(`/vehicles/${id}`, formData, { headers: { Authorization: localStorage.getItem('accessToken')}});
+			await dispatch(updateVehicle({ id, ...formData })).unwrap();
 			setSuccess('¡Vehículo actualizado con éxito!');
 			console.log(success);
 			setEditting(false);
-			setVehicle({...formData});
+			setVehicle({ ...formData });
 		} catch (error) {
 			const errorMessage =
 				error.response?.data?.error ||
@@ -72,40 +77,44 @@ const VehicleDetails = () => {
 			!window.confirm(
 				'¿Estás seguro de que quieres eliminar este vehículo? Esta acción no se puede deshacer.'
 			)
-		) return;
+		)
+			return;
 		try {
-			await api.delete(`/vehicles/${id}`, { headers: { Authorization: localStorage.getItem('accessToken')}});
+			await dispatch(deleteVehicle(id)).unwrap();
 			setSuccess('Vehículo eliminado con éxito.');
-			setTimeout(() => navigate('/vehicles'),1000);
+			setTimeout(() => navigate('/vehicles'), 1000);
 		} catch (error) {
 			setError('No se pudo eliminar el vehículo.');
 			console.error(error);
 		}
 	};
 
-	const handleChange = (e) => {
-		const { name,value } = e.target;
-		setFormData((prev) => ({
-			...prev,
-			[name]: value
-		}));
+	const handleReset = () => {
+		setFormData({ ...selectedVehicle });
+		setEditting(false);
 	};
 
-	const handleReset = () => {
-		setFormData({...vehicle});
-		setEditting(false);
+	if (status === 'loading') {
+		return <p>Loading...</p>;
+	}
+
+	if (reduxError && !selectedVehicle) {
+		return <p className="error-message">{reduxError}</p>;
 	}
 
 	return (
-		<div className='vehicleDetails'>
+		<div className="vehicleDetails">
 			<div className="form-container">
-				<h2>Detalles del vehículo {vehicle.license_plate}</h2>
-				{ !editting && <>
-					<button onClick={() => setEditting(true)}>Editar vehículo</button>
-					<button onClick={handleDelete}>Eliminar vehículo</button>
-				</>}
-				{ loading ? 
-					<p>Loading...</p>:
+				<h2>Detalles del vehículo {selectedVehicle?.license_plate}</h2>
+				{!editting && (
+					<>
+						<button onClick={() => setEditting(true)}>Editar vehículo</button>
+						<button onClick={handleDelete}>Eliminar vehículo</button>
+					</>
+				)}
+				{loading ? (
+					<p>Loading...</p>
+				) : (
 					<form className="form-info" onSubmit={handleUpdate} onReset={handleReset}>
 						<div className="input-container">
 							<div className="form-parts">
@@ -180,13 +189,14 @@ const VehicleDetails = () => {
 						</div>
 						{error && <p className="error-message">{error}</p>}
 						{success && <p className="success-message">{success}</p>}
-						{editting && <>
+						{editting && (
+							<>
 								<input type="submit" value="Guardar" />
 								<input type="reset" value="Cancelar" />
 							</>
-						}
+						)}
 					</form>
-				}
+				)}
 			</div>
 		</div>
 	);

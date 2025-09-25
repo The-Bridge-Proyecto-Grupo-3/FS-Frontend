@@ -1,32 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchVehicles } from '../../redux/vehicles/vehicleSlice';
 import VehicleItem from './VehicleItem';
-import api from '../../api/axios';
+import './Vehicles.css';
 
 const Vehicles = () => {
-	const [vehicles, setVehicles] = useState([]);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
+	const dispatch = useDispatch();
+	const { vehicles, status, error } = useSelector(state => state.vehicles);
 
 	useEffect(() => {
-		const fetchVehicles = async () => {
-			try {
-				const response = await api.get('/vehicles');
-				setVehicles(response.data);
-			} catch (error) {
-				setError('No se pudieron cargar los vehículos. Inténtalo de nuevo más tarde.');
-				console.error(error);
-			} finally {
-				setLoading(false);
-			}
-		};
-		fetchVehicles();
-	}, []);
+		if (status === 'idle') {
+			dispatch(fetchVehicles());
+		}
+	}, [status, dispatch]);
 
-	if (loading) {
+	if (status === 'loading') {
 		return <p>Cargando vehículos...</p>;
 	}
 
-	if (error) {
+	if (status === 'failed') {
 		return <p className="error-message">{error}</p>;
 	}
 
