@@ -9,6 +9,7 @@ import SearchGS from './pages/Gastations/SearchGS';
 import RegisterCompany from './pages/Register/RegisterCompany';
 import RegisterVehicle from './pages/Register/RegisterVehicle';
 import Login from './pages/login/login.jsx';
+import VehicleDetails from './components/Vehicles/VehicleDetails';
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 			<Route path="/registerCompany" element={<RegisterCompany />} />
 			<Route path="/registerVehicle" element={<RegisterVehicle />} />
 			<Route path="/login" element={<Login />} />
+			<Route path="/vehicles/:id" element={<VehicleDetails />} />
 		</Routes>
 	);
 }
