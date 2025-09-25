@@ -4,6 +4,7 @@ import Principal from './pages/principal/Principal';
 import Layout from './layout/layout';
 import CompanySection from './pages/sections/company/CompanySection';
 import DriverSection from './pages/sections/driver/DriverSection';
+import AdminSection from './pages/sections/admin/AdminSection';
 import RegisterDriver from './pages/Register/RegisterDriver';
 import SearchGS from './pages/Gastations/SearchGS';
 import RegisterCompany from './pages/Register/RegisterCompany';
@@ -18,9 +19,10 @@ function App() {
 			<Route index element={<Principal />} />
 			<Route path="/company" element={<CompanySection />} />
 			<Route path="/driver" element={<DriverSection />} />
+			<Route path="/admin" element={<AdminSection />} />
 			<Route path="/registerDriver" element={<RegisterDriver />} />
 			<Route path="/searchGS" element={<SearchGS />} />
-			<Route path="/registerCompany" element={<RegisterCompany />} />
+			<Route path="/register" element={<RegisterCompany />} />
 			<Route path="/registerVehicle" element={<RegisterVehicle />} />
 			<Route path="/login" element={<Login />} />
 			<Route path="/vehicles/:id" element={<VehicleDetails />} />
