@@ -7,11 +7,11 @@ const API_URL = 'http://localhost:4000';
 // 	return res.data;
 // };
 const userLogin = async userData => {
-	const res = await axios.post(`${API_URL}/auth/login`, userData);
+	const res = await axios.post(`${API_URL}/auth/login`, userData, { withCredentials: true });
 	return res.data;
 };
-const verify2FA = async ({ code, token }) => {
-	const res = await axios.post(`${API_URL}/auth/2fa`, { code }, { headers: { Authorization: token }});
+const verify2FA = async (code) => {
+	const res = await axios.post(`${API_URL}/auth/2fa`, { code }, { withCredentials: true });
 	return res.data;
 };
 const authService = {

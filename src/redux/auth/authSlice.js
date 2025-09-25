@@ -3,7 +3,6 @@ import authService from './authService';
 
 const initialState = {
 	user: null,
-	token: null,
 	role: null,
 	requires2FA: false,
 	target: {
@@ -30,10 +29,9 @@ export const registerDriver = createAsyncThunk('auth/registerDriver', async user
 
 export const verify2FA = createAsyncThunk(
 	'/auth/2fa',
-	async (code, { rejectWithValue, getState }) => {
-		const { token } = getState().auth;
+	async (code, { rejectWithValue }) => {
 		try {
-			const response = await authService.verify2FA({ code, token });
+			const response = await authService.verify2FA(code);
 			return response;
 		} catch (err) {
 			return rejectWithValue('Código 2FA incorrecto o expirado', err);
@@ -48,13 +46,11 @@ export const authSlice = createSlice({
 	extraReducers: builder => {
 		builder.addCase(loginUser.fulfilled, (state, action) => {
 			state.target = action.payload.location; // ????
-			state.token = action.payload.token;
 			state.requires2FA = action.payload.requires2FA;
 			state.role = action.payload.role ?? null;
 			state.user = action.payload.user ?? null;
 		});
 		builder.addCase(verify2FA.fulfilled, (state, action) => {
-			state.token = action.payload.token;
 			state.user = action.payload.user;
 			state.role = action.payload.role;
 			state.requires2FA = false;
