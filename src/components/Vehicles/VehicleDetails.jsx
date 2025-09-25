@@ -76,7 +76,7 @@ const VehicleDetails = () => {
 		try {
 			await api.delete(`/vehicles/${id}`, { headers: { Authorization: localStorage.getItem('accessToken')}});
 			setSuccess('Vehículo eliminado con éxito.');
-			setTimeout(1000, () => navigate('/vehicles'));
+			setTimeout(() => navigate('/vehicles'),1000);
 		} catch (error) {
 			setError('No se pudo eliminar el vehículo.');
 			console.error(error);
