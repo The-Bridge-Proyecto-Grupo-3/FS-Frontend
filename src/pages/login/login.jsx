@@ -31,7 +31,7 @@ function Login() {
 		setForm(prev => ({ ...prev, [name]: value.trim() }));
 	};
 
-	return (
+	return (!user &&
 		<div className="login-container">
 			<img src={loginImage} alt="Logo DeiviGo" className="login-logo" />
 			<div className="form-border">
