@@ -10,22 +10,22 @@ const getProvincias = async () => {
 };
 
 const getMunicipios = async idProvincia => {
-	const res = await axios.get(`/municipios/provincia/${idProvincia}`);
+	const res = await api.get(`/municipios/provincia/${idProvincia}`);
 	return res.data;
 };
 
 const getGastations = async idMunicipio => {
-	const res = await axios.get(`/estaciones/municipio/${idMunicipio}`);
+	const res = await api.get(`/estaciones/municipio/${idMunicipio}`);
 	return res.data;
 };
 
 const getGastationDetails = async idEstacion => {
-	const res = await axios.get(`/estaciones/detalles/${idEstacion}`);
+	const res = await api.get(`/estaciones/detalles/${idEstacion}`);
 	return res.data;
 };
 
 const getGastationNextMe = async (latitud, longitud, radio) => {
-	const res = await axios.get(
+	const res = await api.get(
 		`/estaciones/radio?latitud=${latitud}&longitud=${longitud}&radio=${radio}&pagina=1&limite=10`
 	);
 	return res.data;
