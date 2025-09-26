@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../../api/axios';
+import vehicleService from './vehicleService';
 
 const initialState = {
 	vehicles: [],
@@ -8,25 +8,33 @@ const initialState = {
 	error: null,
 };
 
+export const createVehicle = createAsyncThunk(
+	'vehicles/createVehicle',
+	async (vehicleData, { rejectWithValue }) => {
+		try {
+			return await vehicleService.create(vehicleData);
+		} catch (error) {
+			return rejectWithValue(error.response.data.error || 'Error al crear el vehículo');
+		}
+	}
+);
+
 export const fetchVehicles = createAsyncThunk('vehicles/fetchVehicles', async () => {
-	const response = await api.get('/vehicles');
-	return response.data;
+	return await vehicleService.getAll();
 });
 
 export const fetchVehicleById = createAsyncThunk('vehicles/fetchVehicleById', async id => {
-	const response = await api.get(`/vehicles/${id}`);
-	return response.data;
+	return await vehicleService.getById(id);
 });
 
 export const updateVehicle = createAsyncThunk('vehicles/updateVehicle', async vehicleData => {
 	const { id, ...fields } = vehicleData;
-	const response = await api.put(`/vehicles/${id}`, fields);
-	return response.data;
+	return await vehicleService.update(id, fields);
 });
 
 export const deleteVehicle = createAsyncThunk('vehicles/deleteVehicle', async id => {
-	await api.delete(`/vehicles/${id}`);
-	return id; // Devuelve el ID para poder eliminarlo del estado
+	await vehicleService.remove(id);
+	return id;
 });
 
 const vehiclesSlice = createSlice({
@@ -35,6 +43,19 @@ const vehiclesSlice = createSlice({
 	reducers: {},
 	extraReducers: builder => {
 		builder
+			// createVehicle
+			.addCase(createVehicle.pending, state => {
+				state.status = 'loading';
+				state.error = null;
+			})
+			.addCase(createVehicle.fulfilled, (state, action) => {
+				state.status = 'succeeded';
+				state.vehicles.push(action.payload);
+			})
+			.addCase(createVehicle.rejected, (state, action) => {
+				state.status = 'failed';
+				state.error = action.payload;
+			})
 			// fetchVehicles
 			.addCase(fetchVehicles.pending, state => {
 				state.status = 'loading';

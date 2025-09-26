@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../../api/axios.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { createVehicle } from '../../redux/vehicles/vehicleSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import './register.css';
 
 const RegisterVehicle = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const [formData, setFormData] = useState({
 		brand: '',
@@ -19,10 +21,9 @@ const RegisterVehicle = () => {
 	const [success, setSuccess] = useState(null);
 
 	const handleChange = e => {
-		const { name, value } = e.target;
 		setFormData(prevState => ({
 			...prevState,
-			[name]: value,
+			[e.target.name]: e.target.value,
 		}));
 	};
 
@@ -43,12 +44,12 @@ const RegisterVehicle = () => {
 		}
 
 		try {
-			const response = await api.post('/vehicles', formData);
+			await dispatch(createVehicle(formData)).unwrap();
 
 			if (response.status === 201) {
 				setSuccess('¡Vehículo registrado con éxito!');
 				setTimeout(() => {
-					navigate('/dashboard/vehicles'); // Redirige a la lista de vehículos
+					navigate('/vehicles'); // Redirige a la lista de vehículos
 				}, 2000);
 			}
 		} catch (error) {
