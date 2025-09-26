@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getUserInfo } from '../../redux/auth/authSlice';
+import { useDispatch } from 'react-redux';
 // eslint-disable-next-line no-unused-vars
 import { motion as m } from 'framer-motion';
 import LogoPrincipal2 from '../../assets/LogoPrincipal2.png';
@@ -8,11 +10,14 @@ import './principal.css';
 
 export default function Principal() {
 	const navigate = useNavigate();
-
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getUserInfo());
+	}, []);
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			navigate('/login');
-		}, 5000);
+		}, 2000);
 
 		return () => clearTimeout(timer);
 	}, [navigate]);

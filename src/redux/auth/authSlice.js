@@ -11,6 +11,15 @@ const initialState = {
 	},
 };
 
+export const getUserInfo = createAsyncThunk('auth/info', async (_, { rejectWithValue }) => {
+	try {
+		console.log('wrfsery');
+		const userData = await authService.userInfo();
+		return userData;
+	} catch (err) {
+		return rejectWithValue(err.response?.data?.message || 'Error de red o del servidor');
+	}
+});
 export const loginUser = createAsyncThunk(
 	'auth/login',
 	async (credentials, { rejectWithValue }) => {
@@ -27,17 +36,14 @@ export const registerDriver = createAsyncThunk('auth/registerDriver', async user
 	console.log('desde store', user);
 });
 
-export const verify2FA = createAsyncThunk(
-	'/auth/2fa',
-	async (code, { rejectWithValue }) => {
-		try {
-			const response = await authService.verify2FA(code);
-			return response;
-		} catch (err) {
-			return rejectWithValue('Código 2FA incorrecto o expirado', err);
-		}
+export const verify2FA = createAsyncThunk('/auth/2fa', async (code, { rejectWithValue }) => {
+	try {
+		const response = await authService.verify2FA(code);
+		return response;
+	} catch (err) {
+		return rejectWithValue('Código 2FA incorrecto o expirado', err);
 	}
-);
+});
 
 export const authSlice = createSlice({
 	name: 'auth',
@@ -54,6 +60,10 @@ export const authSlice = createSlice({
 			state.user = action.payload.user;
 			state.role = action.payload.role;
 			state.requires2FA = false;
+		});
+		builder.addCase(getUserInfo.fulfilled, (state, action) => {
+			state.role = action.payload.role;
+			state.user = action.payload.user;
 		});
 	},
 });

@@ -6,15 +6,19 @@ import FindGass from '../../../assets/FindGass.png';
 import TicketIcon from '../../../assets/TicketIcon.png';
 import FindElecDot from '../../../assets/FindElecDot.png';
 import { useSelector } from 'react-redux';
+
 export default function DriverSection() {
 	const { user } = useSelector(state => state.auth);
+
 	return (
 		<div>
 			<div className="logoContainer">
 				<img src={LogoutIcon} alt="cerrar sesión" width={40} />
 			</div>
 			<div className="infoContainer">
-				<h2>Hola {user.first_name} {user.last_name}</h2>
+				<h2>
+					Hola {user.first_name} {user.last_name}
+				</h2>
 
 				<Autocomplete
 					disablePortal
