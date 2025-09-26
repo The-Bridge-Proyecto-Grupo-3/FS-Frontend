@@ -10,7 +10,7 @@ function Login() {
 	const navigate = useNavigate();
 	const { requires2FA, user, role } = useSelector(state => state.auth);
 
-	const [form, setForm] = useState({ email: '', password: '' });
+	const [form, setForm] = useState({ email: '', password: '', code: ''});
 	const [error, setError] = useState('');
 
 	useEffect(() => {
