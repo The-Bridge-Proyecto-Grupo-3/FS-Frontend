@@ -25,12 +25,25 @@ const remove = async id => {
 	return response.data;
 };
 
+const assign = async (vehicleId, driverId) => {
+	const payload = driverId ? { driver_id: driverId } : {};
+	const response = await api.put(`/vehicles/${vehicleId}/assign`, payload);
+	return response.data;
+};
+
+const unassign = async vehicleId => {
+	const response = await api.delete(`/vehicles/${vehicleId}/assign`);
+	return response.data;
+};
+
 const vehicleService = {
 	create,
 	getAll,
 	getById,
 	update,
 	remove,
+	assign,
+	unassign,
 };
 
 export default vehicleService;
