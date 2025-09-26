@@ -6,7 +6,7 @@ const create = async vehicleData => {
 };
 
 const getAll = async () => {
-	const response = await api.get('/vehicles');
+	const response = await api.get('/vehicles?available=true');
 	return response.data;
 };
 
