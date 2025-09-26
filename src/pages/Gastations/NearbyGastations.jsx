@@ -45,7 +45,7 @@ const NearbyGastations = () => {
 				})
 			);
 		}
-	}, [coords, radius, dispatch]);
+	}, [coords, radius]);
 
 	const handleRadiusChange = e => {
 		setRadius(Number(e.target.value));
