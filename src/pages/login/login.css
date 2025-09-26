@@ -1,194 +1,203 @@
 /* Contenedor general centrado con gradiente */
 .login-container {
-  width: 375px;
-  height: 812px;
-  background: linear-gradient(180deg, #F2C9C4 0%, #FFFFFF 100%);
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  padding-top: 3rem;
-  box-sizing: border-box;
-  margin: 0 auto;
-  position: relative;
-  font-family: Arial, sans-serif;
-  min-height: 100vh;
-}
+	width: 375px;
+	height: 812px;
+	background: linear-gradient(180deg, #f2c9c4 0%, #ffffff 100%);
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: column;
+	padding-top: 3rem;
+	box-sizing: border-box;
+	margin: 0 auto;
+	position: relative;
+	font-family: Arial, sans-serif;
+	min-height: 100vh;
+	opacity: 0;
+	transform: translateY(30px);
 
+	/* transición correcta */
+	transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.login-container.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
 /* Logo */
 .login-logo {
-  width: 368px;
-  height: 368px;
-  margin-top: -93px;
-  object-fit: contain;
+	width: 368px;
+	height: 368px;
+	margin-top: -93px;
+	object-fit: contain;
 }
 
 /* Contenedor con borde del formulario */
 .form-border {
-  width: 359px;
-  height: auto;
-  top: 286px;
-  left: 8px;
-  border-radius: 24px;
-  border: 2px solid #A8A7A7;
-  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-  padding: 0.5rem 2rem;
-  background: transparent; /* eliminado gradiente interno */
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+	width: 359px;
+	height: auto;
+	top: 286px;
+	left: 8px;
+	border-radius: 24px;
+	border: 2px solid #a8a7a7;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	padding: 0.5rem 2rem;
+	background: transparent; /* eliminado gradiente interno */
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
 }
 
 /* Labels generales */
 .input-label {
-  display: block;
-  width: 290px;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  text-align: left;
-  padding-bottom: 5px;
+	display: block;
+	width: 290px;
+	margin-bottom: 0.5rem;
+	font-weight: bold;
+	text-align: left;
+	padding-bottom: 5px;
 }
 
 /* Label Email específico */
 .input-label.email-label {
-  position: relative;
-  top: 8px; /* sube el label Email */
+	position: relative;
+	top: 8px; /* sube el label Email */
 }
 
 /* Inputs generales */
 .form-border input {
-  width: 290px;
-  height: 51px;
-  border-radius: 24px;
-  border: 2px solid #A8A7A7;
-  padding: 0.75rem;
-  font-size: 1rem;
-  background: transparent;
-  box-sizing: border-box;
-  align-self: center;
-  color: #000;
-  margin-bottom: 24px; /* separación entre Email y Password */
+	width: 290px;
+	height: 51px;
+	border-radius: 24px;
+	border: 2px solid #a8a7a7;
+	padding: 0.75rem;
+	font-size: 1rem;
+	background: transparent;
+	box-sizing: border-box;
+	align-self: center;
+	color: #000;
+	margin-bottom: 24px; /* separación entre Email y Password */
 }
 
 .form-border input::placeholder {
-  color: rgba(0, 0, 0, 0.5);
+	color: rgba(0, 0, 0, 0.5);
 }
 
 /* Password específico */
 .password-input {
-  width: 290px;
-  height: 51px;
-  border-radius: 24px;
-  border: 2px solid #A8A7A7;
-  background: transparent;
-  font-size: 1rem;
-  box-sizing: border-box;
-  align-self: center;
-  color: #000;
-  margin-bottom: 32px; /* separación Password y Login */
+	width: 290px;
+	height: 51px;
+	border-radius: 24px;
+	border: 2px solid #a8a7a7;
+	background: transparent;
+	font-size: 1rem;
+	box-sizing: border-box;
+	align-self: center;
+	color: #000;
+	margin-bottom: 32px; /* separación Password y Login */
 }
 
 /* Botón de login */
 .form-border button {
-  width: 290px;
-  height: 43px;
-  border-radius: 24px;
-  border: none;
-  background: #EA0029;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  align-self: center;
-  margin-bottom: 1rem;
+	width: 290px;
+	height: 43px;
+	border-radius: 24px;
+	border: none;
+	background: #ea0029;
+	color: white;
+	font-weight: bold;
+	font-size: 16px;
+	cursor: pointer;
+	align-self: center;
+	margin-bottom: 1rem;
 }
 
 .form-border button:hover {
-  background: #c70023;
+	background: #c70023;
 }
 
 /* Links debajo del formulario */
 .login-links {
-  width: 359px;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-  font-weight: bold;
+	width: 359px;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1rem;
+	font-weight: bold;
 }
 
 .login-links a {
-  font-family: Roboto, sans-serif;
-  font-size: 16px;
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
+	font-family: Roboto, sans-serif;
+	font-size: 16px;
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
 }
 
 .login-links a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 /* 📱 Responsive: móviles */
 @media (max-width: 767px) {
-  .login-container {
-    width: 100%;
-    height: 100%;
-    padding-top: 10px;
-  }
+	.login-container {
+		width: 100%;
+		height: 100%;
+		padding-top: 10px;
+	}
 
-  .login-logo {
-    width: 90%;
-    height: auto;
-    margin-top: -50px;
-  }
+	.login-logo {
+		width: 90%;
+		height: auto;
+		margin-top: -50px;
+	}
 
-  .form-border, .login-links {
-    width: 90%;
-  }
+	.form-border,
+	.login-links {
+		width: 90%;
+	}
 
-  .form-border input,
-  .form-border button {
-    width: 100%;
-    margin-bottom: 1.5rem;
-  }
+	.form-border input,
+	.form-border button {
+		width: 100%;
+		margin-bottom: 1.5rem;
+	}
 
-  .password-input {
-    width: 100%;
-  }
+	.password-input {
+		width: 100%;
+	}
 
-  .input-label {
-    width: 100%;
-    margin-bottom: 4px;
-  }
+	.input-label {
+		width: 100%;
+		margin-bottom: 4px;
+	}
 }
 
 /* Tablet */
 @media (min-width: 768px) and (max-width: 1024px) {
-  .login-container {
-    width: 500px;
-    height: 812px;
-  }
+	.login-container {
+		width: 500px;
+		height: 812px;
+	}
 
-  .form-border {
-    width: 480px;
-    height: auto;
-  }
+	.form-border {
+		width: 480px;
+		height: auto;
+	}
 
-  .login-links {
-    width: 480px;
-  }
+	.login-links {
+		width: 480px;
+	}
 
-  .form-border input,
-  .form-border button {
-    width: 100%;
-  }
+	.form-border input,
+	.form-border button {
+		width: 100%;
+	}
 
-  .password-input {
-    width: 100%;
-  }
+	.password-input {
+		width: 100%;
+	}
 
-  .input-label {
-    width: 100%;
-    margin-bottom: 4px;
-  }
+	.input-label {
+		width: 100%;
+		margin-bottom: 4px;
+	}
 }
