@@ -1,4 +1,4 @@
-import api from '../../config/axios';
+import api from '../../config/api';
 
 const create = async vehicleData => {
 	const response = await api.post('/vehicles', vehicleData);
