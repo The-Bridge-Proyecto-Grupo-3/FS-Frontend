@@ -16,6 +16,7 @@ import ProtectedRoute from './guards/ProtectedRoute.jsx';
 
 function App() {
 	return (
+		// llamar a /users/me para poder usar las rutas protegidas cuando se recargue la pag
 		<Routes>
 			<Route path="/" element={<Layout />} />
 			<Route index element={<Principal />} />
