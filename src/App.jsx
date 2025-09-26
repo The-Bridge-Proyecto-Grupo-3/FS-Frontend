@@ -10,6 +10,8 @@ import SearchGS from './pages/Gastations/SearchGS';
 import RegisterCompany from './pages/Register/RegisterCompany';
 import RegisterVehicle from './pages/Register/RegisterVehicle';
 import Login from './pages/login/login.jsx';
+import VehicleDetails from './components/Vehicles/VehicleDetails';
+import NearbyGastations from './pages/Gastations/NearbyGastations.jsx';
 
 function App() {
 	return (
@@ -19,11 +21,13 @@ function App() {
 			<Route path="/company" element={<CompanySection />} />
 			<Route path="/driver" element={<DriverSection />} />
 			<Route path="/admin" element={<AdminSection />} />
-			<Route path="/registerDriver" element={<RegisterDriver />} />
-			<Route path="/searchGS" element={<SearchGS />} />
 			<Route path="/register" element={<RegisterCompany />} />
+			<Route path="/registerDriver" element={<RegisterDriver />} />
 			<Route path="/registerVehicle" element={<RegisterVehicle />} />
 			<Route path="/login" element={<Login />} />
+			<Route path="/vehicles/:id" element={<VehicleDetails />} />
+			<Route path="/searchGS" element={<SearchGS />} />
+			<Route path="/NearbyGS" element={<NearbyGastations />} />
 		</Routes>
 	);
 }

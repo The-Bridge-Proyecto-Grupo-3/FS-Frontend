@@ -6,6 +6,7 @@ const initialState = {
 	municipios: [],
 	gastations: [],
 	gastationDetails: null,
+	gastationNextMe: [],
 	isLoading: false,
 	isError: false,
 	message: '',
@@ -50,6 +51,18 @@ export const getGastationDetails = createAsyncThunk(
 	async (idEstacion, thunkAPI) => {
 		try {
 			return await oilService.getGastationDetails(idEstacion);
+		} catch (error) {
+			const message = error.response?.data?.message || error.message || error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
+export const getGastationNextMe = createAsyncThunk(
+	'oil/getGastationNextMe',
+	async ({ latitud, longitud, radio }, thunkAPI) => {
+		try {
+			return await oilService.getGastationNextMe(latitud, longitud, radio);
 		} catch (error) {
 			const message = error.response?.data?.message || error.message || error.toString();
 			return thunkAPI.rejectWithValue(message);
@@ -122,6 +135,20 @@ export const oilSlice = createSlice({
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
+			})
+			.addCase(getGastationNextMe.pending, state => {
+				state.isLoading = true;
+				state.isError = false;
+			})
+			.addCase(getGastationNextMe.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.gastationNextMe = action.payload;
+			})
+			.addCase(getGastationNextMe.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+				state.gastationNextMe = [];
 			});
 	},
 });
