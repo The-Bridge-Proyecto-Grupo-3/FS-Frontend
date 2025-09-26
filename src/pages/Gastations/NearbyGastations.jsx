@@ -36,7 +36,7 @@ const NearbyGastations = () => {
 	}, []);
 
 	useEffect(() => {
-		if (coords.lat && coords.lng) {
+		if (coords.lat !== null && coords.lng !== null) {
 			dispatch(
 				getGastationNextMe({
 					latitud: coords.lat,
