@@ -18,22 +18,14 @@ const VehicleDetails = () => {
 		type: '',
 	});
 	const [editting, setEditting] = useState(false);
-	const [error, setError] = useState(null);
-	const [success, setSuccess] = useState(null);
 
 	useEffect(() => {
 		dispatch(fetchVehicleById(id));
-	}, [id, dispatch]);
+	}, [id]);
 
 	useEffect(() => {
 		if (selectedVehicle) {
-			setFormData({
-				brand: selectedVehicle.brand,
-				model: selectedVehicle.model,
-				license_plate: selectedVehicle.license_plate,
-				registration_date: selectedVehicle.registration_date.split('T')[0],
-				type: selectedVehicle.type,
-			});
+			setFormData({ ...selectedVehicle });
 		}
 	}, [selectedVehicle]);
 
@@ -43,32 +35,18 @@ const VehicleDetails = () => {
 
 	const handleUpdate = async e => {
 		e.preventDefault();
-		setError(null);
-		setSuccess(null);
 
-		if (
-			!selectedVehicle.brand ||
-			!selectedVehicle.model ||
-			!selectedVehicle.license_plate ||
-			!selectedVehicle.registration_date ||
-			!selectedVehicle.type
-		) {
-			setError('Todos los campos son obligatorios.');
+		if (Object.values(formData).some(value => String(value).trim() === '')) {
+			alert('Todos los campos son obligatorios.');
 			return;
 		}
 
 		try {
 			await dispatch(updateVehicle({ id, ...formData })).unwrap();
-			setSuccess('¡Vehículo actualizado con éxito!');
-			console.log(success);
+			alert('¡Vehículo actualizado con éxito!');
 			setEditting(false);
-			setVehicle({ ...formData });
 		} catch (error) {
-			const errorMessage =
-				error.response?.data?.error ||
-				'Error al registrar el vehículo. Inténtalo de nuevo.';
-			setError(errorMessage);
-			console.error(error);
+			console.error('Fallo al actualizar el vehículo:', error);
 		}
 	};
 
@@ -81,11 +59,10 @@ const VehicleDetails = () => {
 			return;
 		try {
 			await dispatch(deleteVehicle(id)).unwrap();
-			setSuccess('Vehículo eliminado con éxito.');
+			alert('Vehículo eliminado con éxito.');
 			setTimeout(() => navigate('/vehicles'), 1000);
 		} catch (error) {
-			setError('No se pudo eliminar el vehículo.');
-			console.error(error);
+			console.error('Fallo al eliminar el vehículo:', error);
 		}
 	};
 
@@ -94,11 +71,11 @@ const VehicleDetails = () => {
 		setEditting(false);
 	};
 
-	if (status === 'loading') {
-		return <p>Loading...</p>;
+	if (status === 'loading' && !selectedVehicle) {
+		return <p>Cargando datos del vehículo...</p>;
 	}
 
-	if (reduxError && !selectedVehicle) {
+	if (status === 'failed' && !selectedVehicle) {
 		return <p className="error-message">{reduxError}</p>;
 	}
 
@@ -107,96 +84,94 @@ const VehicleDetails = () => {
 			<div className="form-container">
 				<h2>Detalles del vehículo {selectedVehicle?.license_plate}</h2>
 				{!editting && (
-					<>
+					<div className="action-buttons">
 						<button onClick={() => setEditting(true)}>Editar vehículo</button>
 						<button onClick={handleDelete}>Eliminar vehículo</button>
-					</>
+					</div>
 				)}
-				{loading ? (
-					<p>Loading...</p>
-				) : (
-					<form className="form-info" onSubmit={handleUpdate} onReset={handleReset}>
-						<div className="input-container">
-							<div className="form-parts">
-								<label htmlFor="brand">Marca</label>
-								<input
-									id="brand"
-									name="brand"
-									type="text"
-									value={formData.brand}
-									onChange={handleChange}
-									required
-									disabled={!editting}
-								/>
-							</div>
-							<div className="form-parts">
-								<label htmlFor="model">Modelo</label>
-								<input
-									id="model"
-									name="model"
-									type="text"
-									value={formData.model}
-									onChange={handleChange}
-									required
-									disabled={!editting}
-								/>
-							</div>
-							<div className="form-parts">
-								<label htmlFor="type">Tipo</label>
-								<select
-									name="type"
-									id="type"
-									className="select-custom"
-									value={formData.type}
-									onChange={handleChange}
-									required
-									disabled={!editting}
-								>
-									<option value="" disabled>
-										Seleccione el tipo de combustible
-									</option>
-									<option value="gas">Gasolina - Híbrido</option>
-									{/* <option value="diesel">Diesel</option> */}
-									{/* <option value="glp">GLP</option> */}
-									<option value="electric">Eléctrico</option>
-								</select>
-							</div>
-							<div className="form-parts">
-								<label htmlFor="license_plate">Matricula</label>
-								<input
-									id="license_plate"
-									name="license_plate"
-									maxLength="8"
-									type="text"
-									value={formData.license_plate}
-									onChange={handleChange}
-									required
-									disabled={!editting}
-								/>
-							</div>
-							<div className="form-parts">
-								<label htmlFor="registration_date">Fecha de matriculación</label>
-								<input
-									id="registration_date"
-									name="registration_date"
-									type="date"
-									value={formData.registration_date}
-									onChange={handleChange}
-									required
-									disabled={!editting}
-								/>
-							</div>
+
+				<form className="form-info" onSubmit={handleUpdate} onReset={handleReset}>
+					<div className="input-container">
+						<div className="form-parts">
+							<label htmlFor="brand">Marca</label>
+							<input
+								id="brand"
+								name="brand"
+								type="text"
+								value={formData.brand}
+								onChange={handleChange}
+								required
+								disabled={!editting}
+							/>
 						</div>
-						{error && <p className="error-message">{error}</p>}
-						{success && <p className="success-message">{success}</p>}
-						{editting && (
-							<>
-								<input type="submit" value="Guardar" />
-								<input type="reset" value="Cancelar" />
-							</>
-						)}
-					</form>
-				)}
+						<div className="form-parts">
+							<label htmlFor="model">Modelo</label>
+							<input
+								id="model"
+								name="model"
+								type="text"
+								value={formData.model}
+								onChange={handleChange}
+								required
+								disabled={!editting}
+							/>
+						</div>
+						<div className="form-parts">
+							<label htmlFor="type">Tipo</label>
+							<select
+								name="type"
+								id="type"
+								className="select-custom"
+								value={formData.type}
+								onChange={handleChange}
+								required
+								disabled={!editting}
+							>
+								<option value="" disabled>
+									Seleccione el tipo de combustible
+								</option>
+								<option value="gas">Gasolina - Híbrido</option>
+								{/* <option value="diesel">Diesel</option> */}
+								{/* <option value="glp">GLP</option> */}
+								<option value="electric">Eléctrico</option>
+							</select>
+						</div>
+						<div className="form-parts">
+							<label htmlFor="license_plate">Matricula</label>
+							<input
+								id="license_plate"
+								name="license_plate"
+								maxLength="8"
+								type="text"
+								value={formData.license_plate}
+								onChange={handleChange}
+								required
+								disabled={!editting}
+							/>
+						</div>
+						<div className="form-parts">
+							<label htmlFor="registration_date">Fecha de matriculación</label>
+							<input
+								id="registration_date"
+								name="registration_date"
+								type="date"
+								value={formData.registration_date}
+								onChange={handleChange}
+								required
+								disabled={!editting}
+							/>
+						</div>
+					</div>
+
+					{status === 'failed' && <p className="error-message">{reduxError}</p>}
+
+					{editting && (
+						<div className="action-buttons">
+							<input type="submit" value="Guardar" disabled={status === 'loading'} />
+							<input type="reset" value="Cancelar" />
+						</div>
+					)}
+				</form>
 			</div>
 		</div>
 	);

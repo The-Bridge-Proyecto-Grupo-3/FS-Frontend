@@ -14,28 +14,60 @@ export const createVehicle = createAsyncThunk(
 		try {
 			return await vehicleService.create(vehicleData);
 		} catch (error) {
-			return rejectWithValue(error.response.data.error || 'Error al crear el vehículo');
+			return rejectWithValue(error.response?.data?.error || 'Error al crear el vehículo');
 		}
 	}
 );
 
-export const fetchVehicles = createAsyncThunk('vehicles/fetchVehicles', async () => {
-	return await vehicleService.getAll();
-});
+export const fetchVehicles = createAsyncThunk(
+	'vehicles/fetchVehicles',
+	async (_, { rejectWithValue }) => {
+		try {
+			return await vehicleService.getAll();
+		} catch (error) {
+			const message = error.response?.data?.error || 'Error al cargar los vehículos';
+			return rejectWithValue(message);
+		}
+	}
+);
 
-export const fetchVehicleById = createAsyncThunk('vehicles/fetchVehicleById', async id => {
-	return await vehicleService.getById(id);
-});
+export const fetchVehicleById = createAsyncThunk(
+	'vehicles/fetchVehicleById',
+	async (id, { rejectWithValue }) => {
+		try {
+			return await vehicleService.getById(id);
+		} catch (error) {
+			const message = error.response?.data?.error || 'Error al cargar el vehículo';
+			return rejectWithValue(message);
+		}
+	}
+);
 
-export const updateVehicle = createAsyncThunk('vehicles/updateVehicle', async vehicleData => {
-	const { id, ...fields } = vehicleData;
-	return await vehicleService.update(id, fields);
-});
+export const updateVehicle = createAsyncThunk(
+	'vehicles/updateVehicle',
+	async (vehicleData, { rejectWithValue }) => {
+		try {
+			const { id, ...fields } = vehicleData;
+			return await vehicleService.update(id, fields);
+		} catch (error) {
+			const message = error.response?.data?.error || 'Error al actualizar el vehículo';
+			return rejectWithValue(message);
+		}
+	}
+);
 
-export const deleteVehicle = createAsyncThunk('vehicles/deleteVehicle', async id => {
-	await vehicleService.remove(id);
-	return id;
-});
+export const deleteVehicle = createAsyncThunk(
+	'vehicles/deleteVehicle',
+	async (id, { rejectWithValue }) => {
+		try {
+			await vehicleService.remove(id);
+			return id; // En caso de éxito, se devuelve el ID
+		} catch (error) {
+			const message = error.response?.data?.error || 'Error al eliminar el vehículo';
+			return rejectWithValue(message);
+		}
+	}
+);
 
 const vehiclesSlice = createSlice({
 	name: 'vehicles',

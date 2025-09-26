@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createVehicle } from '../../redux/vehicles/vehicleSlice';
@@ -8,6 +8,7 @@ import './register.css';
 const RegisterVehicle = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const { status, error: reduxError } = useSelector(state => state.vehicles);
 
 	const [formData, setFormData] = useState({
 		brand: '',
@@ -17,7 +18,6 @@ const RegisterVehicle = () => {
 		type: '', // El tipo puede ser 'gas' o 'electric'
 	});
 
-	const [error, setError] = useState(null);
 	const [success, setSuccess] = useState(null);
 
 	const handleChange = e => {
@@ -29,35 +29,29 @@ const RegisterVehicle = () => {
 
 	const handleSubmit = async e => {
 		e.preventDefault();
-		setError(null);
 		setSuccess(null);
 
-		if (
-			!formData.brand ||
-			!formData.model ||
-			!formData.license_plate ||
-			!formData.registration_date ||
-			!formData.type
-		) {
-			setError('Todos los campos son obligatorios.');
+		if (Object.values(formData).some(value => String(value).trim() === '')) {
+			alert('Todos los campos son obligatorios.');
 			return;
 		}
 
 		try {
 			await dispatch(createVehicle(formData)).unwrap();
 
-			if (response.status === 201) {
-				setSuccess('¡Vehículo registrado con éxito!');
-				setTimeout(() => {
-					navigate('/vehicles'); // Redirige a la lista de vehículos
-				}, 2000);
-			}
+			setSuccess('¡Vehículo registrado con éxito!');
+			setFormData({
+				brand: '',
+				model: '',
+				license_plate: '',
+				registration_date: '',
+				type: '',
+			});
+			setTimeout(() => {
+				navigate('/vehicles'); // Redirige a la lista de vehículos
+			}, 2000);
 		} catch (error) {
-			const errorMessage =
-				error.response?.data?.error ||
-				'Error al registrar el vehículo. Inténtalo de nuevo.';
-			setError(errorMessage);
-			console.error(error);
+			console.error('Fallo al registrar el vehículo:', error);
 		}
 	};
 
@@ -117,7 +111,7 @@ const RegisterVehicle = () => {
 							</select>
 						</div>
 						<div className="form-parts">
-							<label htmlFor="license_plate">Matricula</label>
+							<label htmlFor="license_plate">Matrícula</label>
 							<input
 								id="license_plate"
 								name="license_plate"
@@ -140,10 +134,16 @@ const RegisterVehicle = () => {
 							/>
 						</div>
 					</div>
-					{error && <p className="error-message">{error}</p>}
+					{status === 'failed' && reduxError && (
+						<p className="error-message">{reduxError}</p>
+					)}
 					{success && <p className="success-message">{success}</p>}
 
-					<input type="submit" value="Registrar" />
+					<input
+						type="submit"
+						value={status === 'loading' ? 'Registrando...' : 'Registrar'}
+						disabled={status === 'loading'}
+					/>
 				</form>
 			</div>
 		</div>
