@@ -69,7 +69,32 @@ export const deleteVehicle = createAsyncThunk(
 	}
 );
 
-const vehiclesSlice = createSlice({
+export const assignVehicle = createAsyncThunk(
+	'vehicles/assignVehicle',
+	async ({ vehicleId, driverId }, { rejectWithValue }) => {
+		try {
+			return await vehicleService.assign(vehicleId, driverId);
+		} catch (error) {
+			const message = error.response?.data?.error || 'Error al asignar el vehículo';
+			return rejectWithValue(message);
+		}
+	}
+);
+
+export const unassignVehicle = createAsyncThunk(
+	'vehicles/unassignVehicle',
+	async (vehicleId, { rejectWithValue }) => {
+		try {
+			await vehicleService.unassign(vehicleId);
+			return vehicleId;
+		} catch (error) {
+			const message = error.response?.data?.error || 'Error al desasignar el vehículo';
+			return rejectWithValue(message);
+		}
+	}
+);
+
+const vehicleSlice = createSlice({
 	name: 'vehicles',
 	initialState,
 	reducers: {},
@@ -124,8 +149,32 @@ const vehiclesSlice = createSlice({
 
 				state.vehicles = state.vehicles.filter(v => v.id !== action.payload);
 				state.selectedVehicle = null;
+			})
+			//assignVehicle;
+			.addCase(assignVehicle.fulfilled, (state, action) => {
+				state.status = 'succeeded';
+				const updatedVehicle = action.payload;
+				const index = state.vehicles.findIndex(v => v.id === updatedVehicle.id);
+				if (index !== -1) {
+					state.vehicles[index] = updatedVehicle;
+				}
+				if (state.selectedVehicle && state.selectedVehicle.id === updatedVehicle.id) {
+					state.selectedVehicle = updatedVehicle;
+				}
+			})
+			//unassignVehicle;
+			.addCase(unassignVehicle.fulfilled, (state, action) => {
+				state.status = 'succeeded';
+				const vehicleId = action.payload;
+				const index = state.vehicles.findIndex(v => v.id === vehicleId);
+				if (index !== -1) {
+					state.vehicles[index].in_use_by = null;
+				}
+				if (state.selectedVehicle && state.selectedVehicle.id === vehicleId) {
+					state.selectedVehicle.in_use_by = null;
+				}
 			});
 	},
 });
 
-export default vehiclesSlice.reducer;
+export default vehicleSlice.reducer;

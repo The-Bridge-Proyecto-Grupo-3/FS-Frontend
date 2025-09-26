@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import auth from '../redux/auth/authSlice';
-import vehicle from '../redux/vehicles/vehicleSlice';
+import vehicles from '../redux/vehicles/vehicleSlice';
 import oil from '../redux/oilApi/oilSlice';
+import receipt from '../redux/receipts/receiptSlice';
 
 export const store = configureStore({
-	reducer: { auth, oil, vehicle },
+	reducer: { auth, oil, vehicles, receipt },
 });
