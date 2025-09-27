@@ -3,7 +3,8 @@ import auth from '../redux/auth/authSlice';
 import vehicles from '../redux/vehicles/vehicleSlice';
 import oil from '../redux/oilApi/oilSlice';
 import receipts from '../redux/receipts/receiptSlice';
+import companies from '../redux/companies/companySlice';
 
 export const store = configureStore({
-	reducer: { auth, oil, vehicles, receipts },
+	reducer: { auth, oil, vehicles, receipts, companies },
 });
