@@ -9,18 +9,8 @@ const RegisterDriver = () => {
 	const dispatch = useDispatch();
 
 	const validation = {
-		first_name: value => {
-			value = value ? value.trim() : '';
-			return [
-				[
-					value.length >= 3 && value.length <= 24,
-					'El nombre debe contener entre 3 y 24 caracteres',
-				],
-			];
-		},
-		last_name: value => [
-			[value && value.trim().length > 0, 'El apellido no puede estar vacío'],
-		],
+		first_name: value => [[ value?.length > 0, 'El nombre no puede estar vacío']],
+		last_name: value => [[ value?.length > 0, 'El apellido no puede estar vacío']],
 		email: value => [
 			[
 				/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -34,7 +24,7 @@ const RegisterDriver = () => {
 			[/[A-Z]+/.test(value), 'La contraseña debe contener mayúsculas'],
 			[/[0-9]+/.test(value), 'La contraseña debe contener números'],
 			[/[^\w\s]+/.test(value), 'La contraseña debe contener símbolos especiales'],
-			[value && value.length >= 8, 'La contraseña debe tener 8 caracteres o más'],
+			[ value?.length >= 8, 'La contraseña debe tener 8 caracteres o más'],
 		],
 	};
 
