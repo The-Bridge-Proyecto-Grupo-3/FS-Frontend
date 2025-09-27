@@ -13,7 +13,7 @@ const RegisterCompany = () => {
 	const { emailSent } = useSelector(state => state.companies);
     
     const validation = {
-        email: value => [[/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value),"Invalid email"]],
+        email: value => [[/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value),"Email inválido"]],
         password: value => [
             [/[a-z]+/.test(value), 'La contraseña debe contener letras minúsculas'],
             [/[A-Z]+/.test(value), 'La contraseña debe contener letras mayúsculas'],
@@ -41,7 +41,7 @@ const RegisterCompany = () => {
 				const res = (10-(sumEven + sumOdd)%10)%10;
 				return res == control;
 			})(),
-			"CIF invalido"
+			"CIF inválido"
 		]],
 		address: value => [[value && value.length > 0, "Introduce una dirección"]],
 		state: value => [[value && value.length > 0, "Introduce una provincia"]],
