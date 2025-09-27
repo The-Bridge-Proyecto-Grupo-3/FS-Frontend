@@ -38,7 +38,7 @@ const RegisterDriver = () => {
 		],
 	};
 
-	const onSubmit = formData => dispatch(registerDriver(formData)).unwrap();
+	const onSubmit = formData => dispatch(registerDriver(formData));
 
 	const { formData, message, success, handleInputChange, handleSubmit } = useForm({
 		validation,

@@ -16,9 +16,9 @@ export const getDrivers = createAsyncThunk('drivers/getAll', async (_, { rejectW
 
 export const registerDriver = createAsyncThunk(
 	'drivers/register',
-	async (companyData, { rejectWithValue }) => {
+	async (driverData, { rejectWithValue }) => {
 		try {
-			return await driversService.registerDriver(companyData);
+			return await driversService.registerDriver(driverData);
 		} catch (err) {
 			return rejectWithValue(
 				err.response?.data?.message || err.error || 'Error de red o del servidor'

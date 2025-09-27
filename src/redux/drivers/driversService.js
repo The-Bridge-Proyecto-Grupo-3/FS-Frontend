@@ -5,8 +5,8 @@ const getAll = async userData => {
 	return res.data;
 };
 
-const registerDriver = async companyData => {
-	const res = await axios.post('/drivers', companyData);
+const registerDriver = async driverData => {
+	const res = await axios.post('/drivers', driverData);
 	return res.data;
 };
 
