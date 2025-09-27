@@ -20,12 +20,24 @@ export const getUserInfo = createAsyncThunk('auth/info', async (_, { rejectWithV
 		return rejectWithValue(err.response?.data?.message || 'Error de red o del servidor');
 	}
 });
+
 export const loginUser = createAsyncThunk(
 	'auth/login',
 	async (credentials, { rejectWithValue }) => {
 		try {
 			const userData = await authService.userLogin(credentials);
 			return { ...userData, location: DataTransfer.location };
+		} catch (err) {
+			return rejectWithValue(err.response?.data?.message || 'Error de red o del servidor');
+		}
+	}
+);
+
+export const logoutUser = createAsyncThunk(
+	'auth/logout',
+	async (_, { rejectWithValue }) => {
+		try {
+			return await authService.userLogout();
 		} catch (err) {
 			return rejectWithValue(err.response?.data?.message || 'Error de red o del servidor');
 		}
@@ -51,10 +63,16 @@ export const authSlice = createSlice({
 	reducers: {},
 	extraReducers: builder => {
 		builder.addCase(loginUser.fulfilled, (state, action) => {
-			state.target = action.payload.location; // ????
+			state.target = action.payload.location;
 			state.requires2FA = action.payload.requires2FA;
 			state.role = action.payload.role ?? null;
 			state.user = action.payload.user ?? null;
+		});
+		builder.addCase(logoutUser.fulfilled, (state) => {
+			state.target = null;
+			state.requires2FA = null;
+			state.role = null;
+			state.user = null;
 		});
 		builder.addCase(verify2FA.fulfilled, (state, action) => {
 			state.user = action.payload.user;

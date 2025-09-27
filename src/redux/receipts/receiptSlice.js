@@ -9,10 +9,9 @@ const initialState = {
 
 export const createReceipt = createAsyncThunk(
 	'receipts/createReceipt',
-	async (receiptData, { rejectWithValue, dispatch }) => {
+	async (receiptData, { rejectWithValue }) => {
 		try {
 			await receiptService.create(receiptData);
-			dispatch(fetchReceipts()); //Para volver a cargar la lista de archivos y que esté actualizada
 		} catch (error) {
 			const message = error.response?.data?.error || 'Error al crear el recibo';
 			return rejectWithValue(message);

@@ -8,6 +8,10 @@ const userLogin = async userData => {
 	const res = await axios.post('/auth/login', userData);
 	return res.data;
 };
+const userLogout = async userData => {
+	const res = await axios.post('/auth/logout', userData);
+	return res.data;
+};
 const userInfo = async () => {
 	const res = await axios.get('/auth/info', { withCredentials: true });
 	return res.data;
@@ -19,6 +23,7 @@ const verify2FA = async code => {
 const authService = {
 	// registerDriver,
 	userLogin,
+	userLogout,
 	verify2FA,
 	userInfo,
 };
