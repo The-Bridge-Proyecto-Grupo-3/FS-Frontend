@@ -54,8 +54,7 @@ const RegisterCompany = () => {
 	
     const { formData, message, success, handleInputChange, handleSubmit } = useForm({ validation, onSubmit });
 	useEffect(() => {
-		if(!success) return;
-		setTimeout(() => {
+		if(success) setTimeout(() => {
 			navigate('/login');
 		}, 2000);
 	},[success])
