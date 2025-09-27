@@ -1,6 +1,5 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import LoadingPage from './pages/loading/LoadingPage.jsx';
 import Layout from './layout/layout';
 import CompanySection from './pages/sections/company/CompanySection';
 import DriverSection from './pages/sections/driver/DriverSection';
@@ -16,22 +15,19 @@ import ProtectedRoute from './guards/ProtectedRoute.jsx';
 
 function App() {
 	return (
-		// llamar a /users/me para poder usar las rutas protegidas cuando se recargue la pag
-		<LoadingPage>
-			<Routes>
-				<Route path="/" element={<Layout />} />
-				<Route path="/admin" element={<ProtectedRoute role='admin' ><AdminSection /></ProtectedRoute>} />
-				<Route path="/company" element={<ProtectedRoute role='company' ><CompanySection /></ProtectedRoute>} />
-				<Route path="/driver" element={<ProtectedRoute role='driver' ><DriverSection /></ProtectedRoute>} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/register" element={<ProtectedRoute><RegisterCompany /></ProtectedRoute>} />
-				<Route path="/registerDriver" element={<ProtectedRoute role='company' ><RegisterDriver /></ProtectedRoute>} />
-				<Route path="/registerVehicle" element={<ProtectedRoute role='company' ><RegisterVehicle /></ProtectedRoute>} />
-				<Route path="/vehicles/:id" element={<VehicleDetails />} />
-				<Route path="/searchGS" element={<SearchGS />} />
-				<Route path="/NearbyGS" element={<NearbyGastations />} />
-			</Routes>
-		</LoadingPage>
+		<Routes>
+			<Route path="/" element={<Layout />} />
+			<Route path="/admin" element={<ProtectedRoute role='admin' ><AdminSection /></ProtectedRoute>} />
+			<Route path="/company" element={<ProtectedRoute role='company' ><CompanySection /></ProtectedRoute>} />
+			<Route path="/driver" element={<ProtectedRoute role='driver' ><DriverSection /></ProtectedRoute>} />
+			<Route path="/login" element={<Login />} />
+			<Route path="/register" element={<ProtectedRoute><RegisterCompany /></ProtectedRoute>} />
+			<Route path="/registerDriver" element={<ProtectedRoute role='company' ><RegisterDriver /></ProtectedRoute>} />
+			<Route path="/registerVehicle" element={<ProtectedRoute role='company' ><RegisterVehicle /></ProtectedRoute>} />
+			<Route path="/vehicles/:id" element={<VehicleDetails />} />
+			<Route path="/searchGS" element={<SearchGS />} />
+			<Route path="/NearbyGS" element={<NearbyGastations />} />
+		</Routes>
 	);
 }
 
