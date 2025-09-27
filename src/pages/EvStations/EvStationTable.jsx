@@ -18,6 +18,9 @@ export const EvStationTable = ({ title, stations }) => {
 							Dirección
 						</th>
 						<th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left' }}>
+							Ciudad
+						</th>
+						<th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left' }}>
 							Ubicación
 						</th>
 						<th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left' }}>
