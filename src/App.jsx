@@ -9,7 +9,7 @@ import SearchGS from './pages/Gastations/SearchGS';
 import RegisterCompany from './pages/Register/RegisterCompany';
 import RegisterVehicle from './pages/Register/RegisterVehicle';
 import Login from './pages/login/login.jsx';
-import VehicleDetails from './components/Vehicles/VehicleDetails';
+import Vehicles from './components/Vehicles/Vehicles.jsx';
 import NearbyGastations from './pages/Gastations/NearbyGastations.jsx';
 import ProtectedRoute from './guards/ProtectedRoute.jsx';
 import RegisterReceipt from './pages/Register/RegisterReceipt.jsx';
@@ -107,7 +107,14 @@ function App() {
 					</ProtectedRoute>
 				}
 			/>
-			<Route path="/vehicles/:id" element={<VehicleDetails />} />
+			<Route
+				path="/vehicles"
+				element={
+					<ProtectedRoute role="company">
+						<Vehicles />
+					</ProtectedRoute>
+				}
+			/>
 			<Route path="/searchGS" element={<SearchGS />} />
 			<Route path="/NearbyGS" element={<NearbyGastations />} />
 		</Routes>

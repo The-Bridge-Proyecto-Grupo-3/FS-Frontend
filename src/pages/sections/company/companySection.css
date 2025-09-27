@@ -14,3 +14,13 @@
 	height: 500px;
 	justify-content: space-around;
 }
+.LinkContainer {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+}
+.vehiclesLink {
+	text-decoration: none;
+	color: #000000;
+}

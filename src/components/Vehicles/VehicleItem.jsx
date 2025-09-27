@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import './VehicleItem.css';
+import './VehicleDetails.css';
 
 const VehicleItem = ({ vehicle }) => {
 	const navigate = useNavigate();
