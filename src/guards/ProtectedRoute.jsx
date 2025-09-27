@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-const ProtectedRoute = ({ children, role }) => {
+const ProtectedRoute = ({ role }) => {
 	const { role: currentRole } = useSelector(state => state.auth);
-	console.log(currentRole,role)
-	return currentRole == role ? children : <Navigate to={role ? '/login':'/'} />
+	console.log(role,currentRole);
+	return currentRole == role ? <Outlet />:<Navigate to={role ? '/login':'/'} />
 };
 
 export default ProtectedRoute;
