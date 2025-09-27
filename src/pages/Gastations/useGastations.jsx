@@ -1,59 +1,64 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useMemo, useCallback } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { useMemo, useCallback } from 'react';
 import {
-  getProvincias,
-  getMunicipios,
-  getGastations,
-  getGastationDetails,
-} from "../../redux/oilApi/oilSlice";
+	getProvincias,
+	getMunicipios,
+	getGastations,
+	getGastationDetails,
+	getNearGastations,
+} from '../../redux/oilApi/oilSlice';
 
 export const useGastations = () => {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  const {
-    provincias,
-    municipios,
-    gastations,
-    gastationDetails,
-    isLoading,
-    isError,
-    message,
-  } = useSelector((state) => state.oil);
+	const {
+		provincias,
+		municipios,
+		gastations,
+		gastationDetails,
+		nearGastations,
+		isLoading,
+		isError,
+		message,
+	} = useSelector(state => state.oil);
 
+	const loadProvincias = useCallback(() => {
+		dispatch(getProvincias());
+	}, []);
 
-  const loadProvincias = useCallback(() => {
-    dispatch(getProvincias());
-  }, []);
+	const selectProvincia = useCallback(idProvincia => {
+		if (idProvincia) dispatch(getMunicipios(idProvincia));
+	}, []);
 
+	const selectMunicipio = useCallback(idMunicipio => {
+		if (idMunicipio) dispatch(getGastations(idMunicipio));
+	}, []);
 
-  const selectProvincia = useCallback((idProvincia) => {
-    if (idProvincia) dispatch(getMunicipios(idProvincia));
-  }, []);
+	const selectGastation = useCallback(idEstacion => {
+		if (idEstacion) dispatch(getGastationDetails(idEstacion));
+	}, []);
 
-  const selectMunicipio = useCallback((idMunicipio) => {
-    if (idMunicipio) dispatch(getGastations(idMunicipio));
-  }, []);
+	const provinciasFiltradas = useMemo(() => {
+		return provincias.filter(p => p.idProvincia < 53);
+	}, [provincias]);
 
-  const selectGastation = useCallback((idEstacion) => {
-    if (idEstacion) dispatch(getGastationDetails(idEstacion));
-  }, []);
+	const findNearbyStations = (latitud, longitud) => {
+		dispatch(getNearGastations({ latitud, longitud }));
+	};
 
-  
-  const provinciasFiltradas = useMemo(() => {
-    return provincias.filter((p) => p.idProvincia < 53);
-  }, [provincias]);
-
-  return {
-    provincias: provinciasFiltradas,
-    municipios,
-    gastations,
-    gastationDetails,
-    isLoading,
-    isError,
-    message,
-    loadProvincias,
-    selectProvincia,
-    selectMunicipio,
-    selectGastation,
-  };
+	return {
+		provincias: provinciasFiltradas,
+		municipios,
+		gastations,
+		gastationDetails,
+		nearGastations,
+		isLoading,
+		isError,
+		message,
+		loadProvincias,
+		selectProvincia,
+		selectMunicipio,
+		selectGastation,
+		findNearbyStations,
+	};
 };

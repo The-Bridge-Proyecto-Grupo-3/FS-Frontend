@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useGastations } from './useGastations';
 import { SelectorForm } from './SelectorForm';
 import { GastationDetails } from './GastationDetails';
+import { GastationsTable } from './GastationsTable';
 import { Link } from 'react-router-dom';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 
@@ -11,6 +12,7 @@ const SearchGS = () => {
 		municipios,
 		gastations,
 		gastationDetails,
+		nearGastations,
 		isLoading,
 		isError,
 		message,
@@ -18,11 +20,22 @@ const SearchGS = () => {
 		selectProvincia,
 		selectMunicipio,
 		selectGastation,
+		findNearbyStations,
 	} = useGastations();
 
 	useEffect(() => {
 		loadProvincias();
 	}, [loadProvincias]);
+
+	useEffect(() => {
+		if (gastationDetails) {
+			const { latitud, longitud } = gastationDetails;
+
+			if (latitud && longitud) {
+				findNearbyStations(latitud, longitud);
+			}
+		}
+	}, [gastationDetails, findNearbyStations]);
 
 	const selectorData = { provincias, municipios, gastations };
 	const selectorActions = { selectProvincia, selectMunicipio, selectGastation };
@@ -38,10 +51,23 @@ const SearchGS = () => {
 
 			<SelectorForm data={selectorData} actions={selectorActions} />
 
-			{isLoading && <p>Cargando datos...</p>}
-			{isError && <p style={{ color: 'red' }}>Error: {message}</p>}
-
 			<GastationDetails details={gastationDetails} />
+
+			{/* {isLoading && <p>Cargando datos...</p>} */}
+			{isError && <p style={{ color: 'red' }}>Error: {message}</p>}
+			<>
+				<GastationsTable
+					stations={nearGastations}
+					fuelType="Gasolina95"
+					title="Recomendaciones por precio de Gasolina 95"
+				/>
+
+				<GastationsTable
+					stations={nearGastations}
+					fuelType="Diesel"
+					title="Recomendaciones por precio de Diésel"
+				/>
+			</>
 		</div>
 	);
 };
