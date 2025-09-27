@@ -13,6 +13,7 @@ import Vehicles from './components/Vehicles/Vehicles.jsx';
 import NearbyGastations from './pages/Gastations/NearbyGastations.jsx';
 import ProtectedRoute from './guards/ProtectedRoute.jsx';
 import RegisterReceipt from './pages/Register/RegisterReceipt.jsx';
+import Drivers from './components/Drivers/Drivers.jsx';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserInfo } from './redux/auth/authSlice.js';
@@ -112,6 +113,14 @@ function App() {
 				element={
 					<ProtectedRoute role="company">
 						<Vehicles />
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path="/driversList"
+				element={
+					<ProtectedRoute role="company">
+						<Drivers />
 					</ProtectedRoute>
 				}
 			/>
