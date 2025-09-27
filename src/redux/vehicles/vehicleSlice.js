@@ -128,6 +128,7 @@ const vehicleSlice = createSlice({
 			// fetchVehicleById
 			.addCase(fetchVehicleById.pending, state => {
 				state.status = 'loading';
+				state.selectedVehicle = null;
 			})
 			.addCase(fetchVehicleById.fulfilled, (state, action) => {
 				state.status = 'succeeded';

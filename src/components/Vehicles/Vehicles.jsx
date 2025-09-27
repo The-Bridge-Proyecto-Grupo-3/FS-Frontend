@@ -13,6 +13,7 @@ import {
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import { Link } from 'react-router-dom';
 import './VehicleDetails.css';
+import VehicleItem from './VehicleItem';
 
 const Vehicles = () => {
 	const dispatch = useDispatch();
@@ -51,25 +52,7 @@ const Vehicles = () => {
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{vehicles.map(vehicle => (
-								<TableRow
-									key={vehicle.licence_plate}
-									sx={{
-										'&:hover': {
-											backgroundColor: '#A8A7A7',
-										},
-									}}
-								>
-									<TableCell component="td" scope="row">
-										{vehicle.brand}
-									</TableCell>
-									<TableCell>{vehicle.model}</TableCell>
-									<TableCell>{vehicle.license_plate}</TableCell>
-									<TableCell>
-										{vehicle.in_use_by === null ? 'No' : vehicle.in_use_by}
-									</TableCell>
-								</TableRow>
-							))}
+							{vehicles.map(vehicle => <VehicleItem vehicle={vehicle} />)}
 						</TableBody>
 					</Table>
 				</TableContainer>

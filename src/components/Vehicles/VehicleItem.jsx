@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import './VehicleDetails.css';
+import { TableCell, TableRow } from '@mui/material';
 
 const VehicleItem = ({ vehicle }) => {
 	const navigate = useNavigate();
@@ -9,15 +10,24 @@ const VehicleItem = ({ vehicle }) => {
 	};
 
 	return (
-		<li className="vehicle-item" onClick={handleViewDetails}>
-			<div className="vehicle-info">
-				<span className="vehicle-brand-model">
-					{vehicle.brand} {vehicle.model}
-				</span>
-				<span className="vehicle-plate">{vehicle.license_plate}</span>
-			</div>
-			<span className="view-details-arrow">&rarr;</span>
-		</li>
+		<TableRow
+			key={vehicle.licence_plate}
+			sx={{
+				'&:hover': {
+					backgroundColor: '#A8A7A7',
+				},
+			}}
+			onClick={handleViewDetails}
+		>
+			<TableCell component="td" scope="row">
+				{vehicle.brand}
+			</TableCell>
+			<TableCell>{vehicle.model}</TableCell>
+			<TableCell>{vehicle.license_plate}</TableCell>
+			<TableCell>
+				{vehicle.in_use_by === null ? 'No' : vehicle.in_use_by}
+			</TableCell>
+		</TableRow>
 	);
 };
 
