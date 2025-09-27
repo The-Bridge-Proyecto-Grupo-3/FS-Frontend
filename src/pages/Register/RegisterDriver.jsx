@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
-import { registerDriver } from '../../redux/auth/authSlice';
+import { registerDriver } from '../../redux/drivers/driverSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import { Link } from 'react-router-dom';
 import './register.css';
