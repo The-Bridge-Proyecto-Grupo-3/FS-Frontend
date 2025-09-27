@@ -24,7 +24,7 @@ export const useForm = ({ validation, onSubmit }) => {
 		const { name, value } = event.target;
 		setFormData(prev => ({
 			...prev,
-			[name]: value,
+			[name]: value.trim(),
 		}));
 		setMessage(validateAndPrint(name, value, event.target));
 	};
