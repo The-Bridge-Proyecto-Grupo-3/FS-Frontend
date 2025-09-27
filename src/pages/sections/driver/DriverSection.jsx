@@ -41,21 +41,21 @@ export default function DriverSection() {
 			</div>
 			<div className="imagesContainer">
 				<div className="imgApis">
-					<Link to="/searchGS">
+					<Link to="/searchGS" className="linkStyle">
 						<div className="nameToIcons">
 							<label htmlFor="gasolineras">Gasolineras</label>
 							<img src={FindGass} alt="añadir vehículos" width={140} />
 						</div>
 					</Link>
 					{/* cambiar ruta cuando se cree el componente */}
-					<Link to="/searchGS">
+					<Link to="/searchGS" className="linkStyle">
 						<div className="nameToIcons">
 							<label htmlFor="puntosRecarga">Puntos de Recarga</label>
 							<img src={FindElecDot} alt="añadir conductores" width={140} />
 						</div>
 					</Link>
 				</div>
-				<Link to="/registerReceipt">
+				<Link to="/registerReceipt" className="linkStyle">
 					<div className="imgTicket">
 						<label htmlFor="tickets">Registra Tickets</label>
 						<img src={TicketIcon} alt="añadir ticket" width={140} />
