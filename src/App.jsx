@@ -10,7 +10,6 @@ import RegisterCompany from './pages/Register/RegisterCompany';
 import RegisterVehicle from './pages/Register/RegisterVehicle';
 import Login from './pages/login/login.jsx';
 import VehicleDetails from './components/Vehicles/VehicleDetails';
-import NearbyGastations from './pages/Gastations/NearbyGastations.jsx';
 import ProtectedRoute from './guards/ProtectedRoute.jsx';
 import RegisterReceipt from './pages/Register/RegisterReceipt.jsx';
 import { useEffect } from 'react';
@@ -109,7 +108,7 @@ function App() {
 			/>
 			<Route path="/vehicles/:id" element={<VehicleDetails />} />
 			<Route path="/searchGS" element={<SearchGS />} />
-			<Route path="/NearbyGS" element={<NearbyGastations />} />
+			
 		</Routes>
 	);
 }

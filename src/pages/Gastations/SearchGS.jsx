@@ -1,11 +1,43 @@
-import './SearchGS.scss';
+import { useEffect } from "react";
+import { useGastations } from "./useGastations"; 
+import { SelectorForm } from "./SelectorForm";
+import { GastationDetails } from "./GastationDetails";
 
 const SearchGS = () => {
-	return (
-		<div className="search-container">
-			<h1>Gasolineras</h1>
-		</div>
-	);
+
+  const {
+    provincias,
+    municipios,
+    gastations,
+    gastationDetails,
+    isLoading,
+    isError,
+    message,
+    loadProvincias,
+    selectProvincia,
+    selectMunicipio,
+    selectGastation,
+  } = useGastations();
+
+  useEffect(() => {
+    loadProvincias();
+  }, [loadProvincias]);
+
+  const selectorData = { provincias, municipios, gastations };
+  const selectorActions = { selectProvincia, selectMunicipio, selectGastation };
+
+  return (
+    <div>
+      <h2>Gasolineras</h2>
+
+      <SelectorForm data={selectorData} actions={selectorActions} />
+
+      {isLoading && <p>Cargando datos...</p>}
+      {isError && <p style={{ color: "red" }}>Error: {message}</p>}
+
+      <GastationDetails details={gastationDetails} />
+    </div>
+  );
 };
 
 export default SearchGS;
