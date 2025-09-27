@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Layout from './layout/layout';
 import CompanySection from './pages/sections/company/CompanySection';
 import DriverSection from './pages/sections/driver/DriverSection';
@@ -13,8 +13,40 @@ import VehicleDetails from './components/Vehicles/VehicleDetails';
 import NearbyGastations from './pages/Gastations/NearbyGastations.jsx';
 import ProtectedRoute from './guards/ProtectedRoute.jsx';
 import RegisterReceipt from './pages/Register/RegisterReceipt.jsx';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserInfo } from './redux/auth/authSlice.js';
 
 function App() {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const { role } = useSelector(state => state.auth);
+
+	// 1. Traemos la info del usuario al montar
+	useEffect(() => {
+		dispatch(getUserInfo());
+	}, [dispatch]);
+
+	// 2. Redirigir si estamos en "/" y tenemos un rol
+	useEffect(() => {
+		if (window.location.pathname === '/' && role) {
+			switch (role) {
+				case 'admin':
+					navigate('/admin', { replace: true });
+					break;
+				case 'company':
+					navigate('/company', { replace: true });
+					break;
+				case 'driver':
+					navigate('/driver', { replace: true });
+					break;
+				default:
+					navigate('/login', { replace: true });
+			}
+		}
+	}, [role, navigate]);
+
 	return (
 		<Routes>
 			<Route path="/" element={<Layout />} />

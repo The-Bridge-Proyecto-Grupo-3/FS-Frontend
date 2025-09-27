@@ -33,16 +33,13 @@ export const loginUser = createAsyncThunk(
 	}
 );
 
-export const logoutUser = createAsyncThunk(
-	'auth/logout',
-	async (_, { rejectWithValue }) => {
-		try {
-			return await authService.userLogout();
-		} catch (err) {
-			return rejectWithValue(err.response?.data?.message || 'Error de red o del servidor');
-		}
+export const logoutUser = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
+	try {
+		return await authService.userLogout();
+	} catch (err) {
+		return rejectWithValue(err.response?.data?.message || 'Error de red o del servidor');
 	}
-);
+});
 
 export const registerDriver = createAsyncThunk('auth/registerDriver', async user => {
 	console.log('desde store', user);
@@ -60,7 +57,9 @@ export const verify2FA = createAsyncThunk('/auth/2fa', async (code, { rejectWith
 export const authSlice = createSlice({
 	name: 'auth',
 	initialState,
-	reducers: {},
+	reducers: {
+		resetAuthState: () => initialState,
+	},
 	extraReducers: builder => {
 		builder.addCase(loginUser.fulfilled, (state, action) => {
 			state.target = action.payload.location;
@@ -68,7 +67,7 @@ export const authSlice = createSlice({
 			state.role = action.payload.role ?? null;
 			state.user = action.payload.user ?? null;
 		});
-		builder.addCase(logoutUser.fulfilled, (state) => {
+		builder.addCase(logoutUser.fulfilled, state => {
 			state.target = null;
 			state.requires2FA = null;
 			state.role = null;
@@ -85,5 +84,5 @@ export const authSlice = createSlice({
 		});
 	},
 });
-
+export const { resetAuthState } = authSlice.actions;
 export default authSlice.reducer;
