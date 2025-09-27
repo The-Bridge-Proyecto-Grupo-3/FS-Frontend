@@ -2,7 +2,6 @@
 .login-container {
 	width: 375px;
 	height: 812px;
-	background: linear-gradient(180deg, #f2c9c4 0%, #ffffff 100%);
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;

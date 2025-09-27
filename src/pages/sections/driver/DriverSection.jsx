@@ -7,8 +7,10 @@ import TicketIcon from '../../../assets/TicketIcon.png';
 import FindElecDot from '../../../assets/FindElecDot.png';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 export default function DriverSection() {
 	const { user } = useSelector(state => state.auth);
+
 	return (
 		<div>
 			<div className="logoContainer">
