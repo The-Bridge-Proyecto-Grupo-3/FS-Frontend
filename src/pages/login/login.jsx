@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './login.css';
 import loginImage from '../../assets/logo-deivigo.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, verify2FA, resetAuthState } from '../../redux/auth/authSlice';
+import { loginUser, verify2FA, logoutUser } from '../../redux/auth/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -32,7 +32,7 @@ function Login() {
 		}
 	};
 	const handlereset = () => {
-		dispatch(resetAuthState());
+		dispatch(logoutUser());
 	};
 
 	const handleChange = e => {
