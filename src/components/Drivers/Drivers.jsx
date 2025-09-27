@@ -39,7 +39,7 @@ const Vehicles = () => {
 					<img src={BackArrowIcon} alt="atras" width={30} />
 				</Link>
 			</div>
-			<h2>Mis onductores</h2>
+			<h2>Mis conductores</h2>
 
 			{vehicles.length > 0 ? (
 				<TableContainer sx={{ maxHeight: '550px', padding: '.5rem' }}>
