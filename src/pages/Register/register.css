@@ -49,13 +49,14 @@ label {
 	font-weight: bold;
 }
 input,
-select {
+select, textarea {
 	width: 22.5rem;
 	height: 3.125rem;
 	padding: 1rem;
 	border: 2px solid #a8a7a7;
 	border-radius: 1.5rem;
 	font-size: 0.875rem;
+	
 }
 
 input:focus, select:focus {

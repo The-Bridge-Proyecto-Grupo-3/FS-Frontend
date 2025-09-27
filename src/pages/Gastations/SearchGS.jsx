@@ -5,6 +5,7 @@ import { GastationDetails } from './GastationDetails';
 import { GastationsTable } from './GastationsTable';
 import { Link } from 'react-router-dom';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
+import './search.scss'; // Asegúrate de importar tu SCSS
 
 const SearchGS = () => {
 	const {
@@ -55,7 +56,8 @@ const SearchGS = () => {
 
 			{/* {isLoading && <p>Cargando datos...</p>} */}
 			{isError && <p style={{ color: 'red' }}>Error: {message}</p>}
-			<>
+
+			<div className="recommendations-grid">
 				<GastationsTable
 					stations={nearGastations}
 					fuelType="Gasolina95"
@@ -67,7 +69,7 @@ const SearchGS = () => {
 					fuelType="Diesel"
 					title="Recomendaciones por precio de Diésel"
 				/>
-			</>
+			</div>
 		</div>
 	);
 };
