@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createVehicle } from '../../redux/vehicles/vehicleSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
+import { Link } from 'react-router-dom';
 import './register.css';
 
 const RegisterVehicle = () => {
@@ -48,7 +49,7 @@ const RegisterVehicle = () => {
 				type: '',
 			});
 			setTimeout(() => {
-				navigate('/vehicles'); // Redirige a la lista de vehículos
+				navigate('/company'); // Redirige a la lista de vehículos
 			}, 2000);
 		} catch (error) {
 			console.error('Fallo al registrar el vehículo:', error);
@@ -57,12 +58,10 @@ const RegisterVehicle = () => {
 
 	return (
 		<div className="register-container">
-			<div
-				className="iconContainer"
-				onClick={() => navigate(-1)}
-				style={{ cursor: 'pointer' }}
-			>
-				<img src={BackArrowIcon} alt="atras" width={30} />
+			<div className="iconContainer">
+				<Link to="/driver">
+					<img src={BackArrowIcon} alt="atras" width={30} />
+				</Link>
 			</div>
 
 			<div className="form-container">

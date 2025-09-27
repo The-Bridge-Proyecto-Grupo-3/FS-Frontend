@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './login.css';
 import loginImage from '../../assets/logo-deivigo.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, verify2FA } from '../../redux/auth/authSlice';
+import { loginUser, verify2FA, resetAuthState } from '../../redux/auth/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -30,6 +30,9 @@ function Login() {
 				.unwrap()
 				.catch(setError);
 		}
+	};
+	const handlereset = () => {
+		dispatch(resetAuthState());
 	};
 
 	const handleChange = e => {
@@ -92,6 +95,11 @@ function Login() {
 						<button type="submit">
 							{requires2FA ? 'Verificar' : 'Iniciar sesión'}
 						</button>
+						{requires2FA && (
+							<button id="cancelar" onClick={handlereset}>
+								Cancelar
+							</button>
+						)}
 					</form>
 				</div>
 

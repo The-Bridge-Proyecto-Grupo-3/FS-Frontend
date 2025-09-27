@@ -113,7 +113,10 @@
 .form-border button:hover {
 	background: #c70023;
 }
-
+#cancelar {
+	background-color: #a8a7a7;
+	color: #000000;
+}
 /* Links debajo del formulario */
 .login-links {
 	width: 359px;

@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
 import { registerDriver } from '../../redux/auth/authSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
+import { Link } from 'react-router-dom';
 import './register.css';
 
 const RegisterDriver = () => {
@@ -45,7 +46,9 @@ const RegisterDriver = () => {
 	return (
 		<div className="register-container">
 			<div className="iconContainer">
-				<img src={BackArrowIcon} alt="atras" width={30} />
+				<Link to="/company">
+					<img src={BackArrowIcon} alt="atras" width={30} />
+				</Link>
 			</div>
 			{success ? (
 				<>
