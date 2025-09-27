@@ -19,11 +19,8 @@ const Vehicles = () => {
 	const { vehicles, status, error } = useSelector(state => state.vehicles);
 
 	useEffect(() => {
-		console.log('Aqui');
-		if (status === 'idle') {
-			dispatch(fetchVehicles());
-		}
-	}, [status, dispatch]);
+		dispatch(fetchVehicles());
+	}, []);
 
 	if (status === 'loading') {
 		return <p>Cargando vehículos...</p>;
@@ -63,7 +60,7 @@ const Vehicles = () => {
 										},
 									}}
 								>
-									<TableCell component="th" scope="row">
+									<TableCell component="td" scope="row">
 										{vehicle.brand}
 									</TableCell>
 									<TableCell>{vehicle.model}</TableCell>
