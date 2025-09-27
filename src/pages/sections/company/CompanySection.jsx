@@ -14,8 +14,8 @@ export default function CompanySection() {
 	};
 	return (
 		<div className="companySectionContainer">
-			<div>
-				<img src={LogoutIcon} alt="cerrar sesión" width={40} onClick={handleLogout} />
+			<div onClick={handleLogout}>
+				<img src={LogoutIcon} alt="cerrar sesión" width={40} />
 			</div>
 			<div>
 				<h2>Hola {user.name}</h2>
