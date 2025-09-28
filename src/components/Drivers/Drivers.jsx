@@ -1,22 +1,19 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchVehicles } from '../../redux/vehicles/vehicleSlice';
+import { getDrivers } from '../../redux/drivers/driverSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import { Link } from 'react-router-dom';
 
 const Vehicles = () => {
 	const dispatch = useDispatch();
-	const { vehicles, status, error } = useSelector(state => state.vehicles);
+	const { drivers, status, error } = useSelector(state => state.drivers);
 
 	useEffect(() => {
-		console.log('Aqui');
-		if (status === 'idle') {
-			dispatch(fetchVehicles());
-		}
-	}, [status, dispatch]);
+		dispatch(getDrivers());
+	}, []);
 
 	if (status === 'loading') {
-		return <p>Cargando Conductores...</p>;
+		return <p>Cargando conductores...</p>;
 	}
 
 	if (status === 'failed') {
@@ -31,8 +28,10 @@ const Vehicles = () => {
 				</Link>
 			</div>
 			<h2>Mis conductores</h2>
+			{status === 'loading' && <p>Cargando conductores...</p>}
+			{status === 'failed' && <p className="error-message">{error}</p>}
 
-			{vehicles.length > 0 ? (
+			{drivers?.length > 0 ? (
 				<div className='tableContainer'>
 					<table>
 						<thead>
@@ -42,19 +41,19 @@ const Vehicles = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{vehicles.map(vehicle => (
-								<tr key={vehicle.licence_plate} >
+							{drivers.map(driver => (
+								<tr key={driver.licence_plate} >
 									<td component="th" scope="row">
-										{vehicle.brand}
+										{driver.first_name}
 									</td>
-									<td>{vehicle.model}</td>
+									<td>{driver.last_name}</td>
 								</tr>
 							))}
 						</tbody>
 					</table>
 				</div>
 			) : (
-				<p>No tienes ningún vehículo registrado.</p>
+				<p>No tienes ningún conductor registrado.</p>
 			)}
 		</div>
 	);
