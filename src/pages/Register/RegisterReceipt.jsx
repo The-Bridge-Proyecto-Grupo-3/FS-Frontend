@@ -64,15 +64,6 @@ const RegisterReceipt = () => {
 			return;
 		}
 
-		// const receiptData = {
-		// 	price: formData.price,
-		// 	quantity: formData.quantity || null, // Enviar null si está vacío
-		// 	mileage: formData.mileage || null, // Enviar null si está vacío
-		// 	driver_id: user.id,
-		// 	vehicle_id: assignedVehicle.id,
-		// 	fuel_type: formData.fuel_type,
-		// };
-
 		try {
 			await dispatch(createReceipt(formData)).unwrap();
 			setSuccess('¡Recibo registrado con éxito!');
@@ -90,14 +81,14 @@ const RegisterReceipt = () => {
 		<div className="register-container">
 			<div
 				className="iconContainer"
-				onClick={() => navigate(-1)}
+				onClick={() => navigate('/driver')}
 				style={{ cursor: 'pointer' }}
 			>
 				<img src={BackArrowIcon} alt="atras" width={30} />
 			</div>
 
 			<div className="form-container">
-				<h2>Registro nuevo de Recibo</h2>
+				<h2>Registro de ticktets</h2>
 
 				{user && assignedVehicle && (
 					<div className="info-box">

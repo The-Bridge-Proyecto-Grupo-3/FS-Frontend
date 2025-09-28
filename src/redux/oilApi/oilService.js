@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-	baseURL: 'https://api.precioil.es'
+	baseURL: 'https://api.precioil.es',
 });
 
 const getProvincias = async () => {
@@ -24,6 +24,13 @@ const getGastationDetails = async idEstacion => {
 	return res.data;
 };
 
+const getNearGastations = async (latitud, longitud) => {
+	const res = await api.get(
+		`/estaciones/radio?latitud=${latitud}&longitud=${longitud}&radio=20&pagina=1&limite=30`
+	);
+	return res.data;
+};
+
 const getGastationNextMe = async (latitud, longitud, radio) => {
 	const res = await api.get(
 		`/estaciones/radio?latitud=${latitud}&longitud=${longitud}&radio=${radio}&pagina=1&limite=10`
@@ -36,6 +43,7 @@ const oilService = {
 	getMunicipios,
 	getGastations,
 	getGastationDetails,
+	getNearGastations,
 	getGastationNextMe,
 };
 

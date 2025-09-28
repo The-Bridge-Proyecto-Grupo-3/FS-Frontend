@@ -1,21 +1,19 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchVehicles } from '../../redux/vehicles/vehicleSlice';
+import { getDrivers } from '../../redux/drivers/driverSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import { Link } from 'react-router-dom';
-import './VehicleDetails.css';
-import VehicleItem from './VehicleItem';
 
 const Vehicles = () => {
 	const dispatch = useDispatch();
-	const { vehicles, status, error } = useSelector(state => state.vehicles);
+	const { drivers, status, error } = useSelector(state => state.drivers);
 
 	useEffect(() => {
-		dispatch(fetchVehicles());
+		dispatch(getDrivers());
 	}, []);
 
 	if (status === 'loading') {
-		return <p>Cargando vehículos...</p>;
+		return <p>Cargando conductores...</p>;
 	}
 
 	if (status === 'failed') {
@@ -29,26 +27,33 @@ const Vehicles = () => {
 					<img src={BackArrowIcon} alt="atras" width={30} />
 				</Link>
 			</div>
-			<h2>Mis Vehículos</h2>
+			<h2>Mis conductores</h2>
+			{status === 'loading' && <p>Cargando conductores...</p>}
+			{status === 'failed' && <p className="error-message">{error}</p>}
 
-			{vehicles.length > 0 ? (
+			{drivers?.length > 0 ? (
 				<div className='tableContainer'>
-					<table aria-label="tabla de vehículos" stickyHeader>
+					<table>
 						<thead>
 							<tr>
-								<th>Marca</th>
-								<th>Modelo</th>
-								<th>Matrícula</th>
-								<th>En Uso</th>
+								<th>Nombre</th>
+								<th>Apellido</th>
 							</tr>
 						</thead>
 						<tbody>
-							{vehicles.map(vehicle => <VehicleItem key={vehicle.licence_plate} vehicle={vehicle} />)}
+							{drivers.map(driver => (
+								<tr key={driver.licence_plate} >
+									<td component="th" scope="row">
+										{driver.first_name}
+									</td>
+									<td>{driver.last_name}</td>
+								</tr>
+							))}
 						</tbody>
 					</table>
 				</div>
 			) : (
-				<p>No tienes ningún vehículo registrado.</p>
+				<p>No tienes ningún conductor registrado.</p>
 			)}
 		</div>
 	);

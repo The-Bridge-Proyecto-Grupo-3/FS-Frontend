@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createVehicle } from '../../redux/vehicles/vehicleSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
-import { Link } from 'react-router-dom';
+
 import './register.css';
 
 const RegisterVehicle = () => {
@@ -49,7 +49,7 @@ const RegisterVehicle = () => {
 				type: '',
 			});
 			setTimeout(() => {
-				navigate('/company'); // Redirige a la lista de vehículos
+				navigate('/vehicles');
 			}, 2000);
 		} catch (error) {
 			console.error('Fallo al registrar el vehículo:', error);

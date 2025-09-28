@@ -35,7 +35,7 @@ export const useForm = ({ validation, onSubmit }) => {
 			if (validateAndPrint(field, value, e.target[field])) return;
 		}
 		try {
-			await onSubmit(e.target);
+			await onSubmit(formData);
 			setSuccess(true);
 		} catch (error) {
 			setMessage(error.message || error);

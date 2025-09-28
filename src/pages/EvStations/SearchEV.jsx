@@ -39,7 +39,7 @@ const SearchEV = () => {
 		}
 	}, [coords]);
 
-	const getUnique = (arr, count=5) => {
+	const getUnique = (arr, count=10) => {
 		if (!evStations || evStations.length === 0) {
 			return [];
 		}

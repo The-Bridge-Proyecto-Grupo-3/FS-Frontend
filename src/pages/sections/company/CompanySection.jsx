@@ -28,6 +28,14 @@ export default function CompanySection() {
 					<img src={AddDriver} alt="añadir conductores" width={180} />
 				</Link>
 			</div>
+			<div className="LinkContainer">
+				<Link to="/vehicles" className="vehiclesLink">
+					Lista de Vehículos
+				</Link>
+				<Link to="/driversList" className="vehiclesLink">
+					Lista de Conductores
+				</Link>
+			</div>
 		</div>
 	);
 }

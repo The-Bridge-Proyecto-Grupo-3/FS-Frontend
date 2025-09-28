@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
-import { registerDriver } from '../../redux/auth/authSlice';
+import { registerDriver } from '../../redux/drivers/driverSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import { Link } from 'react-router-dom';
 import './register.css';
@@ -9,16 +9,8 @@ const RegisterDriver = () => {
 	const dispatch = useDispatch();
 
 	const validation = {
-		username: value => {
-			value = value ? value.trim() : '';
-			return [
-				[
-					value.length >= 3 && value.length <= 24,
-					'El nombre debe contener entre 3 y 24 caracteres',
-				],
-			];
-		},
-		surname: value => [[value && value.trim().length > 0, 'El apellido no puede estar vacío']],
+		first_name: value => [[ value?.length > 0, 'El nombre no puede estar vacío']],
+		last_name: value => [[ value?.length > 0, 'El apellido no puede estar vacío']],
 		email: value => [
 			[
 				/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -31,12 +23,12 @@ const RegisterDriver = () => {
 			[/[a-z]+/.test(value), 'La contraseña debe contener minúsculas'],
 			[/[A-Z]+/.test(value), 'La contraseña debe contener mayúsculas'],
 			[/[0-9]+/.test(value), 'La contraseña debe contener números'],
-			[/[^A-Za-z0-9]+/.test(value), 'La contraseña debe contener símbolos especiales'],
-			[value && value.length >= 8, 'La contraseña debe tener 8 caracteres o más'],
+			[/[^\w\s]+/.test(value), 'La contraseña debe contener símbolos especiales'],
+			[ value?.length >= 8, 'La contraseña debe tener 8 caracteres o más'],
 		],
 	};
 
-	const onSubmit = form => dispatch(registerDriver(new FormData(form))).unwrap();
+	const onSubmit = formData => dispatch(registerDriver(formData));
 
 	const { formData, message, success, handleInputChange, handleSubmit } = useForm({
 		validation,

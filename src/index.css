@@ -3,15 +3,20 @@
 	line-height: 1.5;
 	font-weight: 400;
 	min-width: 375px;
-	height: 100vh;
+	min-height: 100%;
 	color: #000000;
-	background: linear-gradient(to bottom, #f2c9c4, #ffffff);
+	background: linear-gradient(180deg, #F9E1DE, #ffffff 100%);
+	background-attachment: fixed;
+	
+	
 }
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	
 }
+
 img:hover {
 	cursor: pointer;
 }

@@ -21,9 +21,9 @@ export const createVehicle = createAsyncThunk(
 
 export const fetchVehicles = createAsyncThunk(
 	'vehicles/fetchVehicles',
-	async (_, { rejectWithValue }) => {
+	async (available, { rejectWithValue }) => {
 		try {
-			return await vehicleService.getAll();
+			return await vehicleService.getAll(available);
 		} catch (error) {
 			const message = error.response?.data?.error || 'Error al cargar los vehículos';
 			return rejectWithValue(message);
@@ -128,6 +128,7 @@ const vehicleSlice = createSlice({
 			// fetchVehicleById
 			.addCase(fetchVehicleById.pending, state => {
 				state.status = 'loading';
+				state.selectedVehicle = null;
 			})
 			.addCase(fetchVehicleById.fulfilled, (state, action) => {
 				state.status = 'succeeded';
