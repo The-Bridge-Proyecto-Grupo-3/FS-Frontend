@@ -8,7 +8,7 @@ export const EvStationTable = ({ title, stations }) => {
 	return (
 		<div style={{ marginTop: '30px' }}>
 			<h3>{title}</h3>
-			<div className='tableStations' style={{maxHeight: '40vh'}}>
+			<div className='tableContainer' style={{maxHeight: '40vh'}}>
 				<table>
 					<thead>
 						<tr>
