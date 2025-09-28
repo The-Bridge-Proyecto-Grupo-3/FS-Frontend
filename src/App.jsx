@@ -15,6 +15,7 @@ import RegisterReceipt from './pages/Register/RegisterReceipt.jsx';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserInfo } from './redux/auth/authSlice.js';
+import SearchEV from './pages/EvStations/SearchEv.jsx';
 
 function App() {
 	const dispatch = useDispatch();
@@ -108,7 +109,8 @@ function App() {
 			/>
 			<Route path="/vehicles/:id" element={<VehicleDetails />} />
 			<Route path="/searchGS" element={<SearchGS />} />
-			
+			<Route path="/searchEV" element={<SearchEV />} />
+			<Route path="/NearbyGS" element={<NearbyGastations />} />
 		</Routes>
 	);
 }

@@ -52,7 +52,7 @@ export default function DriverSection() {
 						</div>
 					</Link>
 					{/* cambiar ruta cuando se cree el componente */}
-					<Link to="/searchGS" className="linkStyle">
+					<Link to="/searchEV" className="linkStyle">
 						<div className="nameToIcons">
 							<label htmlFor="puntosRecarga">Puntos de Recarga</label>
 							<img src={FindElecDot} alt="añadir conductores" width={140} />
