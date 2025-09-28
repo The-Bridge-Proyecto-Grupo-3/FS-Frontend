@@ -110,7 +110,6 @@ function App() {
 			<Route path="/vehicles/:id" element={<VehicleDetails />} />
 			<Route path="/searchGS" element={<SearchGS />} />
 			<Route path="/searchEV" element={<SearchEV />} />
-			<Route path="/NearbyGS" element={<NearbyGastations />} />
 		</Routes>
 	);
 }

@@ -35,7 +35,7 @@ const SearchGS = () => {
 				findNearbyStations(latitud, longitud);
 			}
 		}
-	}, [gastationDetails, findNearbyStations]);
+	}, [gastationDetails]);
 
 	const selectorData = { provincias, municipios, gastations };
 	const selectorActions = { selectProvincia, selectMunicipio, selectGastation };
@@ -53,9 +53,9 @@ const SearchGS = () => {
 
 			<GastationDetails details={gastationDetails} />
 
-			{/* {isLoading && <p>Cargando datos...</p>} */}
+			{isLoading && <p>Cargando datos...</p>}
 			{isError && <p style={{ color: 'red' }}>Error: {message}</p>}
-			<>
+			{ !isLoading && !isError && <>
 				<GastationsTable
 					stations={nearGastations}
 					fuelType="Gasolina95"
@@ -67,7 +67,7 @@ const SearchGS = () => {
 					fuelType="Diesel"
 					title="Recomendaciones por precio de Diésel"
 				/>
-			</>
+			</>}
 		</div>
 	);
 };
