@@ -11,7 +11,6 @@ import RegisterVehicle from './pages/Register/RegisterVehicle';
 import Login from './pages/login/login.jsx';
 import Vehicles from './components/Vehicles/Vehicles.jsx';
 import VehicleDetails from './components/Vehicles/VehicleDetails.jsx';
-import NearbyGastations from './pages/Gastations/NearbyGastations.jsx';
 import ProtectedRoute from './guards/ProtectedRoute.jsx';
 import RegisterReceipt from './pages/Register/RegisterReceipt.jsx';
 import Drivers from './components/Drivers/Drivers.jsx';
@@ -43,7 +42,6 @@ function App() {
 			
 			<Route path="/searchGS" element={<SearchGS />} />
 			<Route path="/searchEV" element={<SearchEV />} />
-			<Route path="/NearbyGS" element={<NearbyGastations />} />
 		</Routes>
 	);
 }

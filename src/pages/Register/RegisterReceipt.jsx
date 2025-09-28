@@ -88,7 +88,7 @@ const RegisterReceipt = () => {
 			</div>
 
 			<div className="form-container">
-				<h2>Registro nuevo de Recibo</h2>
+				<h2>Registro de ticktets</h2>
 
 				{user && assignedVehicle && (
 					<div className="info-box">
