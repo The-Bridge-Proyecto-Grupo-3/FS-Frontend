@@ -9,18 +9,16 @@ import Deivi from '../../assets/Deivi.png';
 import './LoadingPage.css';
 
 export default function Principal({ children }) {
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { user } = useSelector(state => state.auth);
 	const [loading, setLoading] = useState(user == null);
 	useEffect(() => {
 		(async () => {
 			if(!user) {
-				const [response] = await Promise.all([
+				await Promise.all([
 					dispatch(getUserInfo()),
 					new Promise(resolve => setTimeout(resolve,2500))
 				]);
-				if(!getUserInfo.fulfilled.match(response)) navigate('/login');
 				setLoading(false);
 			}
 		})();
