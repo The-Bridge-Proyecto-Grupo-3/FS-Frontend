@@ -33,7 +33,7 @@ const Vehicles = () => {
 
 			{vehicles.length > 0 ? (
 				<div className='tableContainer'>
-					<table aria-label="tabla de vehículos" stickyHeader>
+					<table>
 						<thead>
 							<tr>
 								<th>Marca</th>

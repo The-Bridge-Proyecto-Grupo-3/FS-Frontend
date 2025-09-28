@@ -1,4 +1,3 @@
-import './App.css';
 import './styles/main.scss';
 import { Routes, Route } from 'react-router-dom';
 import RedirectHome from './redirect/RedirectHome.jsx';

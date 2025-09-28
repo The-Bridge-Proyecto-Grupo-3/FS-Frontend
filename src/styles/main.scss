@@ -2,3 +2,26 @@
 //@use './forms';
 
 // TODO: meter estilos de main.css y App.css
+
+:root {
+	font-family: Roboto, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+	min-width: 375px;
+	min-height: 100%;
+	color: #000000;
+	background: linear-gradient(180deg, #F9E1DE, white 100%), white;
+	background-attachment: fixed;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+	list-style: none;
+}
+
+button, input[type='button'], input[type='submit']  {
+	cursor: pointer;
+}
