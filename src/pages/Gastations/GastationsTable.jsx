@@ -35,7 +35,7 @@ export const GastationsTable = ({ stations, fuelType, title }) => {
 	return (
 		<div>
 			<h3>{title}</h3>
-			<div className='tableStations'>
+			<div className='tableContainer'>
 				<table>
 					<thead>
 						<tr>

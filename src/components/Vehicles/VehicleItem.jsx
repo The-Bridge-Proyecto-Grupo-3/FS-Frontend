@@ -10,24 +10,12 @@ const VehicleItem = ({ vehicle }) => {
 	};
 
 	return (
-		<TableRow
-			key={vehicle.licence_plate}
-			sx={{
-				'&:hover': {
-					backgroundColor: '#A8A7A7',
-				},
-			}}
-			onClick={handleViewDetails}
-		>
-			<TableCell component="td" scope="row">
-				{vehicle.brand}
-			</TableCell>
-			<TableCell>{vehicle.model}</TableCell>
-			<TableCell>{vehicle.license_plate}</TableCell>
-			<TableCell>
-				{vehicle.in_use_by === null ? 'No' : vehicle.in_use_by}
-			</TableCell>
-		</TableRow>
+		<tr onClick={handleViewDetails} >
+			<td>{vehicle.brand}</td>
+			<td>{vehicle.model}</td>
+			<td>{vehicle.license_plate}</td>
+			<td>{vehicle.in_use_by === null ? 'No' : vehicle.in_use_by}</td>
+		</tr>
 	);
 };
 

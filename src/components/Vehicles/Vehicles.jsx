@@ -1,15 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchVehicles } from '../../redux/vehicles/vehicleSlice';
-import {
-	Paper,
-	TableContainer,
-	Table,
-	TableHead,
-	TableRow,
-	TableCell,
-	TableBody,
-} from '@mui/material';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import { Link } from 'react-router-dom';
 import './VehicleDetails.css';
@@ -41,21 +32,21 @@ const Vehicles = () => {
 			<h2>Mis Vehículos</h2>
 
 			{vehicles.length > 0 ? (
-				<TableContainer sx={{ maxHeight: '550px', padding: '.5rem' }}>
-					<Table aria-label="tabla de vehículos" stickyHeader>
-						<TableHead>
-							<TableRow>
-								<TableCell>Marca</TableCell>
-								<TableCell>Modelo</TableCell>
-								<TableCell>Matrícula</TableCell>
-								<TableCell>En Uso</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{vehicles.map(vehicle => <VehicleItem vehicle={vehicle} />)}
-						</TableBody>
-					</Table>
-				</TableContainer>
+				<div className='tableContainer'>
+					<table aria-label="tabla de vehículos" stickyHeader>
+						<thead>
+							<tr>
+								<th>Marca</th>
+								<th>Modelo</th>
+								<th>Matrícula</th>
+								<th>En Uso</th>
+							</tr>
+						</thead>
+						<tbody>
+							{vehicles.map(vehicle => <VehicleItem key={vehicle.licence_plate} vehicle={vehicle} />)}
+						</tbody>
+					</table>
+				</div>
 			) : (
 				<p>No tienes ningún vehículo registrado.</p>
 			)}
