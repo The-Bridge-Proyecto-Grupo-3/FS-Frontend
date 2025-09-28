@@ -4,7 +4,7 @@ import { useForm } from '../../hooks/useForm';
 import './register.css';
 import { registerCompany } from '../../redux/companies/companySlice';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const RegisterCompany = () => {
 	const dispatch = useDispatch();
@@ -13,16 +13,7 @@ const RegisterCompany = () => {
 	const { emailSent } = useSelector(state => state.companies);
     
     const validation = {
-        email: value => [[/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value),"Email inválido"]],
-        password: value => [
-            [/[a-z]+/.test(value), 'La contraseña debe contener letras minúsculas'],
-            [/[A-Z]+/.test(value), 'La contraseña debe contener letras mayúsculas'],
-            [/[0-9]+/.test(value), 'La contraseña debe contener números'],
-            [/[^A-Za-z0-9]+/.test(value), 'La contraseña debe contener símbolos especiales'],
-            [value && value.length >= 8, 'La contraseña debe tener 8 o más caracteres'],
-        ],
-        reppassword: value => [[value == formData.password, 'Las contraseñas no coinciden']],
-		name: value => [[value && value.length > 0, "Introduce nombre de la empresa"]],
+        name: value => [[value && value.length > 0, "Introduce nombre de la empresa"]],
 		CIF: cif => [[
 			(() => {
 				if(!cif || typeof cif != "string" || cif.length != 9) return false;
@@ -47,7 +38,16 @@ const RegisterCompany = () => {
 		state: value => [[value && value.length > 0, "Introduce una provincia"]],
 		postal_code: value => [[value !== null && value !== "", "Introduce un código postal"]],
 		payment_entity: value => [[value !== null && value !== "", "Introduce una entidad de pago"]],
-    };
+		email: value => [[/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value),"Email inválido"]],
+        password: value => [
+            [/[a-z]+/.test(value), 'La contraseña debe contener letras minúsculas'],
+            [/[A-Z]+/.test(value), 'La contraseña debe contener letras mayúsculas'],
+            [/[0-9]+/.test(value), 'La contraseña debe contener números'],
+            [/[^A-Za-z0-9]+/.test(value), 'La contraseña debe contener símbolos especiales'],
+            [value && value.length >= 8, 'La contraseña debe tener 8 o más caracteres'],
+        ],
+        reppassword: value => [[value == formData.password, 'Las contraseñas no coinciden']],
+	};
 
 	
     const onSubmit = async () => dispatch(registerCompany(formData)).unwrap();
@@ -62,8 +62,10 @@ const RegisterCompany = () => {
 	
 	return (
 		<div className="register-container">
-			<div className="iconContainer" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-				<img src={BackArrowIcon} alt="atras" width={30} />
+			<div className="iconContainer">
+				<Link to="/">
+					<img src={BackArrowIcon} alt="atras" width={30} />
+				</Link>
 			</div>
 
 			{ success ? (
@@ -120,7 +122,7 @@ const RegisterCompany = () => {
 								<input id="reppassword" name="reppassword" type="password" onChange={handleInputChange} />
 							</div>
 						</div>
-						<span className="error-message">{message}</span>
+						<span className="error">{message}</span>
 						<input type="submit" value="Registrar empresa" />
 					</form>
 				</div>
