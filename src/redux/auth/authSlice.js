@@ -13,7 +13,6 @@ const initialState = {
 
 export const getUserInfo = createAsyncThunk('auth/info', async (_, { rejectWithValue }) => {
 	try {
-		console.log('wrfsery');
 		const userData = await authService.userInfo();
 		return userData;
 	} catch (err) {

@@ -15,6 +15,7 @@ import NearbyGastations from './pages/Gastations/NearbyGastations.jsx';
 import ProtectedRoute from './guards/ProtectedRoute.jsx';
 import RegisterReceipt from './pages/Register/RegisterReceipt.jsx';
 import Drivers from './components/Drivers/Drivers.jsx';
+import SearchEV from './pages/EvStations/SearchEv.jsx';
 
 function App() {
 	return (
@@ -41,6 +42,7 @@ function App() {
 			<Route path="/" element={<RedirectHome />} />
 			
 			<Route path="/searchGS" element={<SearchGS />} />
+			<Route path="/searchEV" element={<SearchEV />} />
 			<Route path="/NearbyGS" element={<NearbyGastations />} />
 		</Routes>
 	);
