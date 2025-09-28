@@ -39,7 +39,7 @@ const SearchEV = () => {
 		}
 	}, [coords]);
 
-	const stationsByDistance = useMemo(() => {
+	const getUnique = (arr) => {
 		if (!evStations || evStations.length === 0) {
 			return [];
 		}
@@ -47,17 +47,20 @@ const SearchEV = () => {
 		const uniqueStations = [];
 		const seenAddresses = new Set();
 
-		for (const station of evStations) {
+		for (const station of arr) {
+			if(uniqueStations.length == 5) break;
 			if (!seenAddresses.has(station.address)) {
 				seenAddresses.add(station.address);
 				uniqueStations.push(station);
 			}
 		}
-		return uniqueStations.slice(0, 5);
-	}, [evStations]);
+		return uniqueStations;
+	};
+
+	const stationsByDistance = useMemo(() => getUnique(evStations), [evStations]);
 
 	const stationsByPower = useMemo(
-		() => [...evStations].sort((a, b) => b.max_power - a.max_power).slice(0, 5),
+		() => getUnique([...evStations].sort((a, b) => b.max_power - a.max_power)),
 		[evStations]
 	);
 
