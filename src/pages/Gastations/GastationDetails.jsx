@@ -3,7 +3,7 @@ export const GastationDetails = ({ details }) => {
   if (!details) return null;
 
   const {
-    nombreEstacion,
+   nombreEstacion,
     marca,
     direccion,
     horario,
@@ -21,7 +21,7 @@ export const GastationDetails = ({ details }) => {
         borderRadius: "8px",
         padding: "15px",
         marginTop: "20px",
-        backgroundColor: "#f9f9f9",
+        backgroundColor: "#cfc5c5ff",
       }}
     >
       <h3 style={{ marginTop: "0" }}>{nombreEstacion}</h3>

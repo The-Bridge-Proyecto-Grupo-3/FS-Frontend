@@ -14,16 +14,14 @@
 	min-height: 100vh;
 	opacity: 0;
 	transform: translateY(30px);
-	transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-	background: linear-gradient(180deg, #f9e1de 60%, #ffffff 100%);
-	background-attachment: fixed;
-}
 
+	/* transición correcta */
+	transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
 .login-container.visible {
 	opacity: 1;
 	transform: translateY(0);
 }
-
 /* Logo */
 .login-logo {
 	width: 368px;
@@ -42,7 +40,7 @@
 	border: 2px solid #a8a7a7;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	padding: 0.5rem 2rem;
-	background: transparent;
+	background: transparent; /* eliminado gradiente interno */
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
@@ -61,36 +59,40 @@
 /* Label Email específico */
 .input-label.email-label {
 	position: relative;
-	top: 8px;
+	top: 8px; /* sube el label Email */
 }
 
-/* Inputs generales con gradiente */
-.form-border input,
-.password-input
-{
+/* Inputs generales */
+.form-border input {
 	width: 290px;
 	height: 51px;
 	border-radius: 24px;
 	border: 2px solid #a8a7a7;
 	padding: 0.75rem;
 	font-size: 1rem;
+	background: transparent;
 	box-sizing: border-box;
 	align-self: center;
 	color: #000;
-	margin-bottom: 24px;
-	background: linear-gradient(135deg, #f9e1de 60%, #ffffff 100%);
-	background-clip: padding-box;
+	margin-bottom: 24px; /* separación entre Email y Password */
 }
 
-/* Placeholder */
-.form-border input::placeholder,
-.password-input::placeholder {
+.form-border input::placeholder {
 	color: rgba(0, 0, 0, 0.5);
 }
 
 /* Password específico */
 .password-input {
-	margin-bottom: 32px;
+	width: 290px;
+	height: 51px;
+	border-radius: 24px;
+	border: 2px solid #a8a7a7;
+	background: transparent;
+	font-size: 1rem;
+	box-sizing: border-box;
+	align-self: center;
+	color: #000;
+	margin-bottom: 32px; /* separación Password y Login */
 }
 
 /* Botón de login */
@@ -111,12 +113,10 @@
 .form-border button:hover {
 	background: #c70023;
 }
-
 #cancelar {
 	background-color: #a8a7a7;
 	color: #000000;
 }
-
 /* Links debajo del formulario */
 .login-links {
 	width: 359px;
@@ -158,10 +158,13 @@
 	}
 
 	.form-border input,
-	.form-border button,
-	.password-input {
+	.form-border button {
 		width: 100%;
 		margin-bottom: 1.5rem;
+	}
+
+	.password-input {
+		width: 100%;
 	}
 
 	.input-label {
@@ -187,7 +190,10 @@
 	}
 
 	.form-border input,
-	.form-border button,
+	.form-border button {
+		width: 100%;
+	}
+
 	.password-input {
 		width: 100%;
 	}
