@@ -2,6 +2,8 @@ import { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getNearEvStations } from '../../redux/evStations/evSlice';
 import { EvStationTable } from './EvStationTable';
+import BackArrowIcon from '../../assets/BackArrowIcon.png';
+import { Link } from 'react-router-dom';
 
 const SearchEV = () => {
 	const dispatch = useDispatch();
@@ -61,6 +63,11 @@ const SearchEV = () => {
 
 	return (
 		<div>
+			<div className="iconContainer">
+				<Link to="/company">
+					<img src={BackArrowIcon} alt="atras" width={30} />
+				</Link>
+			</div>
 			<h2>Puntos de Carga</h2>
 
 			{locationError && <p style={{ color: 'red' }}>{locationError}</p>}
