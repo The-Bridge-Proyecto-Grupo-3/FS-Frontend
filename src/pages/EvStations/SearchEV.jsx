@@ -39,7 +39,7 @@ const SearchEV = () => {
 		}
 	}, [coords]);
 
-	const getUnique = (arr) => {
+	const getUnique = (arr, count=5) => {
 		if (!evStations || evStations.length === 0) {
 			return [];
 		}
@@ -48,11 +48,11 @@ const SearchEV = () => {
 		const seenAddresses = new Set();
 
 		for (const station of arr) {
-			if(uniqueStations.length == 5) break;
 			if (!seenAddresses.has(station.address)) {
 				seenAddresses.add(station.address);
 				uniqueStations.push(station);
 			}
+			if(uniqueStations.length == count) break;
 		}
 		return uniqueStations;
 	};
