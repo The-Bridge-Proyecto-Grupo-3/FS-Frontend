@@ -4,7 +4,6 @@ import { getNearEvStations } from '../../redux/evStations/evSlice';
 import { EvStationTable } from './EvStationTable';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import { Link } from 'react-router-dom';
-import "./SearchEV.scss";
 
 const SearchEV = () => {
 	const dispatch = useDispatch();

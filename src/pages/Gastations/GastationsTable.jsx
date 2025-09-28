@@ -28,68 +28,69 @@ export const GastationsTable = ({ stations, fuelType, title }) => {
 	const isGasolina = fuelType.includes('Gasolina');
 	const isDiesel = fuelType.includes('Diesel');
 
+	const handleOpenMap = (mapUrl) => {
+		window.open(mapUrl, '_blank', 'noopener,noreferrer');
+	};
+
 	return (
 		<div>
 			<h3>{title}</h3>
-			<table>
-				<thead>
-					<tr>
-						<th>Estación</th>
-						<th>Dirección</th>
-
-						{isGasolina && (
-							<>
-								<th>Gasolina 95 (€/L)</th>
-								<th>Gasolina 98 (€/L)</th>
-							</>
-						)}
-
-						{isDiesel && (
-							<>
-								<th>Diésel (€/L)</th>
-								<th>Diésel Premium (€/L)</th>
-							</>
-						)}
-
-						<th>Distancia (km)</th>
-						<th>Mapa</th>
-					</tr>
-				</thead>
-				<tbody>
-					{top3Cheapest.map(station => (
-						<tr key={`${station.idEstacion}-${fuelType}`}>
-							<td>{station.nombreEstacion}</td>
-							<td>{station.direccion}</td>
+			<div className='tableStations'>
+				<table>
+					<thead>
+						<tr>
+							<th>Estación</th>
+							<th>Dirección</th>
 
 							{isGasolina && (
 								<>
-									<td>{station.Gasolina95 || 'ND'}</td>
-									<td>{station.Gasolina98 || 'ND'} </td>
+									<th>95 (€/L)</th>
+									<th>98 (€/L)</th>
 								</>
 							)}
 
 							{isDiesel && (
 								<>
-									<td>{station.Diesel || 'ND'}</td>
-									<td>{station.DieselPremium || 'ND'} </td>
+									<th>Diésel (€/L)</th>
+									<th>Diésel Premium (€/L)</th>
 								</>
 							)}
 
-							<td>{parseFloat(station.distancia).toFixed(2)}</td>
-							<td>
-								<a
-									href={`https://www.google.com/maps/search/?api=1&query=${station.latitud},${station.longitud}`}
-									target="_blank"
-									rel="noopener noreferrer"
-									style={styles.button}
-								>
-									Ver
-								</a>
-							</td>
+							<th>Distancia (km)</th>
+							<th>Mapa</th>
 						</tr>
-					))}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{top3Cheapest.map(station => (
+							<tr key={`${station.idEstacion}-${fuelType}`}>
+								<td>{station.nombreEstacion}</td>
+								<td>{station.direccion}</td>
+
+								{isGasolina && (
+									<>
+										<td>{station.Gasolina95 || 'N/D'}</td>
+										<td>{station.Gasolina98 || 'N/D'} </td>
+									</>
+								)}
+
+								{isDiesel && (
+									<>
+										<td>{station.Diesel || 'N/D'}</td>
+										<td>{station.DieselPremium || 'N/D'} </td>
+									</>
+								)}
+
+								<td>{parseFloat(station.distancia).toFixed(2)}</td>
+								<td>
+									<button className="btnShowMap" onClick={() => 
+										handleOpenMap(`https://www.google.com/maps/search/?api=1&query=${station.latitud},${station.longitud}`)
+									} >Ver Mapa</button>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	);
 };
