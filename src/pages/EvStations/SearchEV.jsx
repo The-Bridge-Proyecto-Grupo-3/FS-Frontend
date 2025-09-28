@@ -4,6 +4,7 @@ import { getNearEvStations } from '../../redux/evStations/evSlice';
 import { EvStationTable } from './EvStationTable';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import { Link } from 'react-router-dom';
+import "./SearchEV.scss";
 
 const SearchEV = () => {
 	const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const SearchEV = () => {
 		}
 	}, [coords]);
 
-	const getUnique = (arr, count=5) => {
+	const getUnique = (arr, count=10) => {
 		if (!evStations || evStations.length === 0) {
 			return [];
 		}
