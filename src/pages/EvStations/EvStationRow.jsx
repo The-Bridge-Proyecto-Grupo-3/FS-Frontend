@@ -9,10 +9,10 @@ export const EvStationRow = ({ station }) => {
 
 	return (
 		<tr>
-			<td>{operator || 'N/D'}</td>
+			{/* <td>{operator || 'N/D'}</td> */}
 			<td>{address}</td>
 			<td>{city}</td>
-			<td>{location || 'N/D'}</td>
+			{/* <td>{location || 'N/D'}</td> */}
 			<td>{max_power ? `${(max_power / 1000).toFixed(1)} kW` : 'N/D'}</td>
 			<td>{distance ? `${distance.toFixed(2)} km` : 'N/D'}</td>
 			<td>

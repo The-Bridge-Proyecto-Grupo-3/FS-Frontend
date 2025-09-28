@@ -11,18 +11,18 @@ export const EvStationTable = ({ title, stations }) => {
 			<table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9em' }}>
 				<thead>
 					<tr style={{ backgroundColor: '#f2f2f2' }}>
-						<th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left' }}>
+						{/* <th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left' }}>
 							Operador
-						</th>
+						</th> */}
 						<th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left' }}>
 							Dirección
 						</th>
 						<th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left' }}>
 							Ciudad
 						</th>
-						<th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left' }}>
+						{/* <th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left' }}>
 							Ubicación
-						</th>
+						</th> */}
 						<th style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'left' }}>
 							Potencia Máx.
 						</th>
