@@ -2,26 +2,32 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createReceipt } from '../../redux/receipts/receiptSlice';
-import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import './register.css';
 import GoBack from '../../components/Buttons/GoBack';
+import { useForm } from '../../hooks/useForm';
 
 const RegisterReceipt = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const { user } = useSelector(state => state.auth);
-	const { status, error: reduxError } = useSelector(state => state.receipts);
-
 	const assignedVehicle = user?.Vehicle;
 
-	const [formData, setFormData] = useState({
-		price: '',
-		quantity: '',
-		mileage: '',
-		fuel_type: '',
+	const { status } = useSelector(state => state.vehicles);
+
+	const validation = {
+		fuel_type: value => [[value, 'Introduce tipo de combustible del vehículo']],
+		price: value => [[value, 'Introduce un precio']],
+		quantity: value => [[value , 'Introduce cantidad']],
+		mileage: value => [[value, 'Introduce kilometraje del vehículo']],
+	};
+
+	const onSubmit = async () => dispatch(createReceipt(formData)).unwrap();
+
+	const { formData, setFormData, message, success, handleInputChange, handleSubmit } = useForm({
+		validation,
+		onSubmit,
 	});
-	const [success, setSuccess] = useState(null);
 
 	useEffect(() => {
 		if (!assignedVehicle) return;
@@ -33,42 +39,12 @@ const RegisterReceipt = () => {
 		}
 	}, [assignedVehicle]);
 
-	const handleChange = e => {
-		setFormData(prevState => ({
-			...prevState,
-			[e.target.name]: e.target.value,
-		}));
-	};
-
-	const handleSubmit = async e => {
-		e.preventDefault();
-		setSuccess(null);
-
-		if (!user || !assignedVehicle) {
-			alert('No se pudo encontrar la información del conductor o del vehículo.');
-			return;
-		}
-
-		if (!formData.price || !formData.fuel_type) {
-			alert(
-				'Por favor, complete todos los campos obligatorios: Precio y Tipo de Combustible.'
-			);
-			return;
-		}
-
-		try {
-			await dispatch(createReceipt(formData)).unwrap();
-			setSuccess('¡Recibo registrado con éxito!');
-			setFormData({ price: '', quantity: '', mileage: '', fuel_type: formData.fuel_type });
-
+	useEffect(() => {
+		if(success)
 			setTimeout(() => {
-				navigate(-1);
+				navigate('/driver');
 			}, 2000);
-		} catch (error) {
-			console.error('Fallo al registrar el recibo:', error);
-		}
-	};
-
+	}, [success]);
 	return (<>
 		<GoBack path='/driver' />
 		<div className="register-container">
@@ -98,8 +74,7 @@ const RegisterReceipt = () => {
 									id="fuel_type"
 									className="select-custom"
 									value={formData.fuel_type}
-									onChange={handleChange}
-									required
+									onChange={handleInputChange}
 								>
 									<option value="" disabled>
 										Seleccione el tipo
@@ -121,8 +96,7 @@ const RegisterReceipt = () => {
 								min="0"
 								step="0.01"
 								value={formData.price}
-								onChange={handleChange}
-								required
+								onChange={handleInputChange}
 							/>
 						</div>
 
@@ -135,7 +109,7 @@ const RegisterReceipt = () => {
 								min="0"
 								step="0.01"
 								value={formData.quantity}
-								onChange={handleChange}
+								onChange={handleInputChange}
 							/>
 						</div>
 
@@ -147,14 +121,12 @@ const RegisterReceipt = () => {
 								type="number"
 								min="0"
 								value={formData.mileage}
-								onChange={handleChange}
+								onChange={handleInputChange}
 							/>
 						</div>
 
-						{status === 'failed' && reduxError && (
-							<p className="error-message">{reduxError}</p>
-						)}
-						{success && <p className="success-message">{success}</p>}
+						{message && <span className="error">{message}</span>}
+						{success && <span className="success">Recibo registrado con éxito</span>}
 
 						<input
 							type="submit"

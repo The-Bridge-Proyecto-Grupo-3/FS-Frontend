@@ -10,7 +10,7 @@ import { useForm } from '../../hooks/useForm';
 const RegisterVehicle = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const { status, error: reduxError } = useSelector(state => state.vehicles);
+	const { status } = useSelector(state => state.vehicles);
 
 	const validation = {
 		brand: value => [[value?.length > 0, 'Introduce marca del vehículo']],
