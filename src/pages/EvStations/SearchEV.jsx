@@ -74,8 +74,8 @@ const SearchEV = () => {
 
 			{!isLoading && !isError && (
 				<>
-					<EvStationTable title="Los 5 más cercanos" stations={stationsByDistance} />
-					<EvStationTable title="Los 5 con mayor potencia" stations={stationsByPower} />
+					<EvStationTable title="Los más cercanos" stations={stationsByDistance} />
+					<EvStationTable title="Los de mayor potencia a 20Km" stations={stationsByPower} />
 				</>
 			)}
 

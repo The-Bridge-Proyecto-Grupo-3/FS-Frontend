@@ -13,7 +13,7 @@ export const EvStationTable = ({ title, stations }) => {
 					<thead>
 						<tr>
 							{/* <th>Operador</th> */}
-							<th>Dirección</th>
+							<th style={{ width: '25vw'}}>Dirección</th>
 							<th>Ciudad</th>
 							{/* <th>Ubicación</th> */}
 							<th>Potencia Máx.</th>

@@ -14,7 +14,7 @@ export const EvStationRow = ({ station }) => {
 			<td>{city}</td>
 			{/* <td>{location || 'N/D'}</td> */}
 			<td>{max_power ? `${(max_power / 1000).toFixed(1)} kW` : 'N/D'}</td>
-			<td>{distance ? `${distance.toFixed(2)} km` : 'N/D'}</td>
+			<td>{distance ? `${distance.toFixed(2)} Km` : 'N/D'}</td>
 			<td className="center">
 				<button className="btnShowMap" onClick={handleOpenMap} >Ver Mapa</button>
 			</td>
