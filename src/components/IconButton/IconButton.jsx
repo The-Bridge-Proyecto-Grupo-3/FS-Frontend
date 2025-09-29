@@ -2,9 +2,9 @@ import back from '../../assets/BackArrowIcon.png';
 // import edit from '../../assets/EditIcon.png';
 // import deleteIcon from '../../assets/DeleteIcon.png';
 import logout from '../../assets/LogoutIcon.png';
-import red from '../../assets/red_circle.png';
-import yellow from '../../assets/yellow_circle.png';
-import green from '../../assets/green_circle.png';
+import red from '../../assets/red_circle.svg';
+import yellow from '../../assets/yellow_circle.svg';
+import green from '../../assets/green_circle.svg';
 import './IconButton.scss';
 
 const icons = {
