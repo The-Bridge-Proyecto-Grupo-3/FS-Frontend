@@ -132,17 +132,17 @@ const RegisterVehicle = () => {
 								required
 							/>
 						</div>
-					</div>
-					{status === 'failed' && reduxError && (
-						<p className="error-message">{reduxError}</p>
-					)}
-					{success && <p className="success-message">{success}</p>}
+						{status === 'failed' && reduxError && (
+							<p className="error-message">{reduxError}</p>
+						)}
+						{success && <p className="success-message">{success}</p>}
 
-					<input
-						type="submit"
-						value={status === 'loading' ? 'Registrando...' : 'Registrar'}
-						disabled={status === 'loading'}
-					/>
+						<input
+							type="submit"
+							value={status === 'loading' ? 'Registrando...' : 'Registrar'}
+							disabled={status === 'loading'}
+						/>
+					</div>
 				</form>
 			</div>
 		</div>

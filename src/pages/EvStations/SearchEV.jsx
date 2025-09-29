@@ -39,7 +39,7 @@ const SearchEV = () => {
 		}
 	}, [coords]);
 
-	const getUnique = (arr, count=10) => {
+	const getUnique = (arr, count = 10) => {
 		if (!evStations || evStations.length === 0) {
 			return [];
 		}
@@ -52,7 +52,7 @@ const SearchEV = () => {
 				seenAddresses.add(station.address);
 				uniqueStations.push(station);
 			}
-			if(uniqueStations.length == count) break;
+			if (uniqueStations.length == count) break;
 		}
 		return uniqueStations;
 	};
@@ -71,7 +71,7 @@ const SearchEV = () => {
 					<img src={BackArrowIcon} alt="atras" width={30} />
 				</Link>
 			</div>
-			<h2>Puntos de Carga</h2>
+			<h2>Puntos de Recarga</h2>
 
 			{locationError && <p style={{ color: 'red' }}>{locationError}</p>}
 			{isLoading && <p>Buscando puntos de carga...</p>}
