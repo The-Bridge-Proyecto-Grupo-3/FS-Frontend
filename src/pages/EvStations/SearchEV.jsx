@@ -4,6 +4,7 @@ import { getNearEvStations } from '../../redux/evStations/evSlice';
 import { EvStationTable } from './EvStationTable';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import { Link } from 'react-router-dom';
+import GoBack from '../../components/GoBack/GoBack';
 
 const SearchEV = () => {
 	const dispatch = useDispatch();
@@ -66,11 +67,7 @@ const SearchEV = () => {
 
 	return (
 		<div>
-			<div className="iconContainer">
-				<Link to="/company">
-					<img src={BackArrowIcon} alt="atras" width={30} />
-				</Link>
-			</div>
+			<GoBack path='/company' />
 			<h2>Puntos de Carga</h2>
 
 			{locationError && <p style={{ color: 'red' }}>{locationError}</p>}

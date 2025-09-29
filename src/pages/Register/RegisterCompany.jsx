@@ -5,6 +5,7 @@ import './register.css';
 import { registerCompany } from '../../redux/companies/companySlice';
 import { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import GoBack from '../../components/GoBack/GoBack';
 
 const RegisterCompany = () => {
 	const dispatch = useDispatch();
@@ -60,13 +61,9 @@ const RegisterCompany = () => {
 		}, 2000);
 	},[success])
 	
-	return (
+	return (<>
+		<GoBack path='/' />
 		<div className="register-container">
-			<div className="iconContainer">
-				<Link to="/">
-					<img src={BackArrowIcon} alt="atras" width={30} />
-				</Link>
-			</div>
 
 			{ success ? (
 				<>
@@ -128,7 +125,7 @@ const RegisterCompany = () => {
 				</div>
 			)}
 		</div>
-	);
+	</>);
 };
 
 export default RegisterCompany;

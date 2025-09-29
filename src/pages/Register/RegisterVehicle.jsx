@@ -5,6 +5,7 @@ import { createVehicle } from '../../redux/vehicles/vehicleSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 
 import './register.css';
+import GoBack from '../../components/GoBack/GoBack';
 
 const RegisterVehicle = () => {
 	const navigate = useNavigate();
@@ -56,13 +57,9 @@ const RegisterVehicle = () => {
 		}
 	};
 
-	return (
+	return (<>
+		<GoBack path='/driver' />
 		<div className="register-container">
-			<div className="iconContainer">
-				<Link to="/driver">
-					<img src={BackArrowIcon} alt="atras" width={30} />
-				</Link>
-			</div>
 
 			<div className="form-container">
 				<h2>Registro nuevo de Vehículo</h2>
@@ -146,7 +143,7 @@ const RegisterVehicle = () => {
 				</form>
 			</div>
 		</div>
-	);
+	</>);
 };
 
 export default RegisterVehicle;

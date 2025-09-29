@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchVehicleById, deleteVehicle, updateVehicle } from '../../redux/vehicles/vehicleSlice';
 import './VehicleDetails.css';
+import GoBack from '../GoBack/GoBack';
 
 const VehicleDetails = () => {
 	const { id } = useParams();
@@ -81,6 +82,7 @@ const VehicleDetails = () => {
 
 	return (
 		<div className="vehicleDetails">
+			<GoBack path='/vehicles' />
 			<div className="form-container">
 				<h2>Detalles del vehículo {selectedVehicle?.license_plate}</h2>
 				{!editting && (

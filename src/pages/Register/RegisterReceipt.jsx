@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createReceipt } from '../../redux/receipts/receiptSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import './register.css';
+import GoBack from '../../components/GoBack/GoBack';
 
 const RegisterReceipt = () => {
 	const navigate = useNavigate();
@@ -77,15 +78,9 @@ const RegisterReceipt = () => {
 		}
 	};
 
-	return (
+	return (<>
+		<GoBack path='/driver' />
 		<div className="register-container">
-			<div
-				className="iconContainer"
-				onClick={() => navigate('/driver')}
-				style={{ cursor: 'pointer' }}
-			>
-				<img src={BackArrowIcon} alt="atras" width={30} />
-			</div>
 
 			<div className="form-container">
 				<h2>Registro de ticktets</h2>
@@ -182,7 +177,7 @@ const RegisterReceipt = () => {
 				</form>
 			</div>
 		</div>
-	);
+	</>);
 };
 
 export default RegisterReceipt;

@@ -4,6 +4,7 @@ import { registerDriver } from '../../redux/drivers/driverSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import { Link } from 'react-router-dom';
 import './register.css';
+import GoBack from '../../components/GoBack/GoBack';
 
 const RegisterDriver = () => {
 	const dispatch = useDispatch();
@@ -35,13 +36,9 @@ const RegisterDriver = () => {
 		onSubmit,
 	});
 
-	return (
+	return (<>
+		<GoBack path='/company' />
 		<div className="register-container">
-			<div className="iconContainer">
-				<Link to="/company">
-					<img src={BackArrowIcon} alt="atras" width={30} />
-				</Link>
-			</div>
 			{success ? (
 				<>
 					<h1>¡Se ha registrado correctamente!</h1>
@@ -99,7 +96,7 @@ const RegisterDriver = () => {
 				</div>
 			)}
 		</div>
-	);
+	</>);
 };
 
 export default RegisterDriver;

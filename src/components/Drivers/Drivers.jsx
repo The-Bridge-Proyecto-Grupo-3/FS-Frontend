@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getDrivers } from '../../redux/drivers/driverSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import { Link } from 'react-router-dom';
+import GoBack from '../GoBack/GoBack';
 
 const Vehicles = () => {
 	const dispatch = useDispatch();
@@ -22,11 +23,7 @@ const Vehicles = () => {
 
 	return (
 		<div className="vehicles-container">
-			<div className="iconContainer">
-				<Link to="/company">
-					<img src={BackArrowIcon} alt="atras" width={30} />
-				</Link>
-			</div>
+			<GoBack path='/company' />
 			<h2>Mis conductores</h2>
 			{status === 'loading' && <p>Cargando conductores...</p>}
 			{status === 'failed' && <p className="error-message">{error}</p>}
