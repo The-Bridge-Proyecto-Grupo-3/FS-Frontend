@@ -88,8 +88,10 @@ const VehicleDetails = () => {
 				<h2>Detalles del vehículo {selectedVehicle?.license_plate}</h2>
 				{!editting && (
 					<div className="action-buttons">
-						<IconButton icon='back' onClick={() => setEditting(true)} title='Editar vehículo' />
-						<IconButton icon='back' onClick={handleDelete} title='Eliminar vehículo' />
+						{/* <IconButton icon='back' onClick={() => setEditting(true)} title='Editar vehículo' />
+						<IconButton icon='back' onClick={handleDelete} title='Eliminar vehículo' /> */}
+						<button onClick={() => setEditting(true)}>Editar vehículo</button>
+						<button onClick={handleDelete}>Eliminar vehículo</button>
 					</div>
 				)}
 
