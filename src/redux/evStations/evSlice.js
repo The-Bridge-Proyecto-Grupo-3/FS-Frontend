@@ -14,7 +14,7 @@ export const getNearEvStations = createAsyncThunk(
 		try {
 			return await evService.getNearEvStations(latitude, longitude);
 		} catch (error) {
-			const message = error.response?.data?.message || error.message || error.toString();
+			const message = error.response?.data?.error || error.message || error.toString();
 			return thunkAPI.rejectWithValue(message);
 		}
 	}

@@ -10,7 +10,7 @@ export const getCompanies = createAsyncThunk('companies/getAll', async (_, { rej
 	try {
 		return await companyService.getAll();
 	} catch (err) {
-		return rejectWithValue(err.response?.data?.message || 'Error de red o del servidor');
+		return rejectWithValue(err.response?.data?.error || 'Error de red o del servidor');
 	}
 });
 
@@ -20,7 +20,7 @@ export const registerCompany = createAsyncThunk(
 		try {
 			return await companyService.registerCompany(companyData);
 		} catch (err) {
-			return rejectWithValue(err.response?.data?.message || err.error || 'Error de red o del servidor');
+			return rejectWithValue(err.response?.data?.error || err.error || 'Error de red o del servidor');
 		}
 	}
 );
