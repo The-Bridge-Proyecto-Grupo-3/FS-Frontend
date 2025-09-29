@@ -1,22 +1,15 @@
 import './companySection.css';
 import AddVehicle from '../../../assets/AddVehicle.png';
 import AddDriver from '../../../assets/AddDriver.png';
-import LogoutIcon from '../../../assets/LogoutIcon.png';
-import { useSelector, useDispatch } from 'react-redux';
-import { logoutUser } from '../../../redux/auth/authSlice';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import LogoutButton from '../../../components/Buttons/LogoutButton';
 
 export default function CompanySection() {
-	const dispatch = useDispatch();
 	const { user } = useSelector(state => state.auth);
-	const handleLogout = () => {
-		dispatch(logoutUser());
-	};
 	return (
 		<div className="companySectionContainer">
-			<div onClick={handleLogout}>
-				<img src={LogoutIcon} alt="cerrar sesión" width={40} />
-			</div>
+			<LogoutButton />
 			<div>
 				<h2>Hola {user.name}</h2>
 			</div>

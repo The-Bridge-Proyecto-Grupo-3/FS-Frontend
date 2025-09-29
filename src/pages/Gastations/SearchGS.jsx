@@ -5,7 +5,7 @@ import { GastationDetails } from './GastationDetails';
 import { GastationsTable } from './GastationsTable';
 import { Link } from 'react-router-dom';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
-import GoBack from '../../components/GoBack/GoBack';
+import GoBack from '../../components/Buttons/GoBack';
 
 const SearchGS = () => {
 	const {

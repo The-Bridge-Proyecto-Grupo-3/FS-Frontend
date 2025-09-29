@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import './VehicleDetails.css';
 import VehicleItem from './VehicleItem';
 import IconButton from '../IconButton/IconButton';
-import GoBack from '../GoBack/GoBack';
+import GoBack from '../Buttons/GoBack';
 
 const Vehicles = () => {
 	const dispatch = useDispatch();

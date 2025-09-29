@@ -5,21 +5,15 @@ import { TextField } from '@mui/material';
 import FindGass from '../../../assets/FindGass.png';
 import TicketIcon from '../../../assets/TicketIcon.png';
 import FindElecDot from '../../../assets/FindElecDot.png';
-import { useSelector, useDispatch } from 'react-redux';
-import { logoutUser } from '../../../redux/auth/authSlice';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import LogoutButton from '../../../components/Buttons/LogoutButton';
 
 export default function DriverSection() {
 	const { user } = useSelector(state => state.auth);
-	const dispatch = useDispatch();
-	const handleLogout = () => {
-		dispatch(logoutUser());
-	};
 	return (
 		<div>
-			<div className="logoContainer" onClick={handleLogout}>
-				<img src={LogoutIcon} alt="cerrar sesión" width={40} />
-			</div>
+			<LogoutButton />
 			<div className="infoContainer">
 				<h2>
 					Hola {user.first_name} {user.last_name}

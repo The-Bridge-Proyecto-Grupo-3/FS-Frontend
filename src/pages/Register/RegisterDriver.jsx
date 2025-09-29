@@ -4,7 +4,7 @@ import { registerDriver } from '../../redux/drivers/driverSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import { Link } from 'react-router-dom';
 import './register.css';
-import GoBack from '../../components/GoBack/GoBack';
+import GoBack from '../../components/Buttons/GoBack';
 
 const RegisterDriver = () => {
 	const dispatch = useDispatch();

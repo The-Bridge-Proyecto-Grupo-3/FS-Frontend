@@ -3,7 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchVehicleById, deleteVehicle, updateVehicle } from '../../redux/vehicles/vehicleSlice';
 import './VehicleDetails.css';
-import GoBack from '../GoBack/GoBack';
+import GoBack from '../Buttons/GoBack';
+import IconButton from '../IconButton/IconButton';
 
 const VehicleDetails = () => {
 	const { id } = useParams();
@@ -87,8 +88,8 @@ const VehicleDetails = () => {
 				<h2>Detalles del vehículo {selectedVehicle?.license_plate}</h2>
 				{!editting && (
 					<div className="action-buttons">
-						<button onClick={() => setEditting(true)}>Editar vehículo</button>
-						<button onClick={handleDelete}>Eliminar vehículo</button>
+						<IconButton icon='back' onClick={() => setEditting(true)} title='Editar vehículo' />
+						<IconButton icon='back' onClick={handleDelete} title='Eliminar vehículo' />
 					</div>
 				)}
 

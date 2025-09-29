@@ -5,7 +5,7 @@ import { createVehicle } from '../../redux/vehicles/vehicleSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 
 import './register.css';
-import GoBack from '../../components/GoBack/GoBack';
+import GoBack from '../../components/Buttons/GoBack';
 
 const RegisterVehicle = () => {
 	const navigate = useNavigate();

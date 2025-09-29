@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getDrivers } from '../../redux/drivers/driverSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import { Link } from 'react-router-dom';
-import GoBack from '../GoBack/GoBack';
+import GoBack from '../Buttons/GoBack';
 
 const Vehicles = () => {
 	const dispatch = useDispatch();

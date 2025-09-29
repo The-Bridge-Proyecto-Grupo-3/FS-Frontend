@@ -5,7 +5,7 @@ import './register.css';
 import { registerCompany } from '../../redux/companies/companySlice';
 import { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import GoBack from '../../components/GoBack/GoBack';
+import GoBack from '../../components/Buttons/GoBack';
 
 const RegisterCompany = () => {
 	const dispatch = useDispatch();

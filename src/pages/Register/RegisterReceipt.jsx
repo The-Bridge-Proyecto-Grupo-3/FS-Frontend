@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createReceipt } from '../../redux/receipts/receiptSlice';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import './register.css';
-import GoBack from '../../components/GoBack/GoBack';
+import GoBack from '../../components/Buttons/GoBack';
 
 const RegisterReceipt = () => {
 	const navigate = useNavigate();
