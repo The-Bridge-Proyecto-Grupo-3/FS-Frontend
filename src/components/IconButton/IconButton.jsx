@@ -16,7 +16,6 @@ const icons = {
 };
 
 const IconButton = ({ icon, title, label, onClick, style }) => {
-	console.log(icons)
 	return (
 		<button
 			title={title}

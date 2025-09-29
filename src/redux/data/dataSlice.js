@@ -4,6 +4,7 @@ import dataService from './dataService';
 const initialState = {
 	dataStations: [],
 	tips: [],
+	status: 'idle'
 };
 
 export const postRecommendations = createAsyncThunk(
@@ -39,6 +40,11 @@ export const dataSlice = createSlice({
 	extraReducers: builder => {
 		builder.addCase(postRecommendations.fulfilled, (state, action) => {
 			state.dataStations = action.payload;
+			state.status = 'success'
+		});
+		builder.addCase(postRecommendations.pending, (state, action) => {
+			state.dataStations = action.payload;
+			state.status = 'loading'
 		});
 		builder.addCase(postHabits.fulfilled, (state, action) => {
 			state.tips = action.payload;
