@@ -1,13 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createReceipt } from '../../redux/receipts/receiptSlice';
 import GoBack from '../../components/Buttons/GoBack';
 import { useForm } from '../../hooks/useForm';
 import { postRecommendations } from '../../redux/data/dataSlice';
+import DataStation from './DataStation';
+import './DataStations.scss';
 
 const RegisterReceipt = () => {
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	// const { user } = useSelector(state => state.auth);
@@ -16,6 +16,7 @@ const RegisterReceipt = () => {
 	// const { status } = useSelector(state => state.vehicles);
 
 	const { dataStations, status } = useSelector(state => state.data);
+	const meanPrice = 1.62;
 
 	const validation = {
 		fuel_type: value => [[value, 'Introduce tipo de combustible del vehículo']],
@@ -26,7 +27,7 @@ const RegisterReceipt = () => {
 
 	const onSubmit = async () => dispatch(postRecommendations({
 		litros_necesarios: formData.quantity,
-		precio_area_medio: 1.62,
+		precio_area_medio: meanPrice,
 		ruta_id: "R001"
 	})).unwrap();
 
@@ -38,6 +39,43 @@ const RegisterReceipt = () => {
 	useEffect(() => {
 		setFormData(prev => ({...prev, origin: "", destination: "", fuel_type: ""}));
 	},[])
+
+	const [coords, setCoords] = useState({lat: 40.40875, lng: -3.623236286941566 });
+	const [locationError, setLocationError] = useState('');
+
+	useEffect(() => console.log(dataStations), [dataStations])
+
+	// useEffect(() => {
+	// 	if (navigator.geolocation) {
+	// 		navigator.geolocation.getCurrentPosition(
+	// 			pos => {
+	// 				setCoords({
+	// 					lat: pos.coords.latitude,
+	// 					lng: pos.coords.longitude,
+	// 				});
+	// 			},
+	// 			err => {
+	// 				console.error('Error obteniendo ubicación:', err);
+	// 				setLocationError(
+	// 					'No se pudo obtener tu ubicación. Por favor, activa los permisos.'
+	// 				);
+	// 			}
+	// 		);
+	// 	} else {
+	// 		setLocationError('Geolocalización no soportada en este navegador.');
+	// 	}
+	// }, []);
+
+	const distance = (lat1,lon1,lat2,lon2) => {
+		lat1 *= Math.PI/180;
+		lat2 *= Math.PI/180;
+		lon1 *= Math.PI/180;
+		lon2 *= Math.PI/180;
+		const hav = (t) => Math.sin(t/2)**2;
+		const dlat = lat1-lat2;
+		const dlng = lon1-lon2;
+		return 2*6371*Math.asin(Math.sqrt(hav(dlat)+hav(dlng)*(1-hav(dlat)-hav(lat1+lat2))));
+	}
 
 	// useEffect(() => {
 	// 	if (!assignedVehicle) return;
@@ -52,7 +90,6 @@ const RegisterReceipt = () => {
 	return (<>
 		<GoBack path='/driver' />
 		<div className="register-container">
-
 			<div className="form-container">
 				<h2>Gasolineras</h2>
 
@@ -128,6 +165,16 @@ const RegisterReceipt = () => {
 						/>
 					</div>
 				</form>
+			</div>
+
+			<div className='stationsList'>
+				{dataStations && dataStations.slice(5).map((station,index) => {
+					return <DataStation key={index} index={index+1} data={{
+						...station,
+						distance: distance(station.latitud,station.longitud,coords.lat,coords.lng),
+						priceDiff: (station.precio_litro - meanPrice)*100
+					}} />
+				})}
 			</div>
 		</div>
 	</>);

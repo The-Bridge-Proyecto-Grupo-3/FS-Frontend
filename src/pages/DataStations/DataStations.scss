@@ -1,0 +1,13 @@
+.stationsList {
+	width: 90vw;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	.dataStation {
+		background-color: #fff;
+		border: 1px solid #aaa;
+		border-radius: 5px;
+		padding: 0.5rem;
+
+	}
+}

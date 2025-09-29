@@ -39,7 +39,7 @@ export const dataSlice = createSlice({
 	reducers: {},
 	extraReducers: builder => {
 		builder.addCase(postRecommendations.fulfilled, (state, action) => {
-			state.dataStations = action.payload;
+			state.dataStations = action.payload.estaciones.slice(5);
 			state.status = 'success'
 		});
 		builder.addCase(postRecommendations.pending, (state, action) => {
