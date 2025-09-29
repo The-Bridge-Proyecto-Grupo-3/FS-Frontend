@@ -1,24 +1,17 @@
 import { useDispatch } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
-import { registerDriver } from '../../redux/auth/authSlice';
-import './SignForm.scss';
+import { registerDriver } from '../../redux/drivers/driverSlice';
+import BackArrowIcon from '../../assets/BackArrowIcon.png';
+import { Link } from 'react-router-dom';
+import './register.css';
+import GoBack from '../../components/Buttons/GoBack';
 
 const RegisterDriver = () => {
 	const dispatch = useDispatch();
 
 	const validation = {
-		username: value => {
-			value = value ? value.trim() : '';
-			return [
-				[
-					value.length >= 4 && value.length <= 24,
-					'El nombre debe contener entre 4 y 24 caracteres',
-				],
-			];
-		},
-		screenname: value => [
-			[value && value.trim().length > 0, 'El apellido no puede estar vacío'],
-		],
+		first_name: value => [[value?.length > 0, 'El nombre no puede estar vacío']],
+		last_name: value => [[value?.length > 0, 'El apellido no puede estar vacío']],
 		email: value => [
 			[
 				/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -31,90 +24,79 @@ const RegisterDriver = () => {
 			[/[a-z]+/.test(value), 'La contraseña debe contener minúsculas'],
 			[/[A-Z]+/.test(value), 'La contraseña debe contener mayúsculas'],
 			[/[0-9]+/.test(value), 'La contraseña debe contener números'],
-			[/[^A-Za-z0-9]+/.test(value), 'La contraseña debe contener símbolos especiales'],
-			[value && value.length >= 8, 'La contraseña debe tener 8 caracteres o más'],
+			[/[^\w\s]+/.test(value), 'La contraseña debe contener símbolos especiales'],
+			[value?.length >= 8, 'La contraseña debe tener 8 caracteres o más'],
 		],
-		// reppassword: value => [[value == formData.password, 'Passwords do not match']],
 	};
 
-	const onSubmit = form => dispatch(registerDriver(new FormData(form))).unwrap();
+	const onSubmit = formData => dispatch(registerDriver(formData));
 
 	const { formData, message, success, handleInputChange, handleSubmit } = useForm({
 		validation,
 		onSubmit,
 	});
 
-	return (
-		<div className="signForm">
+	return (<>
+		<GoBack path='/company' />
+		<div className="register-container">
 			{success ? (
 				<>
 					<h1>¡Se ha registrado correctamente!</h1>
 					<p>Por favor, revise su email para verificar la cuenta</p>
 				</>
 			) : (
-				<form onSubmit={handleSubmit}>
-					<h1>Registro nuevo de Conductor</h1>
-					<div>
-						<label htmlFor="username">Nombre</label>
-						<input
-							id="username"
-							name="username"
-							className={formData.username && 'validate'}
-							type="text"
-							placeholder="Username"
-							onChange={handleInputChange}
-						/>
-					</div>
-					<div>
-						<label htmlFor="name">Apellidos:</label>
-						<input
-							id="name"
-							name="screenname"
-							className={formData.screenname && 'validate'}
-							type="text"
-							placeholder="Screen name"
-							onChange={handleInputChange}
-						/>
-					</div>
-					<div>
-						<label htmlFor="email">Email</label>
-						<input
-							id="email"
-							name="email"
-							className={formData.email && 'validate'}
-							type="text"
-							placeholder="Email"
-							onChange={handleInputChange}
-						/>
-					</div>
-					<div>
-						<label htmlFor="password">Contraseña</label>
-						<input
-							id="password"
-							name="password"
-							className={formData.password && 'validate'}
-							type="password"
-							placeholder="Password"
-							onChange={handleInputChange}
-						/>
-					</div>
-					{/* <div>
-						<label htmlFor="reppassword">Repeat password:</label>
-						<input
-							id="reppassword"
-							name="reppassword"
-							className={formData.reppassword && 'validate'}
-							type="password"
-							placeholder="Repeat password"
-							onChange={handleInputChange}
-						/>
-					</div> */}
-					<span className="error">{message}</span>
-					<input type="submit" value="Registrar" />
-				</form>
+				<div className="form-container">
+					<h2>Registro nuevo de Conductor</h2>
+					<form onSubmit={handleSubmit} className="form-info">
+						<div className="input-container">
+							<div className="form-parts">
+								<label htmlFor="firstname">Nombre</label>
+								<input
+									id="firstname"
+									name="first_name"
+									className={formData.first_name && 'validate'}
+									type="text"
+									onChange={handleInputChange}
+								/>
+							</div>
+							<div className="form-parts">
+								<label htmlFor="lastname">Apellidos</label>
+								<input
+									id="lastname"
+									name="last_name"
+									className={formData.last_name && 'validate'}
+									type="text"
+									onChange={handleInputChange}
+								/>
+							</div>
+							<div className="form-parts">
+								<label htmlFor="email">Email</label>
+								<input
+									id="email"
+									name="email"
+									className={formData.email && 'validate'}
+									type="text"
+									onChange={handleInputChange}
+								/>
+							</div>
+							<div className="form-parts">
+								<label htmlFor="password">Contraseña</label>
+								<input
+									id="password"
+									name="password"
+									className={formData.password && 'validate'}
+									type="password"
+									onChange={handleInputChange}
+								/>
+							</div>
+							<span className="error">{message}</span>
+							<input type="submit" value="Registrar" />
+						</div>
+					</form>
+				</div>
 			)}
 		</div>
-	);
+	</>);
 };
 
 export default RegisterDriver;

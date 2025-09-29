@@ -8,6 +8,7 @@ export const useForm = ({ validation, onSubmit }) => {
 	const [success, setSuccess] = useState(false);
 
 	const validateAndPrint = (name, value, input) => {
+		if(!input) return;
 		const validations = validation[name](value);
 		for (let [valid, msg] of validations) {
 			if (!valid) {
@@ -24,7 +25,7 @@ export const useForm = ({ validation, onSubmit }) => {
 		const { name, value } = event.target;
 		setFormData(prev => ({
 			...prev,
-			[name]: value,
+			[name]: value.trim(),
 		}));
 		setMessage(validateAndPrint(name, value, event.target));
 	};
@@ -35,7 +36,7 @@ export const useForm = ({ validation, onSubmit }) => {
 			if (validateAndPrint(field, value, e.target[field])) return;
 		}
 		try {
-			await onSubmit(e.target);
+			await onSubmit(formData);
 			setSuccess(true);
 		} catch (error) {
 			setMessage(error.message || error);
@@ -44,6 +45,7 @@ export const useForm = ({ validation, onSubmit }) => {
 
 	return {
 		formData,
+		setFormData,
 		message,
 		success,
 		handleInputChange,

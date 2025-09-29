@@ -1,0 +1,42 @@
+.tableContainer {
+	overflow-y: auto;
+	font-size: 0.9em;
+	border: 1px solid #ddd;
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		thead tr {
+			background-color: #fff;
+			position: sticky;
+			top: 0;
+			th {
+				padding: 0.5rem;
+				text-align: left;
+				outline: 1px solid #ddd;
+			}
+		}
+		tbody {
+			tr:hover {
+				background-color: #ccc;
+			}
+			td {
+				padding: 0rem 0.5rem;
+				height: 2rem;
+				&.center {
+					text-align: center;
+				}
+			}
+		}
+
+		.btnShowMap {
+			border: none;
+			text-decoration: none;		
+			cursor: pointer;
+			padding: 5px 10px;
+			// border: 1px solid #007bff;
+			background-color: #007bff;
+			color: white;
+			border-radius: 5px;
+		}
+	}
+}

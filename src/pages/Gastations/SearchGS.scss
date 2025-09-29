@@ -1,13 +1,18 @@
 .search-container {
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
+	align-items: center;
+	gap: 0.5rem;
 	max-width: 600px;
-	margin: 0 auto;
+	margin-left: 0.5rem;
 
 	h1 {
-		font-size: 1.2rem;
-		margin-bottom: 5px;
+		font-size: 2rem;
+		margin-top: 2.5rem;
+		text-align: center;
+	}
+	h2 {
+		font-size: 1rem;
 	}
 }
 
@@ -16,16 +21,17 @@
 	width: 100%;
 
 	input {
-		width: 100%;
-		padding: 8px;
-		border: 1px solid #ccc;
-		border-radius: 4px;
-		font-size: 14px;
+		width: 22.5rem;
+		height: 3.125rem;
+		padding: 0.5rem;
+		border: 2px solid #a8a7a7;
+		border-radius: 1.5rem;
+		font-size: 0.875rem;
 
 		&:focus {
 			border-color: #007bff;
 			outline: none;
-			box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+			box-shadow: 0 0 4px #007bff66;
 		}
 	}
 
@@ -35,7 +41,7 @@
 		left: 0;
 		width: 100%;
 		background: white;
-		border: 1px solid #ccc;
+		border: 1px solid #a8a7a7;
 		border-radius: 4px;
 		max-height: 250px;
 		overflow-y: auto;

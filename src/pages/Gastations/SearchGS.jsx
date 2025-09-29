@@ -1,36 +1,70 @@
-import { useState } from 'react';
-import Provincias from './Provincias';
-import Municipios from './Municipios';
-import Gastations from './Gastations';
-import './SearchGS.scss';
+import { useEffect } from 'react';
+import { useGastations } from './useGastations';
+import { SelectorForm } from './SelectorForm';
+import { GastationDetails } from './GastationDetails';
+import { GastationsTable } from './GastationsTable';
+import { Link } from 'react-router-dom';
+import BackArrowIcon from '../../assets/BackArrowIcon.png';
+import GoBack from '../../components/Buttons/GoBack';
 
 const SearchGS = () => {
-	const [provinciaSeleccionada, setProvinciaSeleccionada] = useState(null);
-	const [municipioSeleccionado, setMunicipioSeleccionado] = useState(null);
+	const {
+		provincias,
+		municipios,
+		gastations,
+		gastationDetails,
+		nearGastations,
+		isLoading,
+		isError,
+		message,
+		loadProvincias,
+		selectProvincia,
+		selectMunicipio,
+		selectGastation,
+		findNearbyStations,
+	} = useGastations();
+
+	useEffect(() => {
+		loadProvincias();
+	}, [loadProvincias]);
+
+	useEffect(() => {
+		if (gastationDetails) {
+			const { latitud, longitud } = gastationDetails;
+
+			if (latitud && longitud) {
+				findNearbyStations(latitud, longitud);
+			}
+		}
+	}, [gastationDetails]);
+
+	const selectorData = { provincias, municipios, gastations };
+	const selectorActions = { selectProvincia, selectMunicipio, selectGastation };
 
 	return (
-		<div className="search-container">
-			<h1>Gasolineras</h1>
+		<div>
+			<GoBack path='/driver' />
+			<h2>Gasolineras</h2>
 
-			<Provincias
-				onSelect={provincia => {
-					setProvinciaSeleccionada(provincia);
-					setMunicipioSeleccionado(null); // reset municipios
-				}}
-			/>
+			<SelectorForm data={selectorData} actions={selectorActions} />
 
-			{provinciaSeleccionada && (
-				<Municipios
-					idProvincia={provinciaSeleccionada.idProvincia}
-					onSelect={municipio => {
-						setMunicipioSeleccionado(municipio);
-					}}
+			<GastationDetails details={gastationDetails} />
+
+			{isLoading && <p>Cargando datos...</p>}
+			{isError && <p style={{ color: 'red' }}>Error: {message}</p>}
+			{ !isLoading && !isError && <>
+				<GastationsTable
+					stations={nearGastations}
+					fuelType="Gasolina95"
+					title="Recomendaciones por precio de Gasolina 95"
 				/>
-			)}
 
-			{municipioSeleccionado && (
-				<Gastations idMunicipio={municipioSeleccionado.idMunicipio} />
-			)}
+				<GastationsTable
+					stations={nearGastations}
+					fuelType="Diesel"
+					title="Recomendaciones por precio de Diésel"
+				/>
+			</>}
 		</div>
 	);
 };
