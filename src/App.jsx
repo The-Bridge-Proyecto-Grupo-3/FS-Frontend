@@ -15,6 +15,7 @@ import ProtectedRoute from './guards/ProtectedRoute.jsx';
 import RegisterReceipt from './pages/Register/RegisterReceipt.jsx';
 import Drivers from './components/Drivers/Drivers.jsx';
 import SearchEV from './pages/EvStations/SearchEV.jsx';
+import DataStations from './pages/DataStations/DataStations.jsx';
 
 function App() {
 	return (
@@ -40,7 +41,7 @@ function App() {
 			</Route>
 			<Route path="/" element={<RedirectHome />} />
 			
-			<Route path="/searchGS" element={<SearchGS />} />
+			<Route path="/searchGS" element={<DataStations />} />
 			<Route path="/searchEV" element={<SearchEV />} />
 		</Routes>
 	);
