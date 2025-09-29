@@ -44,6 +44,7 @@ export const useForm = ({ validation, onSubmit }) => {
 
 	return {
 		formData,
+		setFormData,
 		message,
 		success,
 		handleInputChange,
