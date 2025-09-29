@@ -17,7 +17,7 @@ export const getProvincias = createAsyncThunk('oil/getProvincias', async thunkAP
 	try {
 		return await oilService.getProvincias();
 	} catch (error) {
-		const message = error.response?.data?.message || error.message || error.toString();
+		const message = error.response?.data?.error || error.message || error.toString();
 		return thunkAPI.rejectWithValue(message);
 	}
 });
@@ -29,7 +29,7 @@ export const getMunicipios = createAsyncThunk(
 			return await oilService.getMunicipios(idProvincia);
 		} catch (error) {
 			console.error(error);
-			const message = error.response?.data?.message || error.message || error.toString();
+			const message = error.response?.data?.error || error.message || error.toString();
 			return thunkAPI.rejectWithValue(message);
 		}
 	}
@@ -41,7 +41,7 @@ export const getGastations = createAsyncThunk(
 		try {
 			return await oilService.getGastations(idMunicipio);
 		} catch (error) {
-			const message = error.response?.data?.message || error.message || error.toString();
+			const message = error.response?.data?.error || error.message || error.toString();
 			return thunkAPI.rejectWithValue(message);
 		}
 	}
@@ -53,7 +53,7 @@ export const getGastationDetails = createAsyncThunk(
 		try {
 			return await oilService.getGastationDetails(idEstacion);
 		} catch (error) {
-			const message = error.response?.data?.message || error.message || error.toString();
+			const message = error.response?.data?.error || error.message || error.toString();
 			return thunkAPI.rejectWithValue(message);
 		}
 	}
@@ -65,7 +65,7 @@ export const getNearGastations = createAsyncThunk(
 		try {
 			return await oilService.getNearGastations(latitud, longitud);
 		} catch (error) {
-			const message = error.response?.data?.message || error.message || error.toString();
+			const message = error.response?.data?.error || error.message || error.toString();
 			return thunkAPI.rejectWithValue(message);
 		}
 	}
@@ -77,7 +77,7 @@ export const getGastationNextMe = createAsyncThunk(
 		try {
 			return await oilService.getGastationNextMe(latitud, longitud, radio);
 		} catch (error) {
-			const message = error.response?.data?.message || error.message || error.toString();
+			const message = error.response?.data?.error || error.message || error.toString();
 			return thunkAPI.rejectWithValue(message);
 		}
 	}

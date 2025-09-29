@@ -1,6 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import './VehicleDetails.css';
-import { TableCell, TableRow } from '@mui/material';
 
 const VehicleItem = ({ vehicle }) => {
 	const navigate = useNavigate();

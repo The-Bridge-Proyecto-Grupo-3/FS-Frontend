@@ -5,6 +5,7 @@ import { GastationDetails } from './GastationDetails';
 import { GastationsTable } from './GastationsTable';
 import { Link } from 'react-router-dom';
 import BackArrowIcon from '../../assets/BackArrowIcon.png';
+import GoBack from '../../components/Buttons/GoBack';
 
 const SearchGS = () => {
 	const {
@@ -42,11 +43,7 @@ const SearchGS = () => {
 
 	return (
 		<div>
-			<div className="iconContainer">
-				<Link to="/driver">
-					<img src={BackArrowIcon} alt="atras" width={30} />
-				</Link>
-			</div>
+			<GoBack path='/driver' />
 			<h2>Gasolineras</h2>
 
 			<SelectorForm data={selectorData} actions={selectorActions} />

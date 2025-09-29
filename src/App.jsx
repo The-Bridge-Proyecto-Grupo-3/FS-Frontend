@@ -1,4 +1,3 @@
-import './App.css';
 import './styles/main.scss';
 import { Routes, Route } from 'react-router-dom';
 import RedirectHome from './redirect/RedirectHome.jsx';
@@ -15,7 +14,7 @@ import VehicleDetails from './components/Vehicles/VehicleDetails.jsx';
 import ProtectedRoute from './guards/ProtectedRoute.jsx';
 import RegisterReceipt from './pages/Register/RegisterReceipt.jsx';
 import Drivers from './components/Drivers/Drivers.jsx';
-import SearchEV from './pages/EvStations/SearchEv.jsx';
+import SearchEV from './pages/EvStations/SearchEV.jsx';
 
 function App() {
 	return (

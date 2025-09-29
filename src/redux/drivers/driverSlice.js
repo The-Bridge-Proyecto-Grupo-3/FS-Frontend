@@ -10,7 +10,7 @@ export const getDrivers = createAsyncThunk('drivers/getAll', async (_, { rejectW
 	try {
 		return await driversService.getAll();
 	} catch (err) {
-		return rejectWithValue(err.response?.data?.message || 'Error de red o del servidor');
+		return rejectWithValue(err.response?.data?.error || 'Error de red o del servidor');
 	}
 });
 
@@ -21,7 +21,7 @@ export const registerDriver = createAsyncThunk(
 			return await driversService.registerDriver(driverData);
 		} catch (err) {
 			return rejectWithValue(
-				err.response?.data?.message || err.error || 'Error de red o del servidor'
+				err.response?.data?.error || err.error || 'Error de red o del servidor'
 			);
 		}
 	}

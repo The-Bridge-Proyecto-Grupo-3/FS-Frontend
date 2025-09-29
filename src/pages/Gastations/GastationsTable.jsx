@@ -81,7 +81,7 @@ export const GastationsTable = ({ stations, fuelType, title }) => {
 								)}
 
 								<td>{parseFloat(station.distancia).toFixed(2)}</td>
-								<td>
+								<td className='center'>
 									<button className="btnShowMap" onClick={() => 
 										handleOpenMap(`https://www.google.com/maps/search/?api=1&query=${station.latitud},${station.longitud}`)
 									} >Ver Mapa</button>

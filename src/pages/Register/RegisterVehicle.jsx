@@ -1,68 +1,46 @@
-import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createVehicle } from '../../redux/vehicles/vehicleSlice';
-import BackArrowIcon from '../../assets/BackArrowIcon.png';
 
 import './register.css';
+import GoBack from '../../components/Buttons/GoBack';
+import { useForm } from '../../hooks/useForm';
 
 const RegisterVehicle = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const { status, error: reduxError } = useSelector(state => state.vehicles);
+	const { status } = useSelector(state => state.vehicles);
 
-	const [formData, setFormData] = useState({
-		brand: '',
-		model: '',
-		license_plate: '',
-		registration_date: '',
-		type: '', // El tipo puede ser 'gas' o 'electric'
-	});
-
-	const [success, setSuccess] = useState(null);
-
-	const handleChange = e => {
-		setFormData(prevState => ({
-			...prevState,
-			[e.target.name]: e.target.value,
-		}));
+	const validation = {
+		brand: value => [[value?.length > 0, 'Introduce marca del vehículo']],
+		model: value => [[value?.length > 0, 'Introduce modelo del vehículo']],
+		type: value => [[value, 'Introduce tipo de combustible']],
+		license_plate: value => [[value?.length > 0, 'Introduce matrícula del vehículo']],
+		registration_date: value => [[value, 'Introduce fecha de matriculación']],
 	};
 
-	const handleSubmit = async e => {
-		e.preventDefault();
-		setSuccess(null);
+	const onSubmit = async () => dispatch(createVehicle(formData)).unwrap();
 
-		if (Object.values(formData).some(value => String(value).trim() === '')) {
-			alert('Todos los campos son obligatorios.');
-			return;
-		}
+	const { formData, setFormData, message, success, handleInputChange, handleSubmit } = useForm({
+		validation,
+		onSubmit,
+	});
 
-		try {
-			await dispatch(createVehicle(formData)).unwrap();
+	useEffect(() => {
+		setFormData(prev => ({...prev,type:'gas'}));
+	},[]);
 
-			setSuccess('¡Vehículo registrado con éxito!');
-			setFormData({
-				brand: '',
-				model: '',
-				license_plate: '',
-				registration_date: '',
-				type: '',
-			});
+	useEffect(() => {
+		if(success)
 			setTimeout(() => {
 				navigate('/vehicles');
 			}, 2000);
-		} catch (error) {
-			console.error('Fallo al registrar el vehículo:', error);
-		}
-	};
+	}, [success]);
 
-	return (
+	return (<>
+		<GoBack path='/driver' />
 		<div className="register-container">
-			<div className="iconContainer">
-				<Link to="/driver">
-					<img src={BackArrowIcon} alt="atras" width={30} />
-				</Link>
-			</div>
 
 			<div className="form-container">
 				<h2>Registro nuevo de Vehículo</h2>
@@ -75,8 +53,7 @@ const RegisterVehicle = () => {
 								name="brand"
 								type="text"
 								value={formData.brand}
-								onChange={handleChange}
-								required
+								onChange={handleInputChange}
 							/>
 						</div>
 						<div className="form-parts">
@@ -86,8 +63,7 @@ const RegisterVehicle = () => {
 								name="model"
 								type="text"
 								value={formData.model}
-								onChange={handleChange}
-								required
+								onChange={handleInputChange}
 							/>
 						</div>
 						<div className="form-parts">
@@ -97,8 +73,7 @@ const RegisterVehicle = () => {
 								id="type"
 								className="select-custom"
 								value={formData.type}
-								onChange={handleChange}
-								required
+								onChange={handleInputChange}
 							>
 								<option value="" disabled>
 									Seleccione el tipo de combustible
@@ -117,8 +92,7 @@ const RegisterVehicle = () => {
 								maxLength="8"
 								type="text"
 								value={formData.license_plate}
-								onChange={handleChange}
-								required
+								onChange={handleInputChange}
 							/>
 						</div>
 						<div className="form-parts">
@@ -128,25 +102,22 @@ const RegisterVehicle = () => {
 								name="registration_date"
 								type="date"
 								value={formData.registration_date}
-								onChange={handleChange}
-								required
+								onChange={handleInputChange}
 							/>
 						</div>
-					</div>
-					{status === 'failed' && reduxError && (
-						<p className="error-message">{reduxError}</p>
-					)}
-					{success && <p className="success-message">{success}</p>}
+						{message && <span className="error">{message}</span>}
+						{success && <span className="success">Vehículo registrado con éxito</span>}
 
-					<input
-						type="submit"
-						value={status === 'loading' ? 'Registrando...' : 'Registrar'}
-						disabled={status === 'loading'}
-					/>
+						<input
+							type="submit"
+							value={status === 'loading' ? 'Registrando...' : 'Registrar'}
+							disabled={status === 'loading'}
+						/>
+					</div>
 				</form>
 			</div>
 		</div>
-	);
+	</>);
 };
 
 export default RegisterVehicle;

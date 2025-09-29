@@ -2,8 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getNearEvStations } from '../../redux/evStations/evSlice';
 import { EvStationTable } from './EvStationTable';
-import BackArrowIcon from '../../assets/BackArrowIcon.png';
-import { Link } from 'react-router-dom';
+import GoBack from '../../components/Buttons/GoBack';
 
 const SearchEV = () => {
 	const dispatch = useDispatch();
@@ -39,7 +38,7 @@ const SearchEV = () => {
 		}
 	}, [coords]);
 
-	const getUnique = (arr, count=10) => {
+	const getUnique = (arr, count = 10) => {
 		if (!evStations || evStations.length === 0) {
 			return [];
 		}
@@ -52,7 +51,7 @@ const SearchEV = () => {
 				seenAddresses.add(station.address);
 				uniqueStations.push(station);
 			}
-			if(uniqueStations.length == count) break;
+			if (uniqueStations.length == count) break;
 		}
 		return uniqueStations;
 	};
@@ -66,12 +65,8 @@ const SearchEV = () => {
 
 	return (
 		<div>
-			<div className="iconContainer">
-				<Link to="/company">
-					<img src={BackArrowIcon} alt="atras" width={30} />
-				</Link>
-			</div>
-			<h2>Puntos de Carga</h2>
+			<GoBack path='/company' />
+			<h2>Puntos de Recarga</h2>
 
 			{locationError && <p style={{ color: 'red' }}>{locationError}</p>}
 			{isLoading && <p>Buscando puntos de carga...</p>}
@@ -79,8 +74,8 @@ const SearchEV = () => {
 
 			{!isLoading && !isError && (
 				<>
-					<EvStationTable title="Los 5 más cercanos" stations={stationsByDistance} />
-					<EvStationTable title="Los 5 con mayor potencia" stations={stationsByPower} />
+					<EvStationTable title="Los más cercanos" stations={stationsByDistance} />
+					<EvStationTable title="Los de mayor potencia a 20Km" stations={stationsByPower} />
 				</>
 			)}
 

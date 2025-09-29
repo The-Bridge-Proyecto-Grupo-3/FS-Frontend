@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchVehicleById, deleteVehicle, updateVehicle } from '../../redux/vehicles/vehicleSlice';
 import './VehicleDetails.css';
+import GoBack from '../Buttons/GoBack';
+import IconButton from '../IconButton/IconButton';
 
 const VehicleDetails = () => {
 	const { id } = useParams();
@@ -81,10 +83,13 @@ const VehicleDetails = () => {
 
 	return (
 		<div className="vehicleDetails">
+			<GoBack path='/vehicles' />
 			<div className="form-container">
 				<h2>Detalles del vehículo {selectedVehicle?.license_plate}</h2>
 				{!editting && (
 					<div className="action-buttons">
+						{/* <IconButton icon='back' onClick={() => setEditting(true)} title='Editar vehículo' />
+						<IconButton icon='back' onClick={handleDelete} title='Eliminar vehículo' /> */}
 						<button onClick={() => setEditting(true)}>Editar vehículo</button>
 						<button onClick={handleDelete}>Eliminar vehículo</button>
 					</div>
@@ -161,16 +166,20 @@ const VehicleDetails = () => {
 								disabled={!editting}
 							/>
 						</div>
+
+						{status === 'failed' && <p className="error-message">{reduxError}</p>}
+
+						{editting && (
+							<div className="action-buttons">
+								<input
+									type="submit"
+									value="Guardar"
+									disabled={status === 'loading'}
+								/>
+								<input type="reset" value="Cancelar" />
+							</div>
+						)}
 					</div>
-
-					{status === 'failed' && <p className="error-message">{reduxError}</p>}
-
-					{editting && (
-						<div className="action-buttons">
-							<input type="submit" value="Guardar" disabled={status === 'loading'} />
-							<input type="reset" value="Cancelar" />
-						</div>
-					)}
 				</form>
 			</div>
 		</div>

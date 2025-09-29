@@ -5,6 +5,8 @@ import BackArrowIcon from '../../assets/BackArrowIcon.png';
 import { Link } from 'react-router-dom';
 import './VehicleDetails.css';
 import VehicleItem from './VehicleItem';
+import IconButton from '../IconButton/IconButton';
+import GoBack from '../Buttons/GoBack';
 
 const Vehicles = () => {
 	const dispatch = useDispatch();
@@ -24,16 +26,12 @@ const Vehicles = () => {
 
 	return (
 		<div className="vehicles-container">
-			<div className="iconContainer">
-				<Link to="/company">
-					<img src={BackArrowIcon} alt="atras" width={30} />
-				</Link>
-			</div>
+			<GoBack path='/company' />
 			<h2>Mis Vehículos</h2>
 
 			{vehicles.length > 0 ? (
 				<div className='tableContainer'>
-					<table aria-label="tabla de vehículos" stickyHeader>
+					<table>
 						<thead>
 							<tr>
 								<th>Marca</th>
