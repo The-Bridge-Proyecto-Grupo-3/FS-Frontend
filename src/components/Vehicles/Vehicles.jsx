@@ -37,11 +37,15 @@ const Vehicles = () => {
 								<th>Marca</th>
 								<th>Modelo</th>
 								<th>Matrícula</th>
+								<th>Estado</th>
 								<th>En Uso</th>
 							</tr>
 						</thead>
 						<tbody>
-							{vehicles.map(vehicle => <VehicleItem key={vehicle.licence_plate} vehicle={vehicle} />)}
+							{vehicles.map(vehicle => {
+								const vehicleModified = {...vehicle, state: ["red","yellow","green"][Math.floor(Math.pow(9*Math.random(),0.5))]}
+								return <VehicleItem key={vehicle.licence_plate} vehicle={vehicleModified} />
+							})}
 						</tbody>
 					</table>
 				</div>
