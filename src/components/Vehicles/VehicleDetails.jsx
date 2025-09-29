@@ -164,16 +164,20 @@ const VehicleDetails = () => {
 								disabled={!editting}
 							/>
 						</div>
+
+						{status === 'failed' && <p className="error-message">{reduxError}</p>}
+
+						{editting && (
+							<div className="action-buttons">
+								<input
+									type="submit"
+									value="Guardar"
+									disabled={status === 'loading'}
+								/>
+								<input type="reset" value="Cancelar" />
+							</div>
+						)}
 					</div>
-
-					{status === 'failed' && <p className="error-message">{reduxError}</p>}
-
-					{editting && (
-						<div className="action-buttons">
-							<input type="submit" value="Guardar" disabled={status === 'loading'} />
-							<input type="reset" value="Cancelar" />
-						</div>
-					)}
 				</form>
 			</div>
 		</div>

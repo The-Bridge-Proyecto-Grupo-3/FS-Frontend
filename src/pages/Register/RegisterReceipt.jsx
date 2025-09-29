@@ -10,34 +10,26 @@ const RegisterReceipt = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	// Obtener el objeto de usuario completo, que ahora incluye el vehículo
 	const { user } = useSelector(state => state.auth);
 	const { status, error: reduxError } = useSelector(state => state.receipts);
 
-	// El vehículo asignado está directamente en el objeto de usuario
 	const assignedVehicle = user?.Vehicle;
 
 	const [formData, setFormData] = useState({
 		price: '',
 		quantity: '',
 		mileage: '',
-		fuel_type: '', // Se gestionará de forma automática o por el usuario
+		fuel_type: '',
 	});
 	const [success, setSuccess] = useState(null);
 
-	// Efecto para pre-rellenar el tipo de combustible si se puede inferir
 	useEffect(() => {
-		if (assignedVehicle) {
-			const vehicleType = assignedVehicle.type;
-			// Si el tipo de vehículo no es 'gas', podemos inferir el fuel_type
-			if (vehicleType !== 'gas') {
-				// Asumimos que el 'type' del vehículo (e.g., 'diesel', 'electric')
-				// corresponde directamente con una opción de 'fuel_type' del recibo.
-				setFormData(prev => ({ ...prev, fuel_type: vehicleType }));
-			} else {
-				// Si es 'gas', reseteamos para que el usuario elija
-				setFormData(prev => ({ ...prev, fuel_type: '' }));
-			}
+		if (!assignedVehicle) return;
+		const vehicleType = assignedVehicle.type;
+		if (vehicleType === 'electric') {
+			setFormData(prev => ({ ...prev, fuel_type: 'electric' }));
+		} else if (vehicleType === 'gas') {
+			setFormData(prev => ({ ...prev, fuel_type: '' }));
 		}
 	}, [assignedVehicle]);
 
@@ -57,7 +49,6 @@ const RegisterReceipt = () => {
 			return;
 		}
 
-		// Validar que los campos obligatorios (incluido el fuel_type si es necesario) estén llenos
 		if (!formData.price || !formData.fuel_type) {
 			alert(
 				'Por favor, complete todos los campos obligatorios: Precio y Tipo de Combustible.'
@@ -129,7 +120,6 @@ const RegisterReceipt = () => {
 								type="number"
 								min="0"
 								step="0.01"
-								placeholder="Ej: 50.25"
 								value={formData.price}
 								onChange={handleChange}
 								required
@@ -144,7 +134,6 @@ const RegisterReceipt = () => {
 								type="number"
 								min="0"
 								step="0.01"
-								placeholder="Opcional"
 								value={formData.quantity}
 								onChange={handleChange}
 							/>
@@ -157,23 +146,22 @@ const RegisterReceipt = () => {
 								name="mileage"
 								type="number"
 								min="0"
-								placeholder="Opcional"
 								value={formData.mileage}
 								onChange={handleChange}
 							/>
 						</div>
+
+						{status === 'failed' && reduxError && (
+							<p className="error-message">{reduxError}</p>
+						)}
+						{success && <p className="success-message">{success}</p>}
+
+						<input
+							type="submit"
+							value={status === 'loading' ? 'Registrando...' : 'Registrar'}
+							disabled={status === 'loading' || !assignedVehicle}
+						/>
 					</div>
-
-					{status === 'failed' && reduxError && (
-						<p className="error-message">{reduxError}</p>
-					)}
-					{success && <p className="success-message">{success}</p>}
-
-					<input
-						type="submit"
-						value={status === 'loading' ? 'Registrando...' : 'Registrar'}
-						disabled={status === 'loading' || !assignedVehicle}
-					/>
 				</form>
 			</div>
 		</div>
