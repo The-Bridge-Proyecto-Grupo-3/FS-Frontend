@@ -34,7 +34,7 @@ export default function CompanySection() {
 				<Link to="/driversList" className="linkStyle">
 					<div className="nameToIcons">
 						<label htmlFor="driverList">Lista de Conductores</label>
-						<img src={DriverList} alt="Lista de Conductores" width={120} />
+						<img src={DriverList} alt="Lista de Conductores" width={110} />
 					</div>
 				</Link>
 			</div>
