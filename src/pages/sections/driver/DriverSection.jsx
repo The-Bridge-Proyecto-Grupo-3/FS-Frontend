@@ -4,6 +4,7 @@ import { TextField } from '@mui/material';
 import FindGass from '../../../assets/FindGass.png';
 import TicketIcon from '../../../assets/TicketIcon.png';
 import FindElecDot from '../../../assets/FindElecDot.png';
+import RouteMap from '../../../assets/RouteMap.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LogoutButton from '../../../components/Buttons/LogoutButton';
@@ -16,14 +17,20 @@ export default function DriverSection() {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchVehicles(true));
-	},[user])
+	}, [user]);
 
-	const vehicleToOption = vehicle => (vehicle ? {
-		id: vehicle.id, 
-		label: `${vehicle.brand} ${vehicle.model} - ${vehicle.license_plate}`
-	}:{});
+	const vehicleToOption = vehicle =>
+		vehicle
+			? {
+					id: vehicle.id,
+					label: `${vehicle.brand} ${vehicle.model} - ${vehicle.license_plate}`,
+			  }
+			: {};
 
-	const vehicleOptions = useMemo(() => [...[vehicleToOption(user.Vehicle)], ...vehicles.map(vehicleToOption)], [vehicles, user]);
+	const vehicleOptions = useMemo(
+		() => [...[vehicleToOption(user.Vehicle)], ...vehicles.map(vehicleToOption)],
+		[vehicles, user]
+	);
 	const selectedVehicle = useMemo(() => vehicleToOption(user.Vehicle), [user]);
 
 	return (
@@ -58,23 +65,31 @@ export default function DriverSection() {
 					<Link to="/searchGS" className="linkStyle">
 						<div className="nameToIcons">
 							<label htmlFor="gasolineras">Gasolineras</label>
-							<img src={FindGass} alt="añadir vehículos" width={140} />
+							<img src={FindGass} alt="Gasolineras" width={140} />
 						</div>
 					</Link>
 					{/* cambiar ruta cuando se cree el componente */}
 					<Link to="/searchEV" className="linkStyle">
 						<div className="nameToIcons">
 							<label htmlFor="puntosRecarga">Puntos de Recarga</label>
-							<img src={FindElecDot} alt="añadir conductores" width={140} />
+							<img src={FindElecDot} alt="Puntos de Recarga" width={140} />
 						</div>
 					</Link>
 				</div>
-				<Link to="/registerReceipt" className="linkStyle">
-					<div className="imgTicket">
-						<label htmlFor="tickets">Registra Tickets</label>
-						<img src={TicketIcon} alt="añadir ticket" width={140} />
-					</div>
-				</Link>
+				<div className="imgApis">
+					<Link to="/searchEV" className="linkStyle">
+						<div className="nameToIcons">
+							<label htmlFor="rutaMapa">Buscar en Ruta</label>
+							<img src={RouteMap} alt="Buscar en Ruta" width={140} />
+						</div>
+					</Link>
+					<Link to="/registerReceipt" className="linkStyle">
+						<div className="imgTicket">
+							<label htmlFor="tickets">Registra Tickets</label>
+							<img src={TicketIcon} alt="añadir ticket" width={140} />
+						</div>
+					</Link>
+				</div>
 			</div>
 		</div>
 	);
