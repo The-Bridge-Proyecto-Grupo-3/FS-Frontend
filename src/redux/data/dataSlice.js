@@ -3,7 +3,7 @@ import dataService from './dataService';
 
 const initialState = {
 	dataStations: [],
-	tips: [],
+	tip: null,
 	status: 'idle'
 };
 
@@ -22,9 +22,9 @@ export const postRecommendations = createAsyncThunk(
 
 export const postHabits = createAsyncThunk(
 	'data/predict',
-	async (driverData, { rejectWithValue }) => {
+	async (data, { rejectWithValue }) => {
 		try {
-			return await driversService.registerDriver(driverData);
+			return await dataService.postHabits(data);
 		} catch (error) {
 			return rejectWithValue(
 				error.response?.data?.error || error.error || 'Error de red o del servidor'
@@ -51,7 +51,10 @@ export const dataSlice = createSlice({
 			state.status = 'error'
 		});
 		builder.addCase(postHabits.fulfilled, (state, action) => {
-			state.tips = action.payload;
+			if(state.tip === null) {
+				// state.tip = action.payload.consejos;
+				state.tip = 'Cambio de aceite, filtro de aceite y neumáticos de flota';
+			}
 		});
 	},
 });
