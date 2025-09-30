@@ -6,6 +6,7 @@ import DriverList from '../../../assets/DriverList.png';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LogoutButton from '../../../components/Buttons/LogoutButton';
+import TipsPopup from '../../../components/TipsPopup/TipsPopup';
 
 export default function CompanySection() {
 	const { user } = useSelector(state => state.auth);
@@ -38,6 +39,7 @@ export default function CompanySection() {
 					</div>
 				</Link>
 			</div>
+			<TipsPopup />
 		</div>
 	);
 }
