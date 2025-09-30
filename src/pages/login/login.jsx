@@ -24,8 +24,10 @@ function Login() {
 	const onSubmit = e => {
 		e.preventDefault();
 		if (requires2FA) {
+			setError('');
 			dispatch(verify2FA(form.code)).unwrap().catch(setError);
 		} else if (form.email && form.password) {
+			setError('');
 			dispatch(loginUser({ email: form.email, password: form.password }))
 				.unwrap()
 				.catch(setError);
@@ -91,7 +93,7 @@ function Login() {
 								/>
 							</>
 						)}
-						{error && <p className="error-text">{error}</p>}
+						{error && <span className="error">{error}</span>}
 						<button type="submit">
 							{requires2FA ? 'Verificar' : 'Iniciar sesión'}
 						</button>

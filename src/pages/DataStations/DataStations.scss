@@ -1,0 +1,34 @@
+.stationsList {
+	width: 90vw;
+	max-width: 480px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	.dataStation {
+		background-color: #fff;
+		border: 1px solid #aaa;
+		border-radius: 5px;
+		padding: 0.5rem;
+		cursor: pointer;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		div:nth-child(2) {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			b {
+				font-size: 1.6rem;
+			}
+			span {
+				font-size: 0.8rem;
+				&.saving {
+					color: #20cc00;
+				}
+			}
+		}
+		&:hover {
+			background-color: #f2f2f2;
+		}
+	}
+}

@@ -11,8 +11,9 @@
 	flex-direction: column;
 	width: 100%;
 	align-items: center;
-	height: 500px;
-	justify-content: space-around;
+    justify-content: flex-start;
+    gap: 50px;
+    margin-top: 80px;
 }
 .LinkContainer {
 	display: flex;
