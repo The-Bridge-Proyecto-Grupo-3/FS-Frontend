@@ -168,7 +168,7 @@ const RegisterReceipt = () => {
 			</div>
 
 			<div className='stationsList'>
-				{dataStations && dataStations.slice(5).map((station,index) => {
+				{dataStations && dataStations.map((station,index) => {
 					return <DataStation key={index} index={index+1} data={{
 						...station,
 						distance: distance(station.latitud,station.longitud,coords.lat,coords.lng),
