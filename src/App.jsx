@@ -41,7 +41,8 @@ function App() {
 			</Route>
 			<Route path="/" element={<RedirectHome />} />
 			
-			<Route path="/searchGS" element={<DataStations />} />
+			<Route path="/searchGS" element={<SearchGS />} />
+			<Route path="/searchRoute" element={<DataStations />} />
 			<Route path="/searchEV" element={<SearchEV />} />
 		</Routes>
 	);

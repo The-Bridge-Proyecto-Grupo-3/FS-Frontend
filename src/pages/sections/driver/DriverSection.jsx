@@ -77,7 +77,7 @@ export default function DriverSection() {
 					</Link>
 				</div>
 				<div className="imgApis">
-					<Link to="/searchGS" className="linkStyle">
+					<Link to="/searchRoute" className="linkStyle">
 						<div className="nameToIcons">
 							<label htmlFor="rutaMapa">Buscar en Ruta</label>
 							<img src={RouteMap} alt="Buscar en Ruta" width={140} />
