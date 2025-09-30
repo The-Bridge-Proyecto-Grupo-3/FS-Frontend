@@ -46,6 +46,10 @@ export const dataSlice = createSlice({
 			state.dataStations = action.payload;
 			state.status = 'loading'
 		});
+		builder.addCase(postRecommendations.rejected, (state, action) => {
+			state.dataStations = null;
+			state.status = 'error'
+		});
 		builder.addCase(postHabits.fulfilled, (state, action) => {
 			state.tips = action.payload;
 		});

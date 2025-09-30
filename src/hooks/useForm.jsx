@@ -38,6 +38,7 @@ export const useForm = ({ validation, onSubmit }) => {
 		try {
 			await onSubmit(formData);
 			setSuccess(true);
+			setMessage("")
 		} catch (error) {
 			setMessage(error.message || error);
 		}

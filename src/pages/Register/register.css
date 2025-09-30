@@ -20,7 +20,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	height: 50%;
-	min-height: 650px;
+	/* min-height: 650px; */
 }
 .input-container {
 	display: flex;

@@ -13,7 +13,7 @@ const VehicleItem = ({ vehicle }) => {
 			<td>{vehicle.brand}</td>
 			<td>{vehicle.model}</td>
 			<td>{vehicle.license_plate}</td>
-			<td className='center'>{<IconButton icon={vehicle.state} style={{width:'20px'}}/>}</td>
+			<td className='center'>{<IconButton icon={vehicle.state} style={{width:'20px', verticalAlign: 'middle'}}/>}</td>
 			<td>{["No","Sí"][+(vehicle.in_use_by !== null)]}</td>
 		</tr>
 	);

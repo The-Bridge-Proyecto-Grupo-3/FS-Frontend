@@ -1,5 +1,6 @@
 .stationsList {
 	width: 90vw;
+	max-width: 480px;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
@@ -8,6 +9,9 @@
 		border: 1px solid #aaa;
 		border-radius: 5px;
 		padding: 0.5rem;
-
+		cursor: pointer;
+		&:hover {
+			background-color: #f2f2f2;
+		}
 	}
 }

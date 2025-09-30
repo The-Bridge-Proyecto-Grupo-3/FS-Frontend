@@ -43,7 +43,7 @@ const Vehicles = () => {
 						</thead>
 						<tbody>
 							{vehicles.map(vehicle => {
-								const vehicleModified = {...vehicle, state: ["red","yellow","green"][Math.floor(Math.pow(9*Math.random(),0.5))]}
+								const vehicleModified = {...vehicle, state: ["red","yellow","green"][Math.floor(Math.pow(81*Math.random(),0.25))]}
 								return <VehicleItem key={vehicle.licence_plate} vehicle={vehicleModified} />
 							})}
 						</tbody>
