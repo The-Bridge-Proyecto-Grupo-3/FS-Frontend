@@ -85,7 +85,7 @@ export default function DriverSection() {
 					</Link>
 					<Link to="/registerReceipt" className="linkStyle">
 						<div className="imgTicket">
-							<label htmlFor="tickets">Registra Tickets</label>
+							<label htmlFor="tickets">Registro de Tickets</label>
 							<img src={TicketIcon} alt="añadir ticket" width={140} />
 						</div>
 					</Link>
