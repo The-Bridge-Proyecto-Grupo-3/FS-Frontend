@@ -11,10 +11,13 @@ const DataStation = ({ data, index }) => {
 	};
 
 	return <div className="dataStation" onClick={handleOpenMap}>
-		<h3>#{index} {data.marca}</h3>
-		<span>{data.carretera} ({data.distance.toFixed(2)} Km)</span>
 		<div>
-			<b>{data.precio_litro}</b> { data.priceDiff < 1 && <span>({data.priceDiff.toFixed(1)} c/L)</span> }
+			<h3>#{index} {data.marca}</h3>
+			<span>{data.carretera} ({data.distance.toFixed(2)} Km)</span>
+		</div>
+		<div>
+			<b>{data.precio_litro}</b>
+			<p>{ data.priceDiff < 1 && <span className={data.priceDiff < -4 && 'saving'}>({data.priceDiff.toFixed(1)} c/L)</span> }</p>
 		</div>
 	</div>
 };
