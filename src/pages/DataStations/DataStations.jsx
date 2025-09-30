@@ -20,16 +20,19 @@ const RegisterReceipt = () => {
 
 	const validation = {
 		fuel_type: value => [[value, 'Introduce tipo de combustible del vehículo']],
-		quantity: value => [[value , 'Introduce litros de repostaje']],
+		quantity: value => [[value, 'Introduce litros de repostaje']],
 		origin: value => [[value, 'Introduce un punto de salida']],
-		destination: value => [[value, 'Introduce un destino']]
+		destination: value => [[value, 'Introduce un destino']],
 	};
 
-	const onSubmit = async () => dispatch(postRecommendations({
-		litros_necesarios: formData.quantity,
-		precio_area_medio: meanPrice,
-		ruta_id: "R001"
-	})).unwrap();
+	const onSubmit = async () =>
+		dispatch(
+			postRecommendations({
+				litros_necesarios: formData.quantity,
+				precio_area_medio: meanPrice,
+				ruta_id: 'R001',
+			})
+		).unwrap();
 
 	const { formData, setFormData, message, success, handleInputChange, handleSubmit } = useForm({
 		validation,
@@ -37,13 +40,13 @@ const RegisterReceipt = () => {
 	});
 
 	useEffect(() => {
-		setFormData(prev => ({...prev, origin: "", destination: "", fuel_type: ""}));
-	},[])
+		setFormData(prev => ({ ...prev, origin: '', destination: '', fuel_type: '' }));
+	}, []);
 
-	const [coords, setCoords] = useState({lat: 40.40875, lng: -3.623236286941566 });
+	const [coords, setCoords] = useState({ lat: 40.40875, lng: -3.623236286941566 });
 	const [locationError, setLocationError] = useState('');
 
-	useEffect(() => console.log(dataStations), [dataStations])
+	useEffect(() => console.log(dataStations), [dataStations]);
 
 	// useEffect(() => {
 	// 	if (navigator.geolocation) {
@@ -66,16 +69,20 @@ const RegisterReceipt = () => {
 	// 	}
 	// }, []);
 
-	const distance = (lat1,lon1,lat2,lon2) => {
-		lat1 *= Math.PI/180;
-		lat2 *= Math.PI/180;
-		lon1 *= Math.PI/180;
-		lon2 *= Math.PI/180;
-		const hav = (t) => Math.sin(t/2)**2;
-		const dlat = lat1-lat2;
-		const dlng = lon1-lon2;
-		return 2*6371*Math.asin(Math.sqrt(hav(dlat)+hav(dlng)*(1-hav(dlat)-hav(lat1+lat2))));
-	}
+	const distance = (lat1, lon1, lat2, lon2) => {
+		lat1 *= Math.PI / 180;
+		lat2 *= Math.PI / 180;
+		lon1 *= Math.PI / 180;
+		lon2 *= Math.PI / 180;
+		const hav = t => Math.sin(t / 2) ** 2;
+		const dlat = lat1 - lat2;
+		const dlng = lon1 - lon2;
+		return (
+			2 *
+			6371 *
+			Math.asin(Math.sqrt(hav(dlat) + hav(dlng) * (1 - hav(dlat) - hav(lat1 + lat2))))
+		);
+	};
 
 	// useEffect(() => {
 	// 	if (!assignedVehicle) return;
@@ -87,13 +94,14 @@ const RegisterReceipt = () => {
 	// 	}
 	// }, [assignedVehicle]);
 
-	return (<>
-		<GoBack path='/driver' />
-		<div className="register-container">
-			<div className="form-container">
-				<h2>Gasolineras</h2>
+	return (
+		<>
+			<GoBack path="/driver" />
+			<div className="register-container">
+				<div className="form-container">
+					<h2>Gasolineras</h2>
 
-				{/* {user && assignedVehicle && (
+					{/* {user && assignedVehicle && (
 					<div className="info-box">
 						<p>
 							<strong>Conductor:</strong> {user.first_name} {user.last_name}
@@ -105,79 +113,108 @@ const RegisterReceipt = () => {
 					</div>
 				)} */}
 
-				<form className="form-info" onSubmit={handleSubmit}>
-					<div className="input-container">
-						<div className="form-parts">
-							<label htmlFor='origin'>Origen</label>
-							<select name="origin" id="origin" className='select-custom' value={formData.origin} onChange={handleInputChange}>
-								<option value="" disabled>Elige un punto de salida</option>
-								<option value="Madrid">Madrid</option>
-								<option value="Barcelona">Barcelona</option>
-								<option value="Valencia">Valencia</option>
-								<option value="Sevilla">Sevilla</option>
-								<option value="Bilbao">Bilbao</option>
-							</select>
-							<label htmlFor='destination'>Origen</label>
-							<select name="destination" id="destination" className='select-custom' value={formData.destination} onChange={handleInputChange}>
-								<option value="" disabled>Elige un punto de llegada</option>
-								<option value="Madrid">Madrid</option>
-								<option value="Barcelona">Barcelona</option>
-								<option value="Valencia">Valencia</option>
-								<option value="Sevilla">Sevilla</option>
-								<option value="Bilbao">Bilbao</option>
-							</select>
-							<label htmlFor="fuel_type">Tipo de Gasolina</label>
-							<select
-								name="fuel_type"
-								id="fuel_type"
-								className="select-custom"
-								value={formData.fuel_type}
-								onChange={handleInputChange}
-							>
-								<option value="" disabled>
-									Seleccione el tipo
-								</option>
-								<option value="95">Gasolina 95</option>
-								<option value="98">Gasolina 98</option>
-								<option value="diesel">Diésel</option>
-								<option value="GLP">GLP</option>
-							</select>
-						</div>
+					<form className="form-info" onSubmit={handleSubmit}>
+						<div className="input-container">
+							<div className="form-parts">
+								<label htmlFor="origin">Origen</label>
+								<select
+									name="origin"
+									id="origin"
+									className="select-custom"
+									value={formData.origin}
+									onChange={handleInputChange}
+								>
+									<option value="" disabled>
+										Elige un punto de salida
+									</option>
+									<option value="Madrid">Madrid</option>
+									<option value="Barcelona">Barcelona</option>
+									<option value="Valencia">Valencia</option>
+									<option value="Sevilla">Sevilla</option>
+									<option value="Bilbao">Bilbao</option>
+								</select>
+								<label htmlFor="destination">Destino</label>
+								<select
+									name="destination"
+									id="destination"
+									className="select-custom"
+									value={formData.destination}
+									onChange={handleInputChange}
+								>
+									<option value="" disabled>
+										Elige un punto de llegada
+									</option>
+									<option value="Madrid">Madrid</option>
+									<option value="Barcelona">Barcelona</option>
+									<option value="Valencia">Valencia</option>
+									<option value="Sevilla">Sevilla</option>
+									<option value="Bilbao">Bilbao</option>
+								</select>
+								<label htmlFor="fuel_type">Tipo de Combustible</label>
+								<select
+									name="fuel_type"
+									id="fuel_type"
+									className="select-custom"
+									value={formData.fuel_type}
+									onChange={handleInputChange}
+								>
+									<option value="" disabled>
+										Seleccione el tipo
+									</option>
+									<option value="95">Gasolina 95</option>
+									<option value="98">Gasolina 98</option>
+									<option value="diesel">Diésel</option>
+									<option value="GLP">GLP</option>
+								</select>
+							</div>
 
-						<div className="form-parts">
-							<label htmlFor="quantity">Cantidad (L)</label>
+							<div className="form-parts">
+								<label htmlFor="quantity">Cantidad (L)</label>
+								<input
+									id="quantity"
+									name="quantity"
+									type="number"
+									min="0"
+									step="0.01"
+									value={formData.quantity}
+									onChange={handleInputChange}
+								/>
+							</div>
+
+							{message && <span className="error">{message}</span>}
+
 							<input
-								id="quantity"
-								name="quantity"
-								type="number"
-								min="0"
-								step="0.01"
-								value={formData.quantity}
-								onChange={handleInputChange}
+								type="submit"
+								value={status === 'loading' ? 'Buscando...' : 'Buscar gasolineras'}
 							/>
 						</div>
+					</form>
+				</div>
 
-						{message && <span className="error">{message}</span>}
-
-						<input
-							type="submit"
-							value={status === 'loading' ? 'Buscando...' : 'Buscar gasolineras'}
-						/>
-					</div>
-				</form>
+				<div className="stationsList">
+					{dataStations &&
+						dataStations.map((station, index) => {
+							return (
+								<DataStation
+									key={index}
+									index={index + 1}
+									data={{
+										...station,
+										distance: distance(
+											station.latitud,
+											station.longitud,
+											coords.lat,
+											coords.lng
+										),
+										priceDiff: (station.precio_litro - meanPrice) * 100,
+									}}
+								/>
+							);
+						})}
+				</div>
 			</div>
-
-			<div className='stationsList'>
-				{dataStations && dataStations.map((station,index) => {
-					return <DataStation key={index} index={index+1} data={{
-						...station,
-						distance: distance(station.latitud,station.longitud,coords.lat,coords.lng),
-						priceDiff: (station.precio_litro - meanPrice)*100
-					}} />
-				})}
-			</div>
-		</div>
-	</>);
+		</>
+	);
 };
 
 export default RegisterReceipt;
